@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diu.edu.bd.gradingpolicy.LoginController">
+   <children>
+      <AnchorPane fx:id="main_login" prefHeight="750.0" prefWidth="1272.0">
+         <children>
+            <ImageView fitHeight="753.0" fitWidth="1271.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/login-bg.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#12121242" height="753.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1271.0" />
+            <Button fx:id="close" layoutX="1205.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="65.0" styleClass="close-button" stylesheets="@../css/style.css" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="TIMES" size="1.8em" strokeWidth="0.0" tabSize="4" text="" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane layoutX="390.0" layoutY="44.0" prefHeight="679.0" prefWidth="491.0" style="-fx-background-radius: 15px;">
+               <children>
+                  <ImageView fitHeight="419.0" fitWidth="492.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/login-top-hed.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="40.0" layoutY="167.0" text="Don’t remember your password?" textAlignment="CENTER">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="requestResetCode" layoutX="140.0" layoutY="245.0" mnemonicParsing="false" onAction="#requestResetCode" prefHeight="37.0" prefWidth="218.0" styleClass="button-white" stylesheets="@../css/style.css" text="Request for reset code" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label layoutX="133.0" layoutY="315.0" prefHeight="49.0" prefWidth="225.0" text="WELCOME" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="43.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="1.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="490.0" />
+                  <TextField fx:id="userLoginUserID" alignment="CENTER" layoutX="134.0" layoutY="466.0" prefHeight="45.0" prefWidth="291.0" promptText="User ID" styleClass="input-box" stylesheets="@../css/style.css">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="userLoginUserPassword" alignment="CENTER" layoutX="134.0" layoutY="531.0" prefHeight="44.0" prefWidth="291.0" promptText="User Password" styleClass="input-box" stylesheets="@../css/style.css">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </PasswordField>
+                  <Button fx:id="loginInButton" cache="true" cacheHint="QUALITY" layoutX="225.0" layoutY="618.0" mnemonicParsing="false" onAction="#loginInButton" prefHeight="40.0" prefWidth="109.0" styleClass="button-border" stylesheets="@../css/style.css" text="LOGIN" textAlignment="CENTER" textFill="#282327">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <ChoiceBox fx:id="userLoginType" layoutX="135.0" layoutY="403.0" prefHeight="43.0" prefWidth="291.0" stylesheets="@../css/style.css" value="Select user type">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ChoiceBox>
+                  <ImageView fitHeight="49.0" fitWidth="56.0" layoutX="63.0" layoutY="399.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/user-type.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="49.0" fitWidth="49.0" layoutX="64.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/user-person.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="49.0" fitWidth="49.0" layoutX="64.0" layoutY="530.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/pass-lock.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="105.0" fitWidth="390.0" layoutX="54.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo-white.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <effect>
+                  <DropShadow height="51.41" radius="25.79" spread="0.4" width="53.75">
+                     <color>
+                        <Color opacity="0.2705167531967163" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

@@ -1,0 +1,72 @@
+* {
+    -fx-font-family: Arial;
+}
+
+.button-white {
+    -fx-background-color: #fff;
+    -fx-background-radius: 30px;
+    -fx-font-size: 18px;
+    -fx-text-fill: #000;
+    -fx-border-color: #fff;
+    -fx-border-radius: 30px;
+}
+
+.button-white:hover {
+    -fx-background-color: #9f478e;
+    -fx-text-fill: #fff;
+}
+
+.choice-box {
+    -fx-background-color: #9f478e;
+    -fx-mark-color: #6D4198;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 20px;
+    -fx-text-alignment: right;
+    -fx-font-size: 21px;
+}
+
+.choice-box > * {
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
+    -fx-background-radius: 20px;
+}
+
+.input-box {
+    -fx-background-color:  #9F478E;
+    -fx-text-fill: #fff;
+    -fx-background-radius:  30px;
+    -fx-font-size: 21px;
+    -fx-border-radius: 30px;
+    -fx-border-width: 2;
+    -fx-border-color: transparent;
+}
+
+.input-box:focused {
+    -fx-border-color: rgba(255, 255, 255, 0.4);
+}
+
+.button-border {
+    -fx-background-color: #fff;
+    -fx-border-color:  #9F478E;
+    -fx-border-radius: 30px;
+    -fx-text-fill: #9f478e;
+    -fx-font-size: 18px;
+}
+
+.button-border:hover {
+    -fx-background-color: #9f478e;
+    -fx-text-fill: #fff;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+.close-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 5px;
+}
+
+.close-button:hover {
+    -fx-background-color: #DA0F3E;
+}
