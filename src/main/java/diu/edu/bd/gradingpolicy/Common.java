@@ -17,4 +17,13 @@ public class Common {
         alert.showAndWait();
     }
 
+    public static void alertWarning(String title, String contentText) {
+        Alert alert;
+        alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
+
 }
