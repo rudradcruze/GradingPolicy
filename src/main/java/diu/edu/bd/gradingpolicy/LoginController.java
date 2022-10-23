@@ -10,15 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    Alert alert;
     Common common;
 
     //    All users type
@@ -52,7 +49,7 @@ public class LoginController implements Initializable {
         common.close();
     }
 
-    public void loginInButton() throws IOException {
+    public void loginInButton() {
 
         //    Check empty
         if(userLoginType.getValue().isEmpty() || userLoginUserID.getText().isEmpty() || userLoginUserPassword.getText().isEmpty()) {
@@ -63,35 +60,54 @@ public class LoginController implements Initializable {
         String id = userLoginUserID.getText();
         String password = userLoginUserPassword.getText();
 
-        String file = "src/main/resources/diu/edu/bd/gradingpolicy/csv/users.csv";
-        BufferedReader reader = null;
-        String line = "";
+//        New
 
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            while ((line = reader.readLine()) != null) {
-                String[] row = line.split(",");
-                System.out.println(row);
-                String tempId = row[0];
+//        try {
+//            File myObj = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/users.csv");
+//            Scanner myReader = new Scanner(myObj);
+//            while (myReader.hasNextLine()) {
+//                String row = myReader.nextLine();
+//                String[] data = row.split(",");
+//                System.out.println(data[0] + data[1] + data[2]);
+//
+//                if(data[0].contains("16"))
+//                    System.out.println("Positive");
+//                else
+//                    System.out.println("Negative");
+//            }
+//            myReader.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
 
-                if(tempId == id) {
-                    System.out.println("id" + id + " row " + row[0] +"==");
-                    System.out.println("Matched");
-                }
-                else {
-                    System.out.println("id " + id + " row " + row[0]+"---");
-                    System.out.println("Invalid");
-                }
-//                    if(row[1] == userType)
-//                        System.out.println(userType);
-//                    else
-//                        System.out.println("Invalid");
+//        Old
 
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        String file = "src/main/resources/diu/edu/bd/gradingpolicy/csv/users.csv";
+//        BufferedReader reader = null;
+//        String line = "";
+//
+//        try {
+//            reader = new BufferedReader(new FileReader(file));
+//            while ((line = reader.readLine()) != null) {
+//                String[] row = line.split(",");
+//                System.out.println(row);
+////                String tempId = ;
+//
+//                if(row[0].equals(id)) {
+//                    System.out.println("id" + id + " row " + row[0] +"==");
+//                    System.out.println("Matched");
+//                }
+//                else {
+//                    System.out.println("id " + id + " row " + row[0]+"---");
+//                    System.out.println("Invalid");
+//                }
+//
+//            }
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 

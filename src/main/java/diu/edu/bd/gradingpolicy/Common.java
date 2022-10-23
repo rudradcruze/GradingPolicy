@@ -4,12 +4,12 @@ import javafx.scene.control.Alert;
 
 public class Common {
 
-    Alert alert;
     public static void close(){
         System.exit(0);
     }
 
-    public void alertError(String title, String contentText) {
+    public static void alertError(String title, String contentText) {
+        Alert alert;
         alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
