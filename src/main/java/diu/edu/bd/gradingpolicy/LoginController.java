@@ -1,11 +1,13 @@
 package diu.edu.bd.gradingpolicy;
 
+import diu.edu.bd.gradingpolicy.Common;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,6 +20,8 @@ import java.util.Scanner;
 public class LoginController implements Initializable {
 
     Common common;
+    private double x = 0;
+    private double y = 0;
 
     //    All users type
     private String[] userType = {"Student", "Teacher", "Super Admin"};
@@ -55,7 +59,6 @@ public class LoginController implements Initializable {
         //    Check empty
         if (userLoginType.getValue().isEmpty() || userLoginUserID.getText().isEmpty() || userLoginUserPassword.getText().isEmpty()) {
             common.alertError("Error!", "Please fill up all fields.");
-            close();
         }
 
         String userType = userLoginType.getValue();
@@ -67,33 +70,34 @@ public class LoginController implements Initializable {
         try {
             usersFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/users.csv");
             userFileReader = new Scanner(usersFile);
+            Integer flag = 1;
             while (userFileReader.hasNextLine()) {
                 String row = userFileReader.nextLine();
                 String[] data = row.split(",");
 
-                if (data[0].contains(id) && data[2].contains(password) && password.contains(data[2])) {
-                    System.out.println("data-0 = " + data[0]);
-                    System.out.println("id = " + id);
-                    System.out.println("data-2 = " + data[2]);
-                    System.out.println("pass = " + password);
-                    System.out.println("Positive");
-                } else {
-                    Common.alertError("Error!", "Credential wrong. Please enter valid information.");
-                }
+                if (data[0].contains(id) && data[2].contains(password) && password.contains(data[2]) && data[1].equals(userType)) {
 
-                if (data[1].equals(userType)) {
-                    System.out.println("Positive");
-                } else {
-//                    System.out.println("ID = " + userType);
-                    System.out.println("Negative");
-                }
+                    flag = 0;
+                    common.alertInfo("Login Successful", "Your have successfully login as " + userType + " in Grading Policy system.");
 
+                    // Change the viewing dashboard according to the users.
+                    if (userType.equals("Student"))
+                        changeScreen("diu/edu/bd/gradingpolicy/view/teacher.fxml");
+                    else if (userType.equals("Super Admin"))
+                        changeScreen("view/superAdmin.fxml");
+                    else
+                        changeScreen("view/student.fxml");
+                }
             }
-        } catch (FileNotFoundException e) {
-            Common.alertError("Error!", "An error occurred, File Error!");
-            e.printStackTrace();
-        } finally {
+            if (flag == 1)
+                common.alertError("Error!", "Credential wrong!!!!");
+
             userFileReader.close();
+        } catch (FileNotFoundException e) {
+            common.alertError("Error!", "An error occurred, File Error!");
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -105,7 +109,7 @@ public class LoginController implements Initializable {
     public void changeScreen(String view) throws IOException {
         requestResetCode.getScene().getWindow().hide();
 
-        Parent root = FXMLLoader.load(getClass().getResource(view));
+        Parent root = FXMLLoader.load(getClass().getResource("view/student.fxml"));
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
@@ -115,5 +119,4 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
 }

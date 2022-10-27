@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class GradingPolicy extends Application {
 
-    public double x = 0;
-    public double y = 0;
+    private double x = 0;
+    private double y = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
