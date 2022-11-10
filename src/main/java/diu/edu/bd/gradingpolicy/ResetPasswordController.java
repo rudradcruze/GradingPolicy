@@ -1,5 +1,6 @@
 package diu.edu.bd.gradingpolicy;
 
+import diu.edu.bd.gradingpolicy.Common;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -18,7 +19,7 @@ public class ResetPasswordController {
     @FXML
     private TextField resetPassResetCode;
 
-    void close() {
+    public void close() {
         Common.close();
     }
 

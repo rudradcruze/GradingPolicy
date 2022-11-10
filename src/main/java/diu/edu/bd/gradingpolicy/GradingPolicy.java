@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class GradingPolicy extends Application {
 
-    public double x = 0;
-    public double y = 0;
+    private double x = 0;
+    private double y = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -22,7 +22,7 @@ public class GradingPolicy extends Application {
         // Scene scene = new Scene(fxmlLoader.load(), 1270, 753);
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/superAdmin.fxml"));
         Scene scene = new Scene(root);
 
         root.setOnMousePressed((MouseEvent event) -> {

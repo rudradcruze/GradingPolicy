@@ -1,0 +1,107 @@
+/*
+    This file use to style super admin dashboard.
+*/
+
+* {
+    -fx-font-family: Arial;
+}
+
+.top-border {
+    -fx-background-color: #fff;
+    -fx-border-color: #444;
+    -fx-border-width: .4px .4px .2px .4px;
+}
+
+.semi-top-border {
+    -fx-background-color: #efefef;
+    -fx-border-color: #444;
+    -fx-border-width: .2px .4px .4px .4px;
+}
+
+.minimize,
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #fb3d63;
+}
+
+.minimize:hover {
+    -fx-text-fill: #fff;
+    -fx-background-color: #ddd;
+}
+
+.image-circle {
+    -fx-width: 64px;
+    -fx-height: 64px;
+    -fx-border-radius: 50%;
+}
+
+.gradient-top {
+    -fx-background-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
+}
+
+.navbar-button {
+    -fx-background-color: #fff;
+    -fx-cursor: hand;
+    -fx-text-fill: #000;
+    -fx-font-size: 20px;
+    -fx-alignment: CENTER-LEFT;
+}
+
+.navbar-button:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5,0.3,0,2);
+}
+
+.log-out {
+    -fx-background-color: #d789d7;
+    -fx-font-size: 20px;
+    -fx-background-radius: 5px;
+}
+
+.log-out:hover {
+    -fx-background-color: #9d65c9;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10,0.3,0,0);
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 6,0,0,0);
+}
+
+.shadow-light {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 25,0.2,0,0);
+}
+
+.extra-white-bg {
+    -fx-background-color: #fff;
+    -fx-background-radius: 6px;
+}
+
+.light-bg-green {-fx-background-color: #d1f3e0;}
+.light-bg-blue {-fx-background-color: #e1f1ff;}
+.light-bg-yellow {-fx-background-color: #fff2d8;}
+.light-bg-red {-fx-background-color: #ffeaea;}
+
+
+.card-icon {
+    -fx-background-radius: 50px;
+}
+
+.white-bg {
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 6px;
+}
+
+.search {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
+    -fx-border-width: .8px;
+    -fx-border-radius: 5px;
+    -fx-font-family: Arial;
+    -fx-font-size: 15px;
+    -fx-padding: 0px 0px 0px 32px;
+}
