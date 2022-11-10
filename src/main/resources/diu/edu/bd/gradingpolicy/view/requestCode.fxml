@@ -38,11 +38,11 @@
                </font>
             </Label>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="1.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="490.0" />
-            <TextField fx:id="userResetId" alignment="CENTER" layoutX="79.0" layoutY="482.0" prefHeight="45.0" prefWidth="341.0" promptText="User ID" styleClass="input-box" stylesheets="@../css/style.css">
+            <TextField fx:id="userResetId" alignment="CENTER" layoutX="79.0" layoutY="482.0" prefHeight="45.0" prefWidth="341.0" promptText="User ID" styleClass="input-box" stylesheets="@../css/loginReset.css">
                <font>
                   <Font size="21.0" />
                </font></TextField>
-            <Button fx:id="requestCode" cache="true" cacheHint="QUALITY" layoutX="161.0" layoutY="566.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" styleClass="button-border" stylesheets="@../css/style.css" text="Request Code" textAlignment="CENTER" textFill="#9f478e">
+            <Button fx:id="requestCode" cache="true" cacheHint="QUALITY" layoutX="161.0" layoutY="566.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" styleClass="button-border" stylesheets="@../css/loginReset.css" text="Request Code" textAlignment="CENTER" textFill="#9f478e">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -55,7 +55,7 @@
                   <Image url="@../images/logo-white.png" />
                </image>
             </ImageView>
-            <Button layoutX="132.0" layoutY="191.0" mnemonicParsing="false" onAction="#resetPassword" styleClass="button-white" stylesheets="@../css/style.css" text="Already have access code">
+            <Button layoutX="132.0" layoutY="191.0" mnemonicParsing="false" onAction="#resetPassword" styleClass="button-white" stylesheets="@../css/loginReset.css" text="Already have access code">
                <font>
                   <Font size="18.0" />
                </font>
@@ -63,7 +63,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="198.0" layoutY="249.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="97.0" styleClass="button-white" stylesheets="@../css/style.css" text="Login">
+            <Button layoutX="198.0" layoutY="249.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="97.0" styleClass="button-white" stylesheets="@../css/loginReset.css" text="Login">
                <font>
                   <Font size="18.0" />
                </font>
@@ -85,7 +85,7 @@
             </DropShadow>
          </effect>
       </Pane>
-      <Button layoutX="1205.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="65.0" styleClass="close-button" stylesheets="@../css/style.css" textFill="WHITE">
+      <Button layoutX="1205.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="65.0" styleClass="close-button" stylesheets="@../css/loginReset.css" textFill="WHITE">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="TIMES" size="1.8em" strokeWidth="0.0" tabSize="4" text="" />
          </graphic>

@@ -17,9 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/19"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="diu.edu.bd.gradingpolicy.LoginController">
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diu.edu.bd.gradingpolicy.LoginController">
    <children>
       <AnchorPane fx:id="main_login" prefHeight="750.0" prefWidth="1272.0">
          <children>
@@ -31,8 +29,8 @@
                   <Cursor fx:constant="NONE" />
                </cursor>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#12121242" height="753.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1271.0" />
-            <Button fx:id="close" layoutX="1205.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="65.0" styleClass="close-button" stylesheets="@../css/style.css" textFill="WHITE">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#12121242" height="753.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1270.0" />
+            <Button fx:id="close" layoutX="1205.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="65.0" styleClass="close-button" stylesheets="@../css/loginReset.css" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="TIMES" size="1.8em" strokeWidth="0.0" tabSize="4" text="" />
                </graphic>
@@ -52,7 +50,7 @@
                         <Font size="29.0" />
                      </font>
                   </Label>
-                  <Button fx:id="requestResetCode" layoutX="140.0" layoutY="245.0" mnemonicParsing="false" onAction="#requestResetCode" prefHeight="37.0" prefWidth="218.0" styleClass="button-white" stylesheets="@../css/style.css" text="Request for reset code" textAlignment="CENTER">
+                  <Button fx:id="requestResetCode" layoutX="140.0" layoutY="245.0" mnemonicParsing="false" onAction="#requestResetCode" prefHeight="37.0" prefWidth="218.0" styleClass="button-white" stylesheets="@../css/loginReset.css" text="Request for reset code" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -66,17 +64,17 @@
                      </font>
                   </Label>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="1.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="490.0" />
-                  <TextField fx:id="userLoginUserID" alignment="CENTER" layoutX="134.0" layoutY="466.0" prefHeight="45.0" prefWidth="291.0" promptText="User ID" styleClass="input-box" stylesheets="@../css/style.css">
+                  <TextField fx:id="userLoginUserID" alignment="CENTER" layoutX="134.0" layoutY="466.0" prefHeight="45.0" prefWidth="291.0" promptText="User ID" styleClass="input-box" stylesheets="@../css/loginReset.css">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </TextField>
-                  <PasswordField fx:id="userLoginUserPassword" alignment="CENTER" layoutX="134.0" layoutY="531.0" prefHeight="44.0" prefWidth="291.0" promptText="User Password" styleClass="input-box" stylesheets="@../css/style.css">
+                  <PasswordField fx:id="userLoginUserPassword" alignment="CENTER" layoutX="134.0" layoutY="531.0" prefHeight="44.0" prefWidth="291.0" promptText="User Password" styleClass="input-box" stylesheets="@../css/loginReset.css">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </PasswordField>
-                  <Button fx:id="loginInButton" cache="true" cacheHint="QUALITY" layoutX="225.0" layoutY="618.0" mnemonicParsing="false" onAction="#loginInButton" prefHeight="40.0" prefWidth="109.0" styleClass="button-border" stylesheets="@../css/style.css" text="LOGIN" textAlignment="CENTER" textFill="#282327">
+                  <Button fx:id="loginInButton" cache="true" cacheHint="QUALITY" layoutX="225.0" layoutY="618.0" mnemonicParsing="false" onAction="#loginInButton" prefHeight="40.0" prefWidth="109.0" styleClass="button-border" stylesheets="@../css/loginReset.css" text="LOGIN" textAlignment="CENTER" textFill="#282327">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -84,7 +82,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <ChoiceBox fx:id="userLoginType" layoutX="135.0" layoutY="403.0" prefHeight="43.0" prefWidth="291.0" stylesheets="@../css/style.css" value="Select user type">
+                  <ChoiceBox fx:id="userLoginType" layoutX="135.0" layoutY="403.0" prefHeight="43.0" prefWidth="291.0" stylesheets="@../css/loginReset.css" value="Select user type">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

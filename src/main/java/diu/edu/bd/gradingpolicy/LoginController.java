@@ -1,6 +1,5 @@
 package diu.edu.bd.gradingpolicy;
 
-import diu.edu.bd.gradingpolicy.Common;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -82,11 +81,11 @@ public class LoginController implements Initializable {
 
                     // Change the viewing dashboard according to the users.
                     if (userType.equals("Student"))
-                        changeScreen("diu/edu/bd/gradingpolicy/view/teacher.fxml");
+                        changeScreen("view/student.fxml");
                     else if (userType.equals("Super Admin"))
                         changeScreen("view/superAdmin.fxml");
                     else
-                        changeScreen("view/student.fxml");
+                        changeScreen("view/teacher.fxml");
                 }
             }
             if (flag == 1)
@@ -109,10 +108,26 @@ public class LoginController implements Initializable {
     public void changeScreen(String view) throws IOException {
         requestResetCode.getScene().getWindow().hide();
 
-        Parent root = FXMLLoader.load(getClass().getResource("view/student.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource(view));
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
+
+        root.setOnMousePressed((MouseEvent event) -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+
+        root.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getSceneX() - x);
+            stage.setY(event.getSceneY() - y);
+
+            stage.setOpacity(1);
+        });
+
+        root.setOnMouseReleased((MouseEvent event) -> {
+            stage.setOpacity(1);
+        });
 
         stage.initStyle(StageStyle.TRANSPARENT);
 
