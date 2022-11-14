@@ -12,9 +12,23 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class RequestCodeController  {
+public class RequestCodeController extends commonAbstract  {
 
     RequestCodeController requestCodeController;
+
+    public void changeView(String view) throws IOException {
+        requestCode.getScene().getWindow().hide();
+
+        Parent root = FXMLLoader.load(getClass().getResource(view));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+
+        stage.initStyle(StageStyle.TRANSPARENT);
+
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
     private Button requestCode;
@@ -28,35 +42,11 @@ public class RequestCodeController  {
 
     @FXML
     void login(ActionEvent event) throws IOException {
-        goToLogin();
+        changeView("view/login.fxml");
     }
 
     public void resetPassword(ActionEvent event) throws IOException {
-        requestCode.getScene().getWindow().hide();
-
-        Parent root = FXMLLoader.load(getClass().getResource("view/resetPassword.fxml"));
-
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-
-        stage.initStyle(StageStyle.TRANSPARENT);
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void goToLogin() throws IOException {
-        requestCode.getScene().getWindow().hide();
-
-        Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
-
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-
-        stage.initStyle(StageStyle.TRANSPARENT);
-
-        stage.setScene(scene);
-        stage.show();
+        changeView("view/resetPassword.fxml");
     }
 
 }
