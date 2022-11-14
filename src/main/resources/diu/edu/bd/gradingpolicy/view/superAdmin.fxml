@@ -12,6 +12,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -66,22 +68,22 @@
                            </font>
                         </Label>
                         <Line endX="100.0" layoutX="124.0" layoutY="166.0" startX="-100.0" stroke="WHITE" />
-                        <Button layoutX="22.0" layoutY="214.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Home">
+                        <Button fx:id="home_btn" layoutX="22.0" layoutY="214.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Home">
                            <graphic>
                               <FontAwesomeIcon glyphName="HOME" selectionFill="BLACK" size="1.2em" />
                            </graphic>
                         </Button>
                         <MenuButton layoutX="22.0" layoutY="263.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Students" textFill="WHITE">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="All Students">
+                            <MenuItem fx:id="allStudent_btn" mnemonicParsing="false" text="All Students">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CHEVRON_RIGHT" size=".8em" />
                                  </graphic></MenuItem>
-                            <MenuItem mnemonicParsing="false" text="View Students">
+                            <MenuItem fx:id="viewStudent_btn" mnemonicParsing="false" text="View Students">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CHEVRON_RIGHT" size=".8em" />
                                  </graphic></MenuItem>
-                            <MenuItem mnemonicParsing="false" text="Add Student">
+                            <MenuItem fx:id="addStudent_btn" mnemonicParsing="false" text="Add Student">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CHEVRON_RIGHT" size=".8em" />
                                  </graphic></MenuItem>
@@ -92,17 +94,17 @@
                         </MenuButton>
                         <MenuButton layoutX="22.0" layoutY="311.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Teachers" textFill="WHITE">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="All Teachers">
+                              <MenuItem  fx:id="allTeacher_btn" mnemonicParsing="false" text="All Teachers">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CHEVRON_RIGHT" size=".8em" />
                                  </graphic>
                               </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="View Teacher">
+                              <MenuItem  fx:id="viewTeacher_btn" mnemonicParsing="false" text="View Teacher">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CHEVRON_RIGHT" size=".8em" />
                                  </graphic>
                               </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="Add Teacher">
+                              <MenuItem fx:id="addTeacher_btn"  mnemonicParsing="false" text="Add Teacher">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CHEVRON_RIGHT" size=".8em" />
                                  </graphic>
@@ -326,15 +328,33 @@
                         </AnchorPane>
                         <AnchorPane layoutX="121.0" layoutY="134.0" prefHeight="673.6" prefWidth="1029.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TextField layoutX="12.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Id" styleClass="search" stylesheets="@../css/superAdmin.css" />
+                              <TextField fx:id="viewSearchId_btn" layoutX="12.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Id" styleClass="search" stylesheets="@../css/superAdmin.css" />
                               <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="21.0" layoutY="33.0" size="1.5em" />
-                              <TextField layoutX="265.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Name" styleClass="search" stylesheets="@../css/superAdmin.css" />
+                              <TextField fx:id="viewSearchName_btn" layoutX="265.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Name" styleClass="search" stylesheets="@../css/superAdmin.css" />
                               <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="274.0" layoutY="33.0" size="1.5em" />
-                              <ComboBox layoutX="518.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Semester" styleClass="search" stylesheets="@../css/superAdmin.css">
+                              <ComboBox fx:id="viewSearchSemester_btn" layoutX="518.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Semester" styleClass="search" stylesheets="@../css/superAdmin.css">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </ComboBox>
+                              <TableView layoutX="13.0" layoutY="53.0" prefHeight="604.0" prefWidth="1002.0" stylesheets="@../css/superAdmin.css">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="Id">
+                                       <styleClass>
+                                          <String fx:value="column-header-background" />
+                                          <String fx:value="colum-header" />
+                                       </styleClass></TableColumn>
+                                  <TableColumn prefWidth="165.33344268798828" styleClass="column-header-background" text="Name" />
+                                    <TableColumn prefWidth="106.40011596679688" styleClass="column-header-background" text="Complete Credit" />
+                                    <TableColumn prefWidth="54.39996337890625" styleClass="column-header-background" text="Gender" />
+                                    <TableColumn prefWidth="91.2000732421875" styleClass="column-header-background" text="Date of Birth" />
+                                    <TableColumn prefWidth="65.59994506835938" styleClass="column-header-background" text="Phone" />
+                                    <TableColumn prefWidth="169.60003662109375" styleClass="column-header-background" text="G. Name" />
+                                    <TableColumn prefWidth="98.93341064453125" styleClass="column-header-background" text="G. Relationship" />
+                                    <TableColumn prefWidth="94.1331787109375" styleClass="column-header-background" text="G. Phone" />
+                                    <TableColumn prefWidth="84.2667236328125" styleClass="column-header-background" text="Status" />
+                                </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                      </children>

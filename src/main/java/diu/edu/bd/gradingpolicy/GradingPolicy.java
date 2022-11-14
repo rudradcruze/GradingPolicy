@@ -22,7 +22,7 @@ public class GradingPolicy extends Application {
         // Scene scene = new Scene(fxmlLoader.load(), 1270, 753);
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("view/superAdmin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
         Scene scene = new Scene(root);
 
         root.setOnMousePressed((MouseEvent event) -> {
