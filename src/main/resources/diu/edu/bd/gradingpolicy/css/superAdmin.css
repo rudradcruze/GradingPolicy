@@ -111,7 +111,7 @@
     -fx-border-color: #9d65c9;
 }
 
-.table-view {
+TableView {
     -fx-background-color: transparent;
     -fx-padding: 0px;
     -fx-border-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
@@ -127,6 +127,94 @@
     -fx-padding: 5px 0;
 }
 
-.table-view .colum-header {
+.input-title {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2a3d66;
+}
+
+.combo-box,
+.input-box {
+    -fx-padding: 6px;
+    -fx-border-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
+    -fx-border-width: .8px;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-background-color: #fff !important;
+    -fx-background-radius: 5px;
+}
+
+.ex-padding {
+    -fx-padding: 7px;
+    -fx-font-size: 16px;
+    -fx-border-radius: 8px;
+}
+
+.ex-font-size {
+    -fx-font-size: 16px;
+}
+
+.ex-ex-padding {
+    -fx-padding: 0 10px;
+}
+
+.ex-ex-font-size {
+    -fx-font-size: 22px;
+}
+
+.title-text {
+    -fx-font-size: 35px;
+    -fx-text-fill: #5d54a4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 6,0,0,0);
+}
+
+.input-box:focused {
+    -fx-border-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10,0.2,0,0);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.combo-box {
+    -fx-padding: 2px 0;
+    -fx-cursor: HAND;
+}
+
+.button-common {
+    -fx-background-radius: 5px;
+    -fx-cursor: HAND;
     -fx-text-fill: #fff;
+    -fx-font-size: 15px;
+    -fx-padding: 12px;
+}
+
+.button-purple {
+    -fx-background-color: #9575CD;
+}
+
+.button-purple:hover {
+    -fx-background-color: #673AB7;
+}
+
+.button-green {
+    -fx-background-color: #81C784;
+}
+
+.button-green:hover {
+    -fx-background-color: #4CAF50;
+}
+
+.button-blue {
+    -fx-background-color: #7986CB;
+}
+
+.button-blue:hover {
+    -fx-background-color: #3F51B5;
+}
+
+.button-red {
+    -fx-background-color: #E57373;
+}
+
+.button-red:hover {
+    -fx-background-color: #F44336;
 }

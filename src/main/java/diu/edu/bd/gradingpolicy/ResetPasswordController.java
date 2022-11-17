@@ -1,6 +1,5 @@
 package diu.edu.bd.gradingpolicy;
 
-import diu.edu.bd.gradingpolicy.Common;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
