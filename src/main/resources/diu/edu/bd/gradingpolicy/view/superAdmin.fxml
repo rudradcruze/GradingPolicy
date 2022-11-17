@@ -39,12 +39,12 @@
                                     <Image url="@../images/logo.png" />
                                  </image>
                               </ImageView>
-                              <Button layoutX="1243.7999999999988" layoutY="5.800000000000003" mnemonicParsing="false" prefHeight="24.0" prefWidth="44.0" styleClass="close" stylesheets="@../css/superAdmin.css" textAlignment="CENTER" AnchorPane.rightAnchor="5.800000000001091" AnchorPane.topAnchor="5.800000000000003">
+                              <Button layoutX="1243.7999999999988" layoutY="5.800000000000003" mnemonicParsing="false" onAction="#close" prefHeight="24.0" prefWidth="44.0" styleClass="close" stylesheets="@../css/superAdmin.css" textAlignment="CENTER" AnchorPane.rightAnchor="5.800000000001091" AnchorPane.topAnchor="5.800000000000003">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CLOSE" size="1.2em" />
                                  </graphic>
                               </Button>
-                              <Button layoutX="1198.1999999999994" layoutY="6.200000000000002" mnemonicParsing="false" prefHeight="24.0" prefWidth="43.0" styleClass="minimize" stylesheets="@../css/superAdmin.css" textAlignment="CENTER" AnchorPane.rightAnchor="52.2000000000005" AnchorPane.topAnchor="6.200000000000002">
+                              <Button layoutX="1198.1999999999994" layoutY="6.200000000000002" mnemonicParsing="false" onAction="#minimize" prefHeight="24.0" prefWidth="43.0" styleClass="minimize" stylesheets="@../css/superAdmin.css" textAlignment="CENTER" AnchorPane.rightAnchor="52.2000000000005" AnchorPane.topAnchor="6.200000000000002">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="MINUS" size="1.2em" />
                                  </graphic>
@@ -130,12 +130,12 @@
                               <FontAwesomeIcon glyphName="BOOK" selectionFill="BLACK" size="1.2em" />
                            </graphic>
                         </Button>
-                        <Button fx:id="admin_marks" layoutX="23.0" layoutY="412.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Marks">
+                        <Button fx:id="admin_marks_btn" layoutX="23.0" layoutY="412.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Marks">
                            <graphic>
                               <FontAwesomeIcon glyphName="ADJUST" selectionFill="BLACK" size="1.2em" />
                            </graphic>
                         </Button>
-                        <Button fx:id="admin_create_smester" layoutX="23.0" layoutY="466.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Create Semester">
+                        <Button fx:id="admin_create_semester" layoutX="23.0" layoutY="466.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/superAdmin.css" text="Create Semester">
                            <graphic>
                               <FontAwesomeIcon glyphName="PLUS_CIRCLE" selectionFill="BLACK" size="1.2em" />
                            </graphic>
@@ -146,7 +146,7 @@
                <center>
                   <AnchorPane fx:id="viewStudent" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="admin" layoutX="7.0" layoutY="9.0" prefHeight="675.0" prefWidth="1033.0" stylesheets="@../css/superAdmin.css">
+                        <AnchorPane fx:id="admin" layoutX="7.0" layoutY="9.0" prefHeight="675.0" prefWidth="1033.0" stylesheets="@../css/superAdmin.css" visible="false">
                            <styleClass>
                               <String fx:value="white-bg" />
                               <String fx:value="shadow-light" />
