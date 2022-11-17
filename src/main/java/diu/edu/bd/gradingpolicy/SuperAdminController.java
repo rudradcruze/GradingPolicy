@@ -31,13 +31,13 @@ public class SuperAdminController implements Initializable {
     private AnchorPane admin;
 
     @FXML
-    private Button admin_available_course;
+    private Button admin_available_btn;
 
     @FXML
     private BarChart<?, ?> admin_chart_Students;
 
     @FXML
-    private Button admin_create_semester;
+    private Button admin_create_semester_btn;
 
     @FXML
     private AnchorPane admin_marks;
@@ -58,7 +58,16 @@ public class SuperAdminController implements Initializable {
     private LineChart<?, ?> admin_student_female;
 
     @FXML
-    private MenuButton admin_student_group;
+    private MenuButton admin_student_btn;
+
+    @FXML
+    private MenuItem admin_student_btn_all;
+
+    @FXML
+    private MenuItem admin_student_btn_view;
+
+    @FXML
+    private MenuItem admin_student_btn_add;
 
     @FXML
     private LineChart<?, ?> admin_student_male;
@@ -67,7 +76,16 @@ public class SuperAdminController implements Initializable {
     private Label admin_teacher;
 
     @FXML
-    private MenuButton admin_teacher_group;
+    private MenuButton admin_teacher_btn;
+
+    @FXML
+    private MenuItem admin_teacher_btn_all;
+
+    @FXML
+    private MenuItem admin_teacher_btn_view;
+
+    @FXML
+    private MenuItem admin_teacher_btn_add;
 
     @FXML
     private AnchorPane allStudent;
@@ -498,16 +516,132 @@ public class SuperAdminController implements Initializable {
     @FXML
     private MenuItem viewTeacher_btn;
 
+    // Method to close the screen
     @FXML
     void close(ActionEvent event) {
         Common.close();
     }
 
+    // Method to minimize screen
     public void minimize(){
         Stage stage = (Stage) admin.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    // Method to change the inner interface
+    public void switchScreen(ActionEvent event) {
+        if(event.getSource() == home_btn) {
+            admin.setVisible(true);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_student_btn_all) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(true);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_student_btn_view) {
+            admin.setVisible(false);
+            allStudent.setVisible(true);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_student_btn_add) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(true);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_teacher_btn_all) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(true);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_teacher_btn_view) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(true);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_teacher_btn_add) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(true);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_available_btn) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(true);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_marks_btn) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(true);
+            availableCourse.setVisible(false);
+            semester.setVisible(false);
+        } else if (event.getSource() == admin_create_semester_btn) {
+            admin.setVisible(false);
+            allStudent.setVisible(false);
+            viewStudent.setVisible(false);
+            student_registration.setVisible(false);
+            all_teacher_view.setVisible(false);
+            teacher_edit.setVisible(false);
+            teacher_registration.setVisible(false);
+            admin_marks.setVisible(false);
+            availableCourse.setVisible(false);
+            semester.setVisible(true);
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
