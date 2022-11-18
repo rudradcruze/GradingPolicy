@@ -2,24 +2,27 @@ package diu.edu.bd.gradingpolicy;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SuperAdminController implements Initializable {
+
+    private double x = 0;
+    private double y = 0;
 
     @FXML
     private MenuItem addStudent_btn;
@@ -541,6 +544,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_student_btn.setStyle("-fx-background-color: #fff");
+            admin_teacher_btn.setStyle("-fx-background-color: #fff");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_student_btn_all) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -552,6 +563,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_teacher_btn.setStyle("-fx-background-color: #fff");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_student_btn_view) {
             admin.setVisible(false);
             allStudent.setVisible(true);
@@ -563,6 +582,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_teacher_btn.setStyle("-fx-background-color: #fff");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_student_btn_add) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -574,6 +601,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_teacher_btn.setStyle("-fx-background-color: #fff");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_teacher_btn_all) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -585,6 +620,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: #fff");
+            admin_teacher_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_teacher_btn_view) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -596,6 +639,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: #fff");
+            admin_teacher_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_teacher_btn_add) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -607,6 +658,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: #fff");
+            admin_teacher_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_available_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -618,6 +677,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(true);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: #fff");
+            admin_teacher_btn.setStyle("-fx-background-color: #fff");
+            admin_available_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_marks_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -629,6 +696,14 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(true);
             availableCourse.setVisible(false);
             semester.setVisible(false);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: #fff");
+            admin_teacher_btn.setStyle("-fx-background-color: #fff");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+            admin_create_semester_btn.setStyle("-fx-background-color: #fff");
         } else if (event.getSource() == admin_create_semester_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -640,8 +715,64 @@ public class SuperAdminController implements Initializable {
             admin_marks.setVisible(false);
             availableCourse.setVisible(false);
             semester.setVisible(true);
+
+            // Active Style
+            home_btn.setStyle("-fx-background-color: #fff");
+            admin_student_btn.setStyle("-fx-background-color: #fff");
+            admin_teacher_btn.setStyle("-fx-background-color: #fff");
+            admin_available_btn.setStyle("-fx-background-color: #fff");
+            admin_marks_btn.setStyle("-fx-background-color: #fff");
+            admin_create_semester_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
         }
     }
+
+    // Method to logout
+    public void logout() {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to log out");
+
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if(option.get().equals(ButtonType.OK)) {
+                changeScreen("view/login.fxml");
+            } else return;
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void changeScreen(String view) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource(view));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+
+        root.setOnMousePressed((MouseEvent event) -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+
+        root.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getSceneX() - x);
+            stage.setY(event.getSceneY() - y);
+
+            stage.setOpacity(1);
+        });
+
+        root.setOnMouseReleased((MouseEvent event) -> {
+            stage.setOpacity(1);
+        });
+
+        stage.initStyle(StageStyle.TRANSPARENT);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

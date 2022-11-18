@@ -34,7 +34,4 @@ public class Common {
         alert.setContentText(contentText);
         alert.showAndWait();
     }
-
-
-
 }
