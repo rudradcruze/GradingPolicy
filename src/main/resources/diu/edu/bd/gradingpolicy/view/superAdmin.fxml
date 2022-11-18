@@ -147,7 +147,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="admin" layoutX="7.0" layoutY="9.0" prefHeight="675.0" prefWidth="1033.0" stylesheets="@../css/superAdmin.css">
+                        <AnchorPane fx:id="admin" layoutX="7.0" layoutY="9.0" prefHeight="675.0" prefWidth="1033.0" stylesheets="@../css/superAdmin.css" visible="false">
                            <styleClass>
                               <String fx:value="white-bg" />
                               <String fx:value="shadow-light" />
@@ -354,22 +354,18 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </ComboBox>
-                              <TableView editable="true" layoutX="13.0" layoutY="53.0" prefHeight="630.0" prefWidth="1023.0" stylesheets="@../css/superAdmin.css">
+                              <TableView fx:id="studentAllTableView" editable="true" layoutX="13.0" layoutY="53.0" prefHeight="630.0" prefWidth="1023.0" stylesheets="@../css/superAdmin.css">
                                 <columns>
-                                  <TableColumn fx:id="viewStudent_id" prefWidth="75.0" text="Id">
-                                       <styleClass>
-                                          <String fx:value="column-header-background" />
-                                          <String fx:value="colum-header" />
-                                       </styleClass></TableColumn>
-                                  <TableColumn fx:id="viewStudent_name" prefWidth="176.26667022705078" styleClass="column-header-background" text="Name" />
-                                    <TableColumn fx:id="viewStudent_gender" prefWidth="50.39996337890625" styleClass="column-header-background" text="Gender" />
-                                    <TableColumn fx:id="viewStudent_dob" prefWidth="85.60003662109375" styleClass="column-header-background" text="Date of Birth" />
-                                    <TableColumn fx:id="viewStudent_phone" prefWidth="146.13333129882812" styleClass="column-header-background" text="Phone" />
-                                    <TableColumn fx:id="viewStudent_hsc" prefWidth="45.066650390625" styleClass="column-header-background" text="HSC" />
-                                    <TableColumn fx:id="viewStudent_ssc" prefWidth="49.333251953125" styleClass="column-header-background" text="SSC" />
-                                    <TableColumn fx:id="viewStudent_gName" prefWidth="187.73333740234375" styleClass="column-header-background" text="G. Name" />
-                                    <TableColumn fx:id="viewStudent_gphone" prefWidth="106.1334228515625" styleClass="column-header-background" text="G. Phone" />
-                                    <TableColumn fx:id="viewStudent_status" prefWidth="95.199951171875" styleClass="column-header-background" text="Status" />
+                                  <TableColumn fx:id="viewStudent_id" prefWidth="75.0" styleClass="colum-header" text="Id" />
+                                  <TableColumn fx:id="viewStudent_name" prefWidth="176.26667022705078" text="Name" />
+                                    <TableColumn fx:id="viewStudent_gender" prefWidth="50.39996337890625" text="Gender" />
+                                    <TableColumn fx:id="viewStudent_dob" prefWidth="85.60003662109375" text="Date of Birth" />
+                                    <TableColumn fx:id="viewStudent_phone" prefWidth="146.13333129882812" text="Phone" />
+                                    <TableColumn fx:id="viewStudent_ssc" prefWidth="49.333251953125" text="SSC" />
+                                    <TableColumn fx:id="viewStudent_hsc" prefWidth="45.066650390625" text="HSC" />
+                                    <TableColumn fx:id="viewStudent_gName" prefWidth="187.73333740234375" text="G. Name" />
+                                    <TableColumn fx:id="viewStudent_gphone" prefWidth="106.1334228515625" text="G. Phone" />
+                                    <TableColumn fx:id="viewStudent_status" prefWidth="95.199951171875" text="Status" />
                                 </columns>
                               </TableView>
                            </children>
@@ -439,13 +435,13 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="16.0">
                                  <children>
                                     <TextField fx:id="allStudent_search_id" layoutX="5.0" prefHeight="32.0" prefWidth="1017.0" promptText="Search By Id" styleClass="search" stylesheets="@../css/superAdmin.css" />
                                     <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="14.0" layoutY="22.571428298950195" size="1.5em" />
-                                    <TableView editable="true" layoutX="5.0" layoutY="43.0" prefHeight="74.0" prefWidth="1017.0" stylesheets="@../css/superAdmin.css">
+                                    <TableView fx:id="editViewTable" editable="true" layoutX="5.0" layoutY="43.0" prefHeight="74.0" prefWidth="1017.0" stylesheets="@../css/superAdmin.css">
                                        <columns>
                                           <TableColumn fx:id="allStudent_view_id" prefWidth="75.0" text="Id">
                                              <styleClass>
@@ -461,7 +457,7 @@
                                           <TableColumn fx:id="allStudent_view_hsc" prefWidth="42.39996337890625" styleClass="column-header-background" text="HSC" />
                                           <TableColumn fx:id="allStudent_view_gName" prefWidth="177.33334350585938" styleClass="column-header-background" text="G. Name" />
                                           <TableColumn fx:id="allStudent_view_gPhone" prefWidth="130.39990234375" styleClass="column-header-background" text="G. Phone" />
-                                          <TableColumn fx:id="allStudent_view_status" prefWidth="132.00002441406252" styleClass="column-header-background" text="Status" />
+                                          <TableColumn fx:id="allStudent_view_status" prefWidth="127.2000732421875" styleClass="column-header-background" text="Status" />
                                        </columns>
                                     </TableView>
                                     <AnchorPane layoutX="5.0" layoutY="130.0" prefHeight="528.0" prefWidth="1017.0" stylesheets="@../css/superAdmin.css">
