@@ -729,14 +729,13 @@ public class SuperAdminController implements Initializable {
     // Method to logout
     public void logout() {
         try {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Are you sure you want to log out");
-
-            Optional<ButtonType> option = alert.showAndWait();
+            Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to log out");
 
             if(option.get().equals(ButtonType.OK)) {
+                // Hide dashboard screen
+                admin.getScene().getWindow().hide();
+
+                // Switch to login screen
                 changeScreen("view/login.fxml");
             } else return;
         } catch (Exception e) { e.printStackTrace(); }
