@@ -116,14 +116,13 @@ TableView {
     -fx-padding: 0px;
     -fx-border-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
     -fx-border-width: 1.2px;
-    -fx-border-radius: 8px;
+    -fx-alignment: CENTER;
 }
 
-.table-view .column-header-background {
+.table-view .column-header {
     -fx-background-color: #d789d7;
     -fx-background-inset: 0 0 0 0;
-    -fx-background-radius: 8px 8px 0 0;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
     -fx-padding: 5px 0;
 }
 

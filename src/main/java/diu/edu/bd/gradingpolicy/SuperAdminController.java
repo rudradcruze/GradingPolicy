@@ -1,5 +1,7 @@
 package diu.edu.bd.gradingpolicy;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,15 +11,22 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class SuperAdminController implements Initializable {
 
@@ -478,28 +487,28 @@ public class SuperAdminController implements Initializable {
     private MenuItem viewStudent_btn;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_dob;
+    private TableColumn<StudentData, String> viewStudent_dob;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_gName;
+    private TableColumn<StudentData, String> viewStudent_gName;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_gender;
+    private TableColumn<StudentData, String> viewStudent_gender;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_gphone;
+    private TableColumn<StudentData, String> viewStudent_gphone;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_hsc;
+    private TableColumn<StudentData, String> viewStudent_hsc;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_id;
+    private TableColumn<StudentData, String> viewStudent_id;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_name;
+    private TableColumn<StudentData, String> viewStudent_name;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_phone;
+    private TableColumn<StudentData, String> viewStudent_phone;
 
     @FXML
     private TextField viewStudent_searchId;
@@ -519,6 +528,16 @@ public class SuperAdminController implements Initializable {
     @FXML
     private MenuItem viewTeacher_btn;
 
+    @FXML
+    private TableView<StudentData> studentAllTableView;
+
+    @FXML
+    private TableView<StudentData> editViewTable;
+
+    // ***********************************I
+    // ******* Basic Initial Work ********
+    // ***********************************I
+
     // Method to close the screen
     @FXML
     void close(ActionEvent event) {
@@ -532,7 +551,7 @@ public class SuperAdminController implements Initializable {
     }
 
     // Method to change the inner interface
-    public void switchScreen(ActionEvent event) {
+    public void switchScreen(ActionEvent event) throws FileNotFoundException, ParseException {
         if(event.getSource() == home_btn) {
             admin.setVisible(true);
             allStudent.setVisible(false);
@@ -609,6 +628,9 @@ public class SuperAdminController implements Initializable {
             admin_available_btn.setStyle("-fx-background-color: #fff");
             admin_marks_btn.setStyle("-fx-background-color: #fff");
             admin_create_semester_btn.setStyle("-fx-background-color: #fff");
+
+            // To become update when clicked
+            setAddStudentsShowListData();
         } else if (event.getSource() == admin_teacher_btn_all) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -729,14 +751,13 @@ public class SuperAdminController implements Initializable {
     // Method to logout
     public void logout() {
         try {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Are you sure you want to log out");
-
-            Optional<ButtonType> option = alert.showAndWait();
+            Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to log out");
 
             if(option.get().equals(ButtonType.OK)) {
+                // Hide dashboard screen
+                admin.getScene().getWindow().hide();
+
+                // Switch to login screen
                 changeScreen("view/login.fxml");
             } else return;
         } catch (Exception e) { e.printStackTrace(); }
@@ -771,10 +792,80 @@ public class SuperAdminController implements Initializable {
         stage.show();
     }
 
+    // ***********************************
+    // ************* Students ************
+    // ***********************************
 
+    Scanner studentFileReader = null;
+    File studentFile = null;
+    public ObservableList<StudentData> addStudentListData() throws FileNotFoundException, ParseException {
+
+        ObservableList<StudentData> listStudents = FXCollections.observableArrayList();
+
+        studentFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/students.csv");
+        studentFileReader = new Scanner(studentFile);
+
+        while (studentFileReader.hasNextLine()) {
+
+            StudentData studentData;
+
+            String row = studentFileReader.nextLine();
+            String[] data = row.split(",");
+            Date studentDob = new SimpleDateFormat("dd/MM/yyyy").parse(data[3]);
+
+            studentData = new StudentData(data[0],
+                    data[1],
+                    data[2],
+                    studentDob,
+                    data[4],
+                    data[5],
+                    data[6],
+                    data[7],
+                    data[8],
+                    data[9]);
+
+            listStudents.add(studentData);
+        }
+        return listStudents;
+    }
+
+    private ObservableList<StudentData> addStudentListD;
+    public void setAddStudentsShowListData () throws FileNotFoundException, ParseException {
+        addStudentListD = addStudentListData();
+
+        viewStudent_id.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        allStudent_view_id.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        viewStudent_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        allStudent_view_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        viewStudent_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
+        allStudent_view_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
+        viewStudent_dob.setCellValueFactory(new PropertyValueFactory<>("userDob"));
+        allStudent_view_dob.setCellValueFactory(new PropertyValueFactory<>("userDob"));
+        viewStudent_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
+        allStudent_view_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
+        viewStudent_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
+        allStudent_view_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
+        viewStudent_hsc.setCellValueFactory(new PropertyValueFactory<>("userHSC"));
+        allStudent_view_hsc.setCellValueFactory(new PropertyValueFactory<>("userHSC"));
+        viewStudent_gName.setCellValueFactory(new PropertyValueFactory<>("studentGuardianName"));
+        allStudent_view_gName.setCellValueFactory(new PropertyValueFactory<>("studentGuardianName"));
+        viewStudent_gphone.setCellValueFactory(new PropertyValueFactory<>("studentGuardianPhone"));
+        allStudent_view_gPhone.setCellValueFactory(new PropertyValueFactory<>("studentGuardianPhone"));
+        viewStudent_status.setCellValueFactory(new PropertyValueFactory<>("userStatus"));
+        allStudent_view_status.setCellValueFactory(new PropertyValueFactory<>("userStatus"));
+
+        studentAllTableView.setItems(addStudentListD);
+        editViewTable.setItems(addStudentListD);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // Show Immediately when we process dashboard
+        try {
+            setAddStudentsShowListData();
+        } catch (FileNotFoundException | ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
