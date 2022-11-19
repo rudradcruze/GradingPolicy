@@ -435,13 +435,13 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="16.0">
                                  <children>
                                     <TextField fx:id="allStudent_search_id" layoutX="5.0" prefHeight="32.0" prefWidth="1017.0" promptText="Search By Id" styleClass="search" stylesheets="@../css/superAdmin.css" />
                                     <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="14.0" layoutY="22.571428298950195" size="1.5em" />
-                                    <TableView fx:id="editViewTable" editable="true" layoutX="5.0" layoutY="43.0" prefHeight="74.0" prefWidth="1017.0" stylesheets="@../css/superAdmin.css">
+                                    <TableView fx:id="editViewTable" editable="true" layoutX="5.0" layoutY="43.0" onMouseClicked="#addStudentSelect" prefHeight="118.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
                                        <columns>
                                           <TableColumn fx:id="allStudent_view_id" prefWidth="75.0" text="Id">
                                              <styleClass>
@@ -460,7 +460,7 @@
                                           <TableColumn fx:id="allStudent_view_status" prefWidth="127.2000732421875" styleClass="column-header-background" text="Status" />
                                        </columns>
                                     </TableView>
-                                    <AnchorPane layoutX="5.0" layoutY="130.0" prefHeight="528.0" prefWidth="1017.0" stylesheets="@../css/superAdmin.css">
+                                    <AnchorPane layoutX="5.0" layoutY="174.0" prefHeight="484.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
                                        <styleClass>
                                           <String fx:value="extra-white-bg" />
                                           <String fx:value="shadow" />
@@ -489,13 +489,13 @@
                                           <TextField fx:id="allStudent_edit_gPhone" layoutX="713.0" layoutY="254.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                           <Label layoutX="591.0" layoutY="334.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Status" />
                                           <ComboBox fx:id="allStudent_edit_status" layoutX="713.0" layoutY="327.0" prefHeight="32.0" prefWidth="229.0" promptText="Choose" />
-                                          <Button fx:id="allStudent_edit_save" layoutX="267.0" layoutY="426.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Update">
+                                          <Button fx:id="allStudent_edit_save" layoutX="267.0" layoutY="404.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Update">
                                              <styleClass>
                                                 <String fx:value="button-common" />
                                                 <String fx:value="button-blue" />
                                              </styleClass>
                                           </Button>
-                                          <Button fx:id="allStudent_edit_delete" layoutX="561.0" layoutY="426.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Delete">
+                                          <Button fx:id="allStudent_edit_delete" layoutX="561.0" layoutY="404.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Delete">
                                              <styleClass>
                                                 <String fx:value="button-common" />
                                                 <String fx:value="button-red" />
@@ -969,7 +969,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="semester" layoutX="10.0" layoutY="10.0" prefHeight="705.6" prefWidth="1063.2" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="semester" layoutX="10.0" layoutY="10.0" prefHeight="705.6" prefWidth="1063.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="679.0" prefWidth="328.0" stylesheets="@../css/superAdmin.css">
                                  <styleClass>
@@ -1001,9 +1001,8 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView layoutX="4.0" layoutY="-8.0" prefHeight="679.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="viewSemesterTableView" layoutX="4.0" layoutY="-8.0" onMouseClicked="#addSemesterSelect" prefHeight="679.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                                        <columns>
-                                          <TableColumn fx:id="semester_view_sl" prefWidth="33.86669921875" styleClass="column-header-background" text="SL" />
                                           <TableColumn fx:id="semester_view_season" prefWidth="80.5333251953125" styleClass="column-header-background" text="Season" />
                                           <TableColumn fx:id="semester_view_year" prefWidth="86.933349609375" styleClass="column-header-background" text="Year" />
                                           <TableColumn fx:id="semester_view_semester" prefWidth="86.933349609375" styleClass="column-header-background" text="Semester" />
