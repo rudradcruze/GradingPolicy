@@ -19,9 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.security.auth.callback.Callback;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -966,6 +964,36 @@ public class SuperAdminController implements Initializable {
 
         semester_season.setPromptText(String.valueOf(semesterData.getSemester_season()));
         semester_year.setText(String.valueOf(semesterData.getSemester_year()));
+    }
+
+    public void addSemesterData() throws IOException, ParseException {
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+
+        try {
+            fw = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv", true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+
+            if (semester_year.getText().isEmpty()) {
+                Common.alertError("Error Message", "Please fill up all blank fields.");
+            } else {
+                pw.write("\n" + semester_season.getValue() + "," + semester_year.getText());
+                Common.alertInfo("Information Message", "Semester Create Successfully.");
+            }
+            pw.flush();
+
+        } finally {
+            try {
+                pw.close();
+                bw.close();
+                fw.close();
+            } catch (IOException io) {
+                System.out.println("Something went wrong!");
+            }
+            setAddSemesterShowListData();
+        }
     }
 
     @Override
