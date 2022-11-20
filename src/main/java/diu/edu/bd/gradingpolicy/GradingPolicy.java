@@ -43,7 +43,7 @@ public class GradingPolicy extends Application {
 
         stage.initStyle(StageStyle.TRANSPARENT);
 
-        stage.setTitle("Login in Grading Policy");
+        stage.setTitle("Grading Policy");
         stage.setScene(scene);
         stage.show();
     }

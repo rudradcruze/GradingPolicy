@@ -1,5 +1,6 @@
 package diu.edu.bd.gradingpolicy;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,16 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.security.auth.callback.Callback;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class SuperAdminController implements Initializable {
 
@@ -325,16 +324,13 @@ public class SuperAdminController implements Initializable {
     private Button semester_update;
 
     @FXML
-    private TableColumn<?, ?> semester_view_season;
+    private TableColumn<SemesterData, String> semester_view_season;
 
     @FXML
-    private TableColumn<?, ?> semester_view_semester;
+    private TableColumn<SemesterData, String> semester_view_semester;
 
     @FXML
-    private TableColumn<?, ?> semester_view_sl;
-
-    @FXML
-    private TableColumn<?, ?> semester_view_year;
+    private TableColumn<SemesterData, String> semester_view_year;
 
     @FXML
     private TextField semester_year;
@@ -520,10 +516,10 @@ public class SuperAdminController implements Initializable {
     private ComboBox<?> viewStudent_searchSemester;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_ssc;
+    private TableColumn<SemesterData, String> viewStudent_ssc;
 
     @FXML
-    private TableColumn<?, ?> viewStudent_status;
+    private TableColumn<SemesterData, String> viewStudent_status;
 
     @FXML
     private MenuItem viewTeacher_btn;
@@ -534,9 +530,18 @@ public class SuperAdminController implements Initializable {
     @FXML
     private TableView<StudentData> editViewTable;
 
+    @FXML
+    private TableView<SemesterData> viewSemesterTableView;
+
     // ***********************************I
     // ******* Basic Initial Work ********
     // ***********************************I
+
+    // Files
+    Scanner studentFileReader = null;
+    Scanner semesterFileReader = null;
+    File studentFile = null;
+    File semesterFile = null;
 
     // Method to close the screen
     @FXML
@@ -631,6 +636,8 @@ public class SuperAdminController implements Initializable {
 
             // To become update when clicked
             setAddStudentsShowListData();
+            addGender();
+            addStatusList();
         } else if (event.getSource() == admin_teacher_btn_all) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -745,6 +752,9 @@ public class SuperAdminController implements Initializable {
             admin_available_btn.setStyle("-fx-background-color: #fff");
             admin_marks_btn.setStyle("-fx-background-color: #fff");
             admin_create_semester_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
+
+            addSemesterList();
+            setAddSemesterShowListData();
         }
     }
 
@@ -796,8 +806,28 @@ public class SuperAdminController implements Initializable {
     // ************* Students ************
     // ***********************************
 
-    Scanner studentFileReader = null;
-    File studentFile = null;
+    private String[] genderList = {"Male", "Female", "Others"};
+    public void addGender() {
+        List<String> genderArrayList = new ArrayList<>();
+
+        for (String data : genderList)
+            genderArrayList.add(data);
+
+        ObservableList obList = FXCollections.observableArrayList(genderArrayList);
+        allStudent_edit_gender.setItems(obList);
+    }
+
+    private String[] statusList = {"Active", "Inactive", "Suspended"};
+    public void addStatusList() {
+        List<String> statusArrayLise = new ArrayList<>();
+
+        for (String data : statusList)
+            statusArrayLise.add(data);
+
+        ObservableList obList = FXCollections.observableArrayList(statusArrayLise);
+        allStudent_edit_status.setItems(obList);
+    }
+
     public ObservableList<StudentData> addStudentListData() throws FileNotFoundException, ParseException {
 
         ObservableList<StudentData> listStudents = FXCollections.observableArrayList();
@@ -858,12 +888,96 @@ public class SuperAdminController implements Initializable {
         editViewTable.setItems(addStudentListD);
     }
 
+    public void addStudentSelect() {
+        StudentData studentData = editViewTable.getSelectionModel().getSelectedItem();
+        int num = editViewTable.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        allStudent_edit_name.setText(String.valueOf(studentData.getUserName()));
+        allStudent_edit_phone.setText(String.valueOf(studentData.getUserPhone()));
+        allStudent_edit_ssc.setText(String.valueOf(studentData.getUserSSC()));
+        allStudent_edit_hsc.setText(String.valueOf(studentData.getUserHSC()));
+        allStudent_edit_gName.setText(String.valueOf(studentData.getStudentGuardianName()));
+        allStudent_edit_gName.setText(String.valueOf(studentData.getStudentGuardianPhone()));
+        allStudent_edit_gPhone.setText(String.valueOf(studentData.getStudentGuardianPhone()));
+
+        allStudent_edit_gender.setPromptText(String.valueOf(studentData.getUserGender()));
+        allStudent_edit_dob.setPromptText(String.valueOf(studentData.getUserDob()));
+        allStudent_edit_status.setPromptText(String.valueOf(studentData.getUserStatus()));
+
+    }
+
+    // ***********************************
+    // ************* Semester ************
+    // ***********************************
+
+    private String[] semesterList = {"Spring", "Summer", "Fall"};
+    public void addSemesterList() {
+        List<String> semesterArrayList = new ArrayList<>();
+
+        for (String data : semesterList)
+            semesterArrayList.add(data);
+
+        ObservableList obList = FXCollections.observableArrayList(semesterArrayList);
+        semester_season.setItems(obList);
+    }
+
+    public ObservableList<SemesterData> addSemesterListData() throws FileNotFoundException, ParseException {
+
+        ObservableList<SemesterData> listSemester = FXCollections.observableArrayList();
+
+        semesterFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv");
+        semesterFileReader = new Scanner(semesterFile);
+
+        while (semesterFileReader.hasNextLine()) {
+
+            SemesterData semesterData;
+
+            String row = semesterFileReader.nextLine();
+            String[] data = row.split(",");
+
+            semesterData = new SemesterData(data[0], data[1]);
+
+            listSemester.add(semesterData);
+        }
+        return listSemester;
+    }
+
+    private ObservableList<SemesterData> addSemesterListD;
+    public void setAddSemesterShowListData () throws FileNotFoundException, ParseException {
+
+        addSemesterListD = addSemesterListData();
+
+        semester_view_season.setCellValueFactory(new PropertyValueFactory<>("semester_season"));
+        semester_view_year.setCellValueFactory(new PropertyValueFactory<>("semester_year"));
+        semester_view_semester.setCellValueFactory(new PropertyValueFactory<>("semesterCombo"));
+
+        viewSemesterTableView.setItems(addSemesterListD);
+    }
+
+    public void addSemesterSelect() {
+        SemesterData semesterData = viewSemesterTableView.getSelectionModel().getSelectedItem();
+        int num = viewSemesterTableView.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        semester_season.setPromptText(String.valueOf(semesterData.getSemester_season()));
+        semester_year.setText(String.valueOf(semesterData.getSemester_year()));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Show Immediately when we process dashboard
         try {
             setAddStudentsShowListData();
+            addGender();
+            addStatusList();
+            addSemesterList();
+            setAddSemesterShowListData();
         } catch (FileNotFoundException | ParseException e) {
             throw new RuntimeException(e);
         }
