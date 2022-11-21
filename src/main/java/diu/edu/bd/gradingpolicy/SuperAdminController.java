@@ -522,6 +522,9 @@ public class SuperAdminController implements Initializable {
     @FXML
     private TableView<TeacherData> teacherViewTableShow;
 
+    @FXML
+    private TableView<TeacherData> teacherEditTableView;
+
     // ***********************************I
     // ******* Basic Initial Work ********
     // ***********************************I
@@ -802,6 +805,7 @@ public class SuperAdminController implements Initializable {
         allStudent_edit_gender.setItems(obList);
         student_reg_gender.setItems(obList);
         teacher_reg_gender.setItems(obList);
+        teacher_edit_gender.setItems(obList);
     }
 
     private String[] statusList = {"Active", "Inactive", "Suspended"};
@@ -815,6 +819,7 @@ public class SuperAdminController implements Initializable {
         allStudent_edit_status.setItems(obList);
         student_reg_status.setItems(obList);
         teacher_reg_status.setItems(obList);
+        teacher_edit_status.setItems(obList);
     }
 
     public ObservableList<StudentData> addStudentListData() throws FileNotFoundException {
@@ -1189,6 +1194,23 @@ public class SuperAdminController implements Initializable {
     // ************ Teacher **************
     // ***********************************
 
+    public void selectTeachersEdit() {
+        TeacherData teacherData = teacherEditTableView.getSelectionModel().getSelectedItem();
+        int num = teacherEditTableView.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        teacher_edit_name.setText(String.valueOf(teacherData.getUserName()));
+        teacher_edit_gender.setPromptText(String.valueOf(teacherData.getUserGender()));
+        teacher_edit_phone.setText(String.valueOf(teacherData.getUserPhone()));
+        teacher_edit_status.setPromptText(String.valueOf(teacherData.getUserStatus()));
+        teacher_edit_ssc.setText(String.valueOf(teacherData.getUserSSC()));
+        teacher_edit_hsc.setText(String.valueOf(teacherData.getUserHSC()));
+        teacher_edit_bsc.setText(String.valueOf(teacherData.getTeacherBSC()));
+        teacher_edit_msc.setText(String.valueOf(teacherData.getTeacherMSC()));
+    }
+
     public ObservableList<TeacherData> addTeacherListData() throws FileNotFoundException {
 
         File teacherFile = null;
@@ -1214,7 +1236,6 @@ public class SuperAdminController implements Initializable {
                     data[6],
                     data[7],
                     data[8]);
-            System.out.println(data[7] + " - " + data[8]);
 
             listTeacher.add(teacherData);
         }
@@ -1226,16 +1247,26 @@ public class SuperAdminController implements Initializable {
         addTeacherListD = addTeacherListData();
 
         all_teacher_view_id.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        teacher_edit_view_id.setCellValueFactory(new PropertyValueFactory<>("userId"));
         all_teacher_view_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        teacher_edit_view_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         all_teacher_view_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
+        teacher_edit_view_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
         all_teacher_view_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
+        teacher_edit_view_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
         all_teacher_view_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
+        teacher_edit_view_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
         all_teacher_view_hsc.setCellValueFactory(new PropertyValueFactory<>("userHSC"));
+        teacher_edit_view_hsc.setCellValueFactory(new PropertyValueFactory<>("userHSC"));
         all_teacher_view_bsc.setCellValueFactory(new PropertyValueFactory<>("teacherBSC"));
+        teacher_edit_view_bsc.setCellValueFactory(new PropertyValueFactory<>("teacherBSC"));
         all_teacher_view_msc.setCellValueFactory(new PropertyValueFactory<>("teacherMSC"));
+        teacher_edit_view_msc.setCellValueFactory(new PropertyValueFactory<>("teacherMSC"));
         all_teacher_view_status.setCellValueFactory(new PropertyValueFactory<>("userStatus"));
+        teacher_edit_view_status.setCellValueFactory(new PropertyValueFactory<>("userStatus"));
 
         teacherViewTableShow.setItems(addTeacherListD);
+        teacherEditTableView.setItems(addTeacherListD);
     }
 
     public void clearCreateTeacherFields() {
@@ -1291,6 +1322,84 @@ public class SuperAdminController implements Initializable {
                 throw new IOException(e);
             }
         }
+    }
+
+    public void updateTeacherData() throws IOException, ParseException {
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv";
+        String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/tempTeacher.csv";
+
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+
+        TeacherData teacherData = teacherEditTableView.getSelectionModel().getSelectedItem();
+        int num = teacherEditTableView.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        String oldUserId = String.valueOf(teacherData.getUserId());
+
+        String newUserName = teacher_edit_name.getText();
+        String newUserGender = (String) teacher_edit_gender.getValue();
+        String newUserPhone = teacher_edit_phone.getText();
+        String newUserSSC = teacher_edit_ssc.getText();
+        String newUserHSC = teacher_edit_hsc.getText();
+        String newUserBSC = teacher_edit_bsc.getText();
+        String newUserMSC = teacher_edit_msc.getText();
+        String newUserStatus = (String) teacher_edit_status.getValue();
+
+        FileWriter fw = new FileWriter(tempFile, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+
+        sca = new Scanner(new File(filePath));
+        sca.useDelimiter("[,\n]");
+
+        Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Teacher Data!");
+
+        if(option.get().equals(ButtonType.OK)) {
+
+            String ID = null;
+
+            while (sca.hasNextLine()) {
+
+                String row = sca.nextLine();
+                String[] data = row.split(",");
+
+                ID = data[0];
+
+                if (ID.contains(oldUserId))
+                {
+                    pw.println(oldUserId + "," + newUserName + "," + newUserGender + "," + newUserPhone + "," + newUserSSC + "," + newUserHSC + "," + newUserBSC + "," + newUserMSC + "," + newUserStatus);
+                }
+                else
+                    pw.println(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6] + "," + data[7] + "," + data[8]);
+            }
+            sca.close();
+            oldFile.delete();
+
+            pw.flush();
+            pw.close();
+
+            File rename = new File(filePath);
+            newFile.renameTo(rename);
+
+            Common.alertInfo("Information Message", "Teacher update successfully");
+        } else return;
+        clearTeacherEditSelection();
+        setAddTeacherShowListData();
+    }
+
+    public void clearTeacherEditSelection() {
+        teacher_edit_name.setText("");
+        teacher_edit_gender.setPromptText("Choose");
+        teacher_edit_phone.setText("");
+        teacher_edit_status.setPromptText("Choose");
+        teacher_edit_ssc.setText("");
+        teacher_edit_hsc.setText("");
+        teacher_edit_bsc.setText("");
+        teacher_edit_msc.setText("");
     }
 
     @Override
