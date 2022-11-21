@@ -522,6 +522,9 @@ public class SuperAdminController implements Initializable {
     @FXML
     private TableView<TeacherData> teacherViewTableShow;
 
+    @FXML
+    private TableView<TeacherData> teacherEditTableView;
+
     // ***********************************I
     // ******* Basic Initial Work ********
     // ***********************************I
@@ -1226,16 +1229,26 @@ public class SuperAdminController implements Initializable {
         addTeacherListD = addTeacherListData();
 
         all_teacher_view_id.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        teacher_edit_view_id.setCellValueFactory(new PropertyValueFactory<>("userId"));
         all_teacher_view_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        teacher_edit_view_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         all_teacher_view_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
+        teacher_edit_view_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
         all_teacher_view_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
+        teacher_edit_view_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
         all_teacher_view_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
+        teacher_edit_view_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
         all_teacher_view_hsc.setCellValueFactory(new PropertyValueFactory<>("userHSC"));
+        teacher_edit_view_hsc.setCellValueFactory(new PropertyValueFactory<>("userHSC"));
         all_teacher_view_bsc.setCellValueFactory(new PropertyValueFactory<>("teacherBSC"));
+        teacher_edit_view_bsc.setCellValueFactory(new PropertyValueFactory<>("teacherBSC"));
         all_teacher_view_msc.setCellValueFactory(new PropertyValueFactory<>("teacherMSC"));
+        teacher_edit_view_msc.setCellValueFactory(new PropertyValueFactory<>("teacherMSC"));
         all_teacher_view_status.setCellValueFactory(new PropertyValueFactory<>("userStatus"));
+        teacher_edit_view_status.setCellValueFactory(new PropertyValueFactory<>("userStatus"));
 
         teacherViewTableShow.setItems(addTeacherListD);
+        teacherEditTableView.setItems(addTeacherListD);
     }
 
     public void clearCreateTeacherFields() {
