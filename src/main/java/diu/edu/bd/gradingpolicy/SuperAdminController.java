@@ -799,6 +799,7 @@ public class SuperAdminController implements Initializable {
         ObservableList obList = FXCollections.observableArrayList(genderArrayList);
         allStudent_edit_gender.setItems(obList);
         student_reg_gender.setItems(obList);
+        teacher_reg_gender.setItems(obList);
     }
 
     private String[] statusList = {"Active", "Inactive", "Suspended"};
@@ -811,9 +812,10 @@ public class SuperAdminController implements Initializable {
         ObservableList obList = FXCollections.observableArrayList(statusArrayLise);
         allStudent_edit_status.setItems(obList);
         student_reg_status.setItems(obList);
+        teacher_reg_status.setItems(obList);
     }
 
-    public ObservableList<StudentData> addStudentListData() throws FileNotFoundException, ParseException {
+    public ObservableList<StudentData> addStudentListData() throws FileNotFoundException {
 
         File studentFile = null;
 
@@ -1179,6 +1181,65 @@ public class SuperAdminController implements Initializable {
             setAddSemesterShowListData();
             clearSemesterData();
         } else return;
+    }
+
+    // ***********************************
+    // ************ Teacher **************
+    // ***********************************
+
+    public void clearCreateTeacherFields() {
+        teacher_reg_id.setText("");
+        teacher_reg_name.setText("");
+        teacher_reg_gender.setPromptText("Choose");
+        teacher_reg_phone.setText("");
+        teacher_reg_ssc.setText("");
+        teacher_reg_hsc.setText("");
+        teacher_reg_bsc.setText("");
+        teacher_reg_msc.setText("");
+        teacher_reg_status.setPromptText("Choose");
+    }
+
+    public void createTeacher() throws IOException {
+        FileWriter teacherFile = null;
+        FileWriter userFile = null;
+        BufferedWriter teacherFileBuffer = null;
+        BufferedWriter userFileBuffer = null;
+        PrintWriter teacherFilePrint = null;
+        PrintWriter userFilePrint = null;
+
+        try {
+            teacherFile = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv", true);
+            userFile = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/users.csv", true);
+
+            teacherFileBuffer = new BufferedWriter(teacherFile);
+            userFileBuffer = new BufferedWriter(userFile);
+            teacherFilePrint = new PrintWriter(teacherFileBuffer);
+            userFilePrint = new PrintWriter(userFileBuffer);
+
+            if (teacher_reg_id.getText().isEmpty() || teacher_reg_name.getText().isEmpty() || teacher_reg_phone.getText().isEmpty() || teacher_reg_ssc.getText().isEmpty() || teacher_reg_hsc.getText().isEmpty() || teacher_reg_bsc.getText().isEmpty() || teacher_reg_msc.getText().isEmpty()) {
+                Common.alertError("Error Message", "Please fill up all blank fields.");
+            } else {
+                teacherFilePrint.println(teacher_reg_id.getText() + "," + teacher_reg_name.getText() + "," + teacher_reg_gender.getValue() + "," + teacher_reg_phone.getText() + "," + teacher_reg_ssc.getText() + "," + teacher_reg_hsc.getText() + "," + teacher_reg_bsc.getText() + "," + teacher_reg_msc.getText() + "," + teacher_reg_status.getValue());
+                userFilePrint.println(teacher_reg_id.getText() + "," + "Teacher" + "," + teacher_reg_id.getText());
+
+                Common.alertInfo("Information Message", "Teacher Create Successfully!");
+                Common.alertInfo("Information Message", "Teacher account also created successfully!");
+                clearCreateTeacherFields();
+            }
+            teacherFilePrint.flush();
+            userFilePrint.flush();
+        } finally {
+            try {
+                teacherFile.close();
+                userFile.close();
+                teacherFileBuffer.close();
+                userFileBuffer.close();
+                teacherFilePrint.close();
+                userFilePrint.close();
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
+        }
     }
 
     @Override

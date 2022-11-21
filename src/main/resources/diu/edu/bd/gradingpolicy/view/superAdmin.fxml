@@ -342,7 +342,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="viewStudent" layoutX="121.0" layoutY="134.0" prefHeight="695.2" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="viewStudent" layoutX="121.0" layoutY="134.0" prefHeight="695.2" prefWidth="1052.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <TextField fx:id="viewStudent_searchId" layoutX="12.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Id" styleClass="search" stylesheets="@../css/superAdmin.css" />
                               <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="21.0" layoutY="33.0" size="1.5em" />
@@ -619,7 +619,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="teacher_registration" layoutX="30.0" layoutY="24.0" prefHeight="695.2" prefWidth="1052.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="teacher_registration" layoutX="30.0" layoutY="24.0" prefHeight="695.2" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="13.0" layoutY="11.0" prefHeight="671.0" prefWidth="1028.0" stylesheets="@../css/superAdmin.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
                                  <styleClass>
@@ -730,7 +730,7 @@
                                           <String fx:value="ex-padding" />
                                        </styleClass>
                                     </ComboBox>
-                                    <Button fx:id="teacher_reg_add" layoutX="428.0" layoutY="585.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Add Student">
+                                    <Button fx:id="teacher_reg_add" layoutX="428.0" layoutY="585.0" mnemonicParsing="false" onAction="#createTeacher" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Add Student">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-green" />
