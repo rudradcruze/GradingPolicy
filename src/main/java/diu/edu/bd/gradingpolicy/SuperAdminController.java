@@ -169,28 +169,25 @@ public class SuperAdminController implements Initializable {
     private AnchorPane all_teacher_view;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_bsc;
+    private TableColumn<TeacherData, String> all_teacher_view_bsc;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_dob;
+    private TableColumn<TeacherData, String> all_teacher_view_gender;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_gender;
+    private TableColumn<TeacherData, String> all_teacher_view_hsc;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_hsc;
+    private TableColumn<TeacherData, String> all_teacher_view_id;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_id;
+    private TableColumn<TeacherData, String> all_teacher_view_msc;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_msc;
+    private TableColumn<TeacherData, String> all_teacher_view_name;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_name;
-
-    @FXML
-    private TableColumn<?, ?> all_teacher_view_phone;
+    private TableColumn<TeacherData, String> all_teacher_view_phone;
 
     @FXML
     private TextField all_teacher_view_search_id;
@@ -199,10 +196,10 @@ public class SuperAdminController implements Initializable {
     private TextField all_teacher_view_search_name;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_ssc;
+    private TableColumn<TeacherData, String> all_teacher_view_ssc;
 
     @FXML
-    private TableColumn<?, ?> all_teacher_view_status;
+    private TableColumn<TeacherData, String> all_teacher_view_status;
 
     @FXML
     private AnchorPane availableCourse;
@@ -522,6 +519,9 @@ public class SuperAdminController implements Initializable {
     @FXML
     private Button semester_clear;
 
+    @FXML
+    private TableView<TeacherData> teacherViewTableShow;
+
     // ***********************************I
     // ******* Basic Initial Work ********
     // ***********************************I
@@ -678,6 +678,8 @@ public class SuperAdminController implements Initializable {
             admin_available_btn.setStyle("-fx-background-color: #fff");
             admin_marks_btn.setStyle("-fx-background-color: #fff");
             admin_create_semester_btn.setStyle("-fx-background-color: #fff");
+
+            setAddTeacherShowListData ();
         } else if (event.getSource() == admin_available_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -1187,6 +1189,55 @@ public class SuperAdminController implements Initializable {
     // ************ Teacher **************
     // ***********************************
 
+    public ObservableList<TeacherData> addTeacherListData() throws FileNotFoundException {
+
+        File teacherFile = null;
+
+        ObservableList<TeacherData> listTeacher = FXCollections.observableArrayList();
+
+        teacherFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv");
+        Scanner teacherFileReader = new Scanner(teacherFile);
+
+        while (teacherFileReader.hasNextLine()) {
+
+            TeacherData teacherData;
+
+            String row = teacherFileReader.nextLine();
+            String[] data = row.split(",");
+
+            teacherData = new TeacherData(data[0],
+                    data[1],
+                    data[2],
+                    data[3],
+                    data[4],
+                    data[5],
+                    data[6],
+                    data[7],
+                    data[8]);
+            System.out.println(data[7] + " - " + data[8]);
+
+            listTeacher.add(teacherData);
+        }
+        return listTeacher;
+    }
+
+    private ObservableList<TeacherData> addTeacherListD;
+    public void setAddTeacherShowListData () throws FileNotFoundException, ParseException {
+        addTeacherListD = addTeacherListData();
+
+        all_teacher_view_id.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        all_teacher_view_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        all_teacher_view_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
+        all_teacher_view_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
+        all_teacher_view_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
+        all_teacher_view_hsc.setCellValueFactory(new PropertyValueFactory<>("userHSC"));
+        all_teacher_view_bsc.setCellValueFactory(new PropertyValueFactory<>("teacherBSC"));
+        all_teacher_view_msc.setCellValueFactory(new PropertyValueFactory<>("teacherMSC"));
+        all_teacher_view_status.setCellValueFactory(new PropertyValueFactory<>("userStatus"));
+
+        teacherViewTableShow.setItems(addTeacherListD);
+    }
+
     public void clearCreateTeacherFields() {
         teacher_reg_id.setText("");
         teacher_reg_name.setText("");
@@ -1256,6 +1307,7 @@ public class SuperAdminController implements Initializable {
             updateSemesterData();
             clearStudentAddViewData();
             updateStudentData();
+            setAddTeacherShowListData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
