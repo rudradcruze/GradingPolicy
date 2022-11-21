@@ -1438,6 +1438,43 @@ public class SuperAdminController implements Initializable {
         availableCourse_semester.setItems(observableList);
     }
 
+    public void courseClear() {
+        availableCourse_course.setText("");
+        availableCourse_courseCode.setText("");
+        availableCourse_semester.setPromptText("Choose Semester");
+        availableCourse_type.setPromptText("Theory/Lab");
+        availableCourse_teacher.setText("");
+    }
+
+    public void addCourses() throws IOException {
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        PrintWriter printWriter = null;
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/courses.csv";
+
+        try {
+            fileWriter = new FileWriter(filePath, true);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            printWriter = new PrintWriter(bufferedWriter);
+
+            if(availableCourse_course.getText().isEmpty() || availableCourse_courseCode.getText().isEmpty() || availableCourse_teacher.getText().isEmpty())
+                Common.alertError("Error Message", "Please fill up all blank fields");
+            else {
+                printWriter.println(availableCourse_course.getText() + "," + availableCourse_courseCode.getText() + "," + availableCourse_semester.getValue() + "," + availableCourse_type.getValue() + "," + availableCourse_teacher.getText());
+
+                courseClear();
+                Common.alertInfo("Information Message", "Course Created Successfully");
+            }
+            printWriter.flush();
+            fileWriter.close();
+            bufferedWriter.close();
+            printWriter.close();
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

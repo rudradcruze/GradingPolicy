@@ -384,7 +384,7 @@
                                     <ComboBox fx:id="availableCourse_semester" layoutX="127.0" layoutY="126.0" onAction="#addSemesterToSelectBox" prefWidth="180.0" promptText="Choose Semester" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                     <Label layoutX="65.0" layoutY="181.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Type:" textAlignment="RIGHT" />
                                     <ComboBox fx:id="availableCourse_type" layoutX="128.0" layoutY="173.0" prefWidth="180.0" promptText="Theory / Lab" stylesheets="@../css/superAdmin.css" />
-                                    <Button fx:id="availableCourse_add" layoutX="28.0" layoutY="287.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Add">
+                                    <Button fx:id="availableCourse_add" layoutX="28.0" layoutY="287.0" mnemonicParsing="false" onAction="#addCourses" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Add">
                                        <styleClass>
                                           <String fx:value="button-green" />
                                           <String fx:value="button-common" />
@@ -396,7 +396,7 @@
                                           <String fx:value="button-blue" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="availableCourse_clear" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Clear">
+                                    <Button fx:id="availableCourse_clear" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" onAction="#courseClear" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Clear">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-purple" />
