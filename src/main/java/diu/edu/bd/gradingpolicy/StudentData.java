@@ -1,6 +1,5 @@
 package diu.edu.bd.gradingpolicy;
 
-import java.util.Date;
 
 public class StudentData extends Users {
 

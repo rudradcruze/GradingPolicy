@@ -619,7 +619,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="teacher_registration" layoutX="30.0" layoutY="24.0" prefHeight="695.2" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="teacher_registration" layoutX="30.0" layoutY="24.0" prefHeight="695.2" prefWidth="1052.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="13.0" layoutY="11.0" prefHeight="671.0" prefWidth="1028.0" stylesheets="@../css/superAdmin.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
                                  <styleClass>
@@ -805,28 +805,28 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="all_teacher_view" layoutX="-5.0" layoutY="-1.0" prefHeight="686.0" prefWidth="1045.0" visible="false">
+                        <AnchorPane fx:id="all_teacher_view" layoutX="-5.0" layoutY="-1.0" prefHeight="686.0" prefWidth="1045.0">
                            <children>
                               <TextField fx:id="all_teacher_view_search_id" layoutX="12.0" layoutY="10.0" prefHeight="32.0" prefWidth="511.0" promptText="Search By Id" styleClass="search" stylesheets="@../css/superAdmin.css" />
                               <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="20.0" layoutY="33.0" size="1.5em" />
                               <TextField fx:id="all_teacher_view_search_name" layoutX="533.0" layoutY="10.0" prefHeight="32.0" prefWidth="509.0" promptText="Search By Name" styleClass="search" stylesheets="@../css/superAdmin.css" />
                               <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="542.0" layoutY="33.0" size="1.5em" />
-                              <TableView editable="true" layoutX="13.0" layoutY="53.0" prefHeight="631.0" prefWidth="1031.0" stylesheets="@../css/superAdmin.css">
+                              <TableView fx:id="teacherViewTableShow" editable="true" layoutX="13.0" layoutY="53.0" prefHeight="631.0" prefWidth="1031.0" stylesheets="@../css/superAdmin.css">
                                  <columns>
-                                    <TableColumn fx:id="all_teacher_view_id" prefWidth="79.99999809265137" text="Id">
+                                    <TableColumn fx:id="all_teacher_view_id" prefWidth="89.60003471374512" text="Id">
                                        <styleClass>
                                           <String fx:value="column-header-background" />
                                           <String fx:value="colum-header" />
                                        </styleClass>
                                     </TableColumn>
-                                    <TableColumn fx:id="all_teacher_view_name" prefWidth="235.20001983642578" styleClass="column-header-background" text="Name" />
-                                    <TableColumn fx:id="all_teacher_view_gender" prefWidth="95.46661376953125" styleClass="column-header-background" text="Gender" />
-                                    <TableColumn fx:id="all_teacher_view_phone" prefWidth="137.60003662109375" styleClass="column-header-background" text="Phone" />
-                                    <TableColumn fx:id="all_teacher_view_ssc" prefWidth="56.7999267578125" styleClass="column-header-background" text="SSC" />
-                                    <TableColumn fx:id="all_teacher_view_hsc" prefWidth="58.933349609375" styleClass="column-header-background" text="HSC" />
-                                    <TableColumn fx:id="all_teacher_view_bsc" prefWidth="64.7999267578125" styleClass="column-header-background" text="BSC" />
-                                    <TableColumn fx:id="all_teacher_view_msc" prefWidth="57.86676025390625" styleClass="column-header-background" text="MSC" />
-                                    <TableColumn fx:id="all_teacher_view_status" prefWidth="152.0001220703125" styleClass="column-header-background" text="Status" />
+                                    <TableColumn fx:id="all_teacher_view_name" prefWidth="387.19995880126953" styleClass="column-header-background" text="Name" />
+                                    <TableColumn fx:id="all_teacher_view_gender" prefWidth="106.66665649414062" styleClass="column-header-background" text="Gender" />
+                                    <TableColumn fx:id="all_teacher_view_phone" prefWidth="132.5333251953125" styleClass="column-header-background" text="Phone" />
+                                    <TableColumn fx:id="all_teacher_view_ssc" prefWidth="56.79998779296875" styleClass="column-header-background" text="SSC" />
+                                    <TableColumn fx:id="all_teacher_view_hsc" prefWidth="59.20001220703125" styleClass="column-header-background" text="HSC" />
+                                    <TableColumn fx:id="all_teacher_view_bsc" prefWidth="59.4666748046875" styleClass="column-header-background" text="BSC" />
+                                    <TableColumn fx:id="all_teacher_view_msc" prefWidth="56.7999267578125" styleClass="column-header-background" text="MSC" />
+                                    <TableColumn fx:id="all_teacher_view_status" prefWidth="85.3333740234375" styleClass="column-header-background" text="Status" />
                                  </columns>
                               </TableView>
                            </children>
