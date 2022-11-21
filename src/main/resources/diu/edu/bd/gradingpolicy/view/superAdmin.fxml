@@ -368,7 +368,7 @@
                               </TableView>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="availableCourse" layoutX="57.0" layoutY="18.0" prefHeight="695.2" prefWidth="1052.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="availableCourse" layoutX="57.0" layoutY="18.0" prefHeight="695.2" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="679.0" prefWidth="328.0" stylesheets="@../css/superAdmin.css">
                                  <styleClass>
@@ -381,7 +381,7 @@
                                     <Label layoutX="39.0" layoutY="133.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Semester:" textAlignment="RIGHT" />
                                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="33.0" layoutY="226.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Teacher Id:" textAlignment="RIGHT" />
                                     <TextField fx:id="availableCourse_teacher" layoutX="128.0" layoutY="222.0" prefHeight="23.0" prefWidth="180.0" promptText="720000" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
-                                    <ComboBox fx:id="availableCourse_semester" layoutX="127.0" layoutY="126.0" prefWidth="180.0" promptText="Choose Semester" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
+                                    <ComboBox fx:id="availableCourse_semester" layoutX="127.0" layoutY="126.0" onAction="#addSemesterToSelectBox" prefWidth="180.0" promptText="Choose Semester" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                     <Label layoutX="65.0" layoutY="181.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Type:" textAlignment="RIGHT" />
                                     <ComboBox fx:id="availableCourse_type" layoutX="128.0" layoutY="173.0" prefWidth="180.0" promptText="Theory / Lab" stylesheets="@../css/superAdmin.css" />
                                     <Button fx:id="availableCourse_add" layoutX="28.0" layoutY="287.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Add">
@@ -741,7 +741,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="teacher_edit" layoutX="15.0" layoutY="18.0" prefHeight="666.0" prefWidth="1028.0">
+                        <AnchorPane fx:id="teacher_edit" layoutX="15.0" layoutY="18.0" prefHeight="666.0" prefWidth="1028.0" visible="false">
                            <children>
                               <AnchorPane layoutX="-11.0" layoutY="6.0" prefHeight="666.4" prefWidth="1028.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>

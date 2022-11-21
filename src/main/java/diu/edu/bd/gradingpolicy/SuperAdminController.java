@@ -702,6 +702,9 @@ public class SuperAdminController implements Initializable {
             admin_available_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
             admin_marks_btn.setStyle("-fx-background-color: #fff");
             admin_create_semester_btn.setStyle("-fx-background-color: #fff");
+
+            addCourseType();
+            addSemesterToSelectBox();
         } else if (event.getSource() == admin_marks_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -1402,6 +1405,39 @@ public class SuperAdminController implements Initializable {
         teacher_edit_msc.setText("");
     }
 
+    // ***********************************
+    // ************* Course **************
+    // ***********************************
+
+    private String[] courseTypeList = {"Theory", "Lab"};
+    public void addCourseType() {
+        List<String> courseTypeArrayList = new ArrayList<>();
+
+        for (String data : courseTypeList)
+            courseTypeArrayList.add(data);
+
+        ObservableList observableList = FXCollections.observableArrayList(courseTypeArrayList);
+        availableCourse_type.setItems(observableList);
+    }
+
+    public void addSemesterToSelectBox() throws FileNotFoundException {
+        List<String> semesterArrayList = new ArrayList<>();
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/semesters.csv";
+        Scanner scanner = new Scanner(new File(filePath));
+        scanner.useDelimiter("[,\n]");
+
+        while (scanner.hasNextLine()) {
+            String row = scanner.nextLine();
+            String[] data = row.split(",");
+
+            semesterArrayList.add(data[0] + " " + data[1]);
+        }
+        scanner.close();
+        ObservableList observableList = FXCollections.observableArrayList(semesterArrayList);
+        availableCourse_semester.setItems(observableList);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -1417,6 +1453,8 @@ public class SuperAdminController implements Initializable {
             clearStudentAddViewData();
             updateStudentData();
             setAddTeacherShowListData();
+            addCourseType();
+            addSemesterToSelectBox();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
