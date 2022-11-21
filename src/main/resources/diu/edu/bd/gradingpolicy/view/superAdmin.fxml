@@ -9,7 +9,6 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -359,7 +358,6 @@
                                   <TableColumn fx:id="viewStudent_id" prefWidth="75.0" styleClass="colum-header" text="Id" />
                                   <TableColumn fx:id="viewStudent_name" prefWidth="176.26667022705078" text="Name" />
                                     <TableColumn fx:id="viewStudent_gender" prefWidth="50.39996337890625" text="Gender" />
-                                    <TableColumn fx:id="viewStudent_dob" prefWidth="85.60003662109375" text="Date of Birth" />
                                     <TableColumn fx:id="viewStudent_phone" prefWidth="146.13333129882812" text="Phone" />
                                     <TableColumn fx:id="viewStudent_ssc" prefWidth="49.333251953125" text="SSC" />
                                     <TableColumn fx:id="viewStudent_hsc" prefWidth="45.066650390625" text="HSC" />
@@ -435,7 +433,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="16.0">
                                  <children>
@@ -449,15 +447,14 @@
                                                 <String fx:value="colum-header" />
                                              </styleClass>
                                           </TableColumn>
-                                          <TableColumn fx:id="allStudent_view_name" prefWidth="176.26667022705078" styleClass="column-header-background" text="Name" />
-                                          <TableColumn fx:id="allStudent_view_gender" prefWidth="50.39996337890625" styleClass="column-header-background" text="Gender" />
-                                          <TableColumn fx:id="allStudent_view_dob" prefWidth="85.60003662109375" styleClass="column-header-background" text="Date of Birth" />
-                                          <TableColumn fx:id="allStudent_view_phone" prefWidth="101.8665771484375" styleClass="column-header-background" text="Phone" />
-                                          <TableColumn fx:id="allStudent_view_ssc" prefWidth="42.39996337890625" styleClass="column-header-background" text="SSC" />
-                                          <TableColumn fx:id="allStudent_view_hsc" prefWidth="42.39996337890625" styleClass="column-header-background" text="HSC" />
-                                          <TableColumn fx:id="allStudent_view_gName" prefWidth="177.33334350585938" styleClass="column-header-background" text="G. Name" />
-                                          <TableColumn fx:id="allStudent_view_gPhone" prefWidth="130.39990234375" styleClass="column-header-background" text="G. Phone" />
-                                          <TableColumn fx:id="allStudent_view_status" prefWidth="127.2000732421875" styleClass="column-header-background" text="Status" />
+                                          <TableColumn fx:id="allStudent_view_name" prefWidth="205.6000747680664" styleClass="column-header-background" text="Name" />
+                                          <TableColumn fx:id="allStudent_view_gender" prefWidth="100.7999267578125" styleClass="column-header-background" text="Gender" />
+                                          <TableColumn fx:id="allStudent_view_phone" prefWidth="98.66668701171875" styleClass="column-header-background" text="Phone" />
+                                          <TableColumn fx:id="allStudent_view_ssc" prefWidth="71.73330688476562" styleClass="column-header-background" text="SSC" />
+                                          <TableColumn fx:id="allStudent_view_hsc" prefWidth="89.33343505859375" styleClass="column-header-background" text="HSC" />
+                                          <TableColumn fx:id="allStudent_view_gName" prefWidth="164.00006103515625" styleClass="column-header-background" text="G. Name" />
+                                          <TableColumn fx:id="allStudent_view_gPhone" prefWidth="117.066650390625" styleClass="column-header-background" text="G. Phone" />
+                                          <TableColumn fx:id="allStudent_view_status" prefWidth="97.333251953125" styleClass="column-header-background" text="Status" />
                                        </columns>
                                     </TableView>
                                     <AnchorPane layoutX="5.0" layoutY="174.0" prefHeight="484.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
@@ -470,15 +467,8 @@
                                           <TextField fx:id="allStudent_edit_name" layoutX="179.0" layoutY="49.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                           <Label layoutX="57.0" layoutY="126.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Gender:" />
                                           <ComboBox fx:id="allStudent_edit_gender" layoutX="179.0" layoutY="119.0" prefHeight="32.0" prefWidth="229.0" promptText="Choose" />
-                                          <Label layoutX="57.0" layoutY="199.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Date of Birth:" />
-                                          <DatePicker fx:id="allStudent_edit_dob" layoutX="179.0" layoutY="192.0" prefHeight="32.0" prefWidth="231.0" stylesheets="@../css/superAdmin.css">
-                                             <styleClass>
-                                                <String fx:value="combo-box" />
-                                                <String fx:value="input-box" />
-                                             </styleClass>
-                                          </DatePicker>
-                                          <Label layoutX="57.0" layoutY="272.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Phone:" />
-                                          <TextField fx:id="allStudent_edit_phone" layoutX="179.0" layoutY="265.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
+                                          <Label layoutX="57.0" layoutY="194.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Phone:" />
+                                          <TextField fx:id="allStudent_edit_phone" layoutX="179.0" layoutY="187.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                           <Label layoutX="591.0" layoutY="55.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="SSC:" />
                                           <TextField fx:id="allStudent_edit_ssc" layoutX="713.0" layoutY="48.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                           <Label layoutX="591.0" layoutY="122.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="HSC:" />
@@ -487,15 +477,15 @@
                                           <TextField fx:id="allStudent_edit_gName" layoutX="713.0" layoutY="184.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                           <Label layoutX="591.0" layoutY="261.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Gurdian Phone:" />
                                           <TextField fx:id="allStudent_edit_gPhone" layoutX="713.0" layoutY="254.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
-                                          <Label layoutX="591.0" layoutY="334.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Status" />
-                                          <ComboBox fx:id="allStudent_edit_status" layoutX="713.0" layoutY="327.0" prefHeight="32.0" prefWidth="229.0" promptText="Choose" />
-                                          <Button fx:id="allStudent_edit_save" layoutX="267.0" layoutY="404.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Update">
+                                          <Label layoutX="57.0" layoutY="268.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Status" />
+                                          <ComboBox fx:id="allStudent_edit_status" layoutX="179.0" layoutY="261.0" prefHeight="32.0" prefWidth="229.0" promptText="Choose" />
+                                          <Button fx:id="allStudent_edit_save" layoutX="267.0" layoutY="382.0" mnemonicParsing="false" onAction="#updateStudentData" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Update">
                                              <styleClass>
                                                 <String fx:value="button-common" />
                                                 <String fx:value="button-blue" />
                                              </styleClass>
                                           </Button>
-                                          <Button fx:id="allStudent_edit_delete" layoutX="561.0" layoutY="404.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Delete">
+                                          <Button fx:id="allStudent_edit_delete" layoutX="561.0" layoutY="382.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Delete">
                                              <styleClass>
                                                 <String fx:value="button-common" />
                                                 <String fx:value="button-red" />
@@ -507,7 +497,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="student_registration" layoutX="13.0" layoutY="13.0" prefHeight="695.2" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="student_registration" layoutX="13.0" layoutY="13.0" prefHeight="695.2" prefWidth="1052.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="11.0" layoutY="9.0" prefHeight="670.0" prefWidth="1020.0" stylesheets="@../css/superAdmin.css">
                                  <styleClass>
@@ -546,26 +536,13 @@
                                        </styleClass>
                                     </Label>
                                     <ComboBox fx:id="student_reg_gender" layoutX="179.0" layoutY="309.0" prefHeight="35.0" prefWidth="270.0" promptText="Choose" styleClass="ex-padding" />
-                                    <Label layoutX="36.0" layoutY="409.0" stylesheets="@../css/superAdmin.css" text="Date of Birth:">
+                                    <Label layoutX="36.0" layoutY="408.0" stylesheets="@../css/superAdmin.css" text="Phone:">
                                        <styleClass>
                                           <String fx:value="input-title" />
                                           <String fx:value="ex-font-size" />
                                        </styleClass>
                                     </Label>
-                                    <DatePicker fx:id="student_reg_dob" layoutX="179.0" layoutY="402.0" prefHeight="35.0" prefWidth="270.0" stylesheets="@../css/superAdmin.css">
-                                       <styleClass>
-                                          <String fx:value="combo-box" />
-                                          <String fx:value="input-box" />
-                                          <String fx:value="ex-padding" />
-                                       </styleClass>
-                                    </DatePicker>
-                                    <Label layoutX="36.0" layoutY="508.0" stylesheets="@../css/superAdmin.css" text="Phone:">
-                                       <styleClass>
-                                          <String fx:value="input-title" />
-                                          <String fx:value="ex-font-size" />
-                                       </styleClass>
-                                    </Label>
-                                    <TextField fx:id="student_reg_phone" layoutX="179.0" layoutY="501.0" prefHeight="35.0" prefWidth="270.0" stylesheets="@../css/superAdmin.css">
+                                    <TextField fx:id="student_reg_phone" layoutX="179.0" layoutY="401.0" prefHeight="35.0" prefWidth="270.0" stylesheets="@../css/superAdmin.css">
                                        <styleClass>
                                           <String fx:value="input-box" />
                                           <String fx:value="ex-padding" />
@@ -681,26 +658,13 @@
                                        </styleClass>
                                     </Label>
                                     <ComboBox fx:id="teacher_reg_gender" layoutX="179.0" layoutY="309.0" prefHeight="35.0" prefWidth="270.0" promptText="Choose" styleClass="ex-padding" />
-                                    <Label layoutX="36.0" layoutY="409.0" stylesheets="@../css/superAdmin.css" text="Date of Birth:">
+                                    <Label layoutX="36.0" layoutY="408.0" stylesheets="@../css/superAdmin.css" text="Phone:">
                                        <styleClass>
                                           <String fx:value="input-title" />
                                           <String fx:value="ex-font-size" />
                                        </styleClass>
                                     </Label>
-                                    <DatePicker fx:id="teacher_reg_dob" layoutX="179.0" layoutY="402.0" prefHeight="35.0" prefWidth="270.0" stylesheets="@../css/superAdmin.css">
-                                       <styleClass>
-                                          <String fx:value="combo-box" />
-                                          <String fx:value="input-box" />
-                                          <String fx:value="ex-padding" />
-                                       </styleClass>
-                                    </DatePicker>
-                                    <Label layoutX="36.0" layoutY="508.0" stylesheets="@../css/superAdmin.css" text="Phone:">
-                                       <styleClass>
-                                          <String fx:value="input-title" />
-                                          <String fx:value="ex-font-size" />
-                                       </styleClass>
-                                    </Label>
-                                    <TextField fx:id="teacher_reg_phone" layoutX="179.0" layoutY="501.0" prefHeight="35.0" prefWidth="270.0" stylesheets="@../css/superAdmin.css">
+                                    <TextField fx:id="teacher_reg_phone" layoutX="179.0" layoutY="401.0" prefHeight="35.0" prefWidth="270.0" stylesheets="@../css/superAdmin.css">
                                        <styleClass>
                                           <String fx:value="input-box" />
                                           <String fx:value="ex-padding" />
@@ -793,7 +757,6 @@
                                           </TableColumn>
                                           <TableColumn fx:id="teacher_edit_view_name" prefWidth="186.39997100830078" styleClass="column-header-background" text="Name" />
                                           <TableColumn fx:id="teacher_edit_view_gender" prefWidth="59.200042724609375" styleClass="column-header-background" text="Gender" />
-                                          <TableColumn fx:id="teacher_edit_view_dob" prefWidth="113.86669921875" styleClass="column-header-background" text="Date of Birth" />
                                           <TableColumn fx:id="teacher_edit_view_phone" prefWidth="167.46670532226562" styleClass="column-header-background" text="Phone" />
                                           <TableColumn fx:id="teacher_edit_view_ssc" prefWidth="69.86669921875" styleClass="column-header-background" text="SSC" />
                                           <TableColumn fx:id="teacher_edit_view_hsc" prefWidth="81.06671142578125" styleClass="column-header-background" text="HSC" />
@@ -814,15 +777,8 @@
                                     <TextField fx:id="teacher_edit_name" layoutX="179.0" layoutY="48.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                     <Label layoutX="57.0" layoutY="122.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Gender:" />
                                     <ComboBox fx:id="teacher_edit_gender" layoutX="179.0" layoutY="115.0" prefHeight="32.0" prefWidth="229.0" promptText="Choose" />
-                                    <Label layoutX="57.0" layoutY="191.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Date of Birth:" />
-                                    <DatePicker fx:id="teacher_edit_dob" layoutX="179.0" layoutY="184.0" prefHeight="32.0" prefWidth="231.0" stylesheets="@../css/superAdmin.css">
-                                       <styleClass>
-                                          <String fx:value="combo-box" />
-                                          <String fx:value="input-box" />
-                                       </styleClass>
-                                    </DatePicker>
-                                    <Label layoutX="57.0" layoutY="259.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Phone:" />
-                                    <TextField fx:id="teacher_edit_phone" layoutX="179.0" layoutY="252.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
+                                    <Label layoutX="57.0" layoutY="191.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Phone:" />
+                                    <TextField fx:id="teacher_edit_phone" layoutX="179.0" layoutY="184.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                     <Label layoutX="591.0" layoutY="55.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="SSC:" />
                                     <TextField fx:id="teacher_edit_ssc" layoutX="713.0" layoutY="48.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                     <Label layoutX="591.0" layoutY="122.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="HSC:" />
@@ -831,8 +787,8 @@
                                     <TextField fx:id="teacher_edit_bsc" layoutX="713.0" layoutY="181.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
                                     <Label layoutX="591.0" layoutY="254.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="MSC:" />
                                     <TextField fx:id="teacher_edit_msc" layoutX="713.0" layoutY="247.0" prefHeight="23.0" prefWidth="228.0" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
-                                    <Label layoutX="591.0" layoutY="322.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Status" />
-                                    <ComboBox fx:id="teacher_edit_status" layoutX="713.0" layoutY="315.0" prefHeight="32.0" prefWidth="229.0" promptText="Choose" />
+                                    <Label layoutX="57.0" layoutY="259.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Status" />
+                                    <ComboBox fx:id="teacher_edit_status" layoutX="179.0" layoutY="252.0" prefHeight="32.0" prefWidth="229.0" promptText="Choose" />
                                     <Button fx:id="teacher_edit_update" layoutX="267.0" layoutY="411.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Update">
                                        <styleClass>
                                           <String fx:value="button-common" />
@@ -865,7 +821,6 @@
                                     </TableColumn>
                                     <TableColumn fx:id="all_teacher_view_name" prefWidth="235.20001983642578" styleClass="column-header-background" text="Name" />
                                     <TableColumn fx:id="all_teacher_view_gender" prefWidth="95.46661376953125" styleClass="column-header-background" text="Gender" />
-                                    <TableColumn fx:id="all_teacher_view_dob" prefWidth="105.06661987304688" styleClass="column-header-background" text="Date of Birth" />
                                     <TableColumn fx:id="all_teacher_view_phone" prefWidth="137.60003662109375" styleClass="column-header-background" text="Phone" />
                                     <TableColumn fx:id="all_teacher_view_ssc" prefWidth="56.7999267578125" styleClass="column-header-background" text="SSC" />
                                     <TableColumn fx:id="all_teacher_view_hsc" prefWidth="58.933349609375" styleClass="column-header-background" text="HSC" />

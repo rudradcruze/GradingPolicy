@@ -8,17 +8,15 @@ public class Users {
     private String userId;
     private String userName;
     private String userGender;
-    private Date userDob;
     private String userPhone;
     private String userSSC;
     private String userHSC;
     private String userStatus;
 
-    public Users(String userId, String userName, String userGender, Date userDob, String userPhone, String userSSC, String userHSC, String userStatus) {
+    public Users(String userId, String userName, String userGender, String userPhone, String userSSC, String userHSC, String userStatus) {
         this.userId = userId;
         this.userName = userName;
         this.userGender = userGender;
-        this.userDob = userDob;
         this.userPhone = userPhone;
         this.userSSC = userSSC;
         this.userHSC = userHSC;
@@ -35,10 +33,6 @@ public class Users {
 
     public String getUserGender() {
         return userGender;
-    }
-
-    public Date getUserDob() {
-        return userDob;
     }
 
     public String getUserPhone() {

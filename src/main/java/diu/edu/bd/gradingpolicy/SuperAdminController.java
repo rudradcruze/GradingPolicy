@@ -106,9 +106,6 @@ public class SuperAdminController implements Initializable {
     private Button allStudent_edit_delete;
 
     @FXML
-    private DatePicker allStudent_edit_dob;
-
-    @FXML
     private TextField allStudent_edit_gName;
 
     @FXML
@@ -137,9 +134,6 @@ public class SuperAdminController implements Initializable {
 
     @FXML
     private TextField allStudent_search_id;
-
-    @FXML
-    private TableColumn<?, ?> allStudent_view_dob;
 
     @FXML
     private TableColumn<?, ?> allStudent_view_gName;
@@ -337,9 +331,6 @@ public class SuperAdminController implements Initializable {
     private Button student_reg_add;
 
     @FXML
-    private DatePicker student_reg_dob;
-
-    @FXML
     private ComboBox<?> student_reg_gender;
 
     @FXML
@@ -479,9 +470,6 @@ public class SuperAdminController implements Initializable {
 
     @FXML
     private MenuItem viewStudent_btn;
-
-    @FXML
-    private TableColumn<StudentData, String> viewStudent_dob;
 
     @FXML
     private TableColumn<StudentData, String> viewStudent_gName;
@@ -840,18 +828,16 @@ public class SuperAdminController implements Initializable {
 
             String row = studentFileReader.nextLine();
             String[] data = row.split(",");
-            Date studentDob = new SimpleDateFormat("yyyy-MM-DD").parse(data[3]);
 
             studentData = new StudentData(data[0],
                     data[1],
                     data[2],
-                    studentDob,
+                    data[3],
                     data[4],
                     data[5],
                     data[6],
                     data[7],
-                    data[8],
-                    data[9]);
+                    data[8]);
 
             listStudents.add(studentData);
         }
@@ -868,8 +854,6 @@ public class SuperAdminController implements Initializable {
         allStudent_view_name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         viewStudent_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
         allStudent_view_gender.setCellValueFactory(new PropertyValueFactory<>("userGender"));
-        viewStudent_dob.setCellValueFactory(new PropertyValueFactory<>("userDob"));
-        allStudent_view_dob.setCellValueFactory(new PropertyValueFactory<>("userDob"));
         viewStudent_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
         allStudent_view_phone.setCellValueFactory(new PropertyValueFactory<>("userPhone"));
         viewStudent_ssc.setCellValueFactory(new PropertyValueFactory<>("userSSC"));
@@ -899,11 +883,9 @@ public class SuperAdminController implements Initializable {
         allStudent_edit_ssc.setText(String.valueOf(studentData.getUserSSC()));
         allStudent_edit_hsc.setText(String.valueOf(studentData.getUserHSC()));
         allStudent_edit_gName.setText(String.valueOf(studentData.getStudentGuardianName()));
-        allStudent_edit_gName.setText(String.valueOf(studentData.getStudentGuardianPhone()));
         allStudent_edit_gPhone.setText(String.valueOf(studentData.getStudentGuardianPhone()));
 
         allStudent_edit_gender.setPromptText(String.valueOf(studentData.getUserGender()));
-        allStudent_edit_dob.setPromptText(String.valueOf(studentData.getUserDob()));
         allStudent_edit_status.setPromptText(String.valueOf(studentData.getUserStatus()));
 
     }
@@ -921,7 +903,7 @@ public class SuperAdminController implements Initializable {
             if (student_reg_id.getText().isEmpty() || student_reg_name.getText().isEmpty() || student_reg_phone.getText().isEmpty() || student_reg_ssc.getText().isEmpty() || student_reg_hsc.getText().isEmpty() || student_reg_gurdianName.getText().isEmpty() || student_reg_gurdianPhone.getText().isEmpty()) {
                 Common.alertError("Error Message", "Please fill up all blank fields.");
             } else {
-                pw.println(student_reg_id.getText() + "," + student_reg_name.getText() + "," + student_reg_gender.getValue() + "," + student_reg_dob.getValue() + "," + student_reg_phone.getText() + "," + student_reg_ssc.getText() + "," + student_reg_hsc.getText() + "," + student_reg_gurdianName.getText() + "," + student_reg_gurdianPhone.getText() + "," + student_reg_status.getValue());
+                pw.println(student_reg_id.getText() + "," + student_reg_name.getText() + "," + student_reg_gender.getValue() + "," + student_reg_phone.getText() + "," + student_reg_ssc.getText() + "," + student_reg_hsc.getText() + "," + student_reg_gurdianName.getText() + "," + student_reg_gurdianPhone.getText() + "," + student_reg_status.getValue());
 
                 Common.alertInfo("Information Message", "Student Create Successfully!");
             }
@@ -943,7 +925,6 @@ public class SuperAdminController implements Initializable {
         student_reg_id.setText("");
         student_reg_name.setText("");
         student_reg_gender.setPromptText("Choose");
-        student_reg_dob.setPromptText("Choose");
         student_reg_phone.setText("");
         student_reg_ssc.setText("");
         student_reg_hsc.setText("");
@@ -952,7 +933,74 @@ public class SuperAdminController implements Initializable {
         student_reg_status.setPromptText("Choose");
     }
 
-    
+    public void updateStudentData() throws IOException, ParseException {
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/students.csv";
+        String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/tempStudents.csv";
+
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+
+        StudentData studentData = editViewTable.getSelectionModel().getSelectedItem();
+        int num = editViewTable.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        String oldUserId = String.valueOf(studentData.getUserId());
+        String oldUserName = String.valueOf(studentData.getUserName());
+        String oldUserGender = String.valueOf(studentData.getUserGender());
+        String oldUserPhone = String.valueOf(studentData.getUserPhone());
+        String oldUserSSC = String.valueOf(studentData.getUserSSC());
+        String oldUserHSC = String.valueOf(studentData.getUserHSC());
+        String oldUserGName = String.valueOf(studentData.getStudentGuardianName());
+        String oldUserGPhone = String.valueOf(studentData.getStudentGuardianPhone());
+        String oldUserStatus = String.valueOf(studentData.getUserStatus());
+
+
+        String newUserName = allStudent_edit_name.getText();
+        String newUserGender = (String) allStudent_edit_gender.getValue();
+        String newUserPhone = allStudent_edit_phone.getText();
+        String newUserSSC = allStudent_edit_ssc.getText();
+        String newUserHSC = allStudent_edit_hsc.getText();
+        String newUserGName = allStudent_edit_gName.getText();
+        String newUserGPhone = allStudent_edit_gPhone.getText();
+        String newUserStatus = (String) allStudent_edit_status.getValue();
+
+        FileWriter fw = new FileWriter(tempFile, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+
+        sca = new Scanner(new File(filePath));
+        sca.useDelimiter("[,\n]");
+
+        Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Student Data!");
+
+        if(option.get().equals(ButtonType.OK)) {
+
+            while (sca.hasNextLine()) {
+
+                String row = sca.nextLine();
+                String[] data = row.split(",");
+
+                if (data[0].equals(oldUserId))
+                    pw.println(oldUserId + "," + newUserName + "," + newUserGender + "," + newUserPhone + "," + newUserSSC + "," + newUserHSC + "," + newUserGName + "," + newUserGPhone + "," + newUserStatus);
+                else
+                    pw.println(oldUserId + "," + oldUserName + "," + oldUserGender + "," + oldUserPhone + "," + oldUserSSC + "," + oldUserHSC + "," + oldUserGName + "," + oldUserGPhone + "," + oldUserStatus);
+            }
+            sca.close();
+            oldFile.delete();
+
+            pw.flush();
+            pw.close();
+
+            File rename = new File(filePath);
+            newFile.renameTo(rename);
+
+            Common.alertInfo("Information Message", "Student update successfully");
+            setAddStudentsShowListData();
+        } else return;
+    }
 
     // ***********************************
     // ************* Semester ************
