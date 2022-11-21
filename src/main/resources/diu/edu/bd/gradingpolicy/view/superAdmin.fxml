@@ -507,7 +507,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="student_registration" layoutX="13.0" layoutY="13.0" prefHeight="695.2" prefWidth="1052.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="student_registration" layoutX="13.0" layoutY="13.0" prefHeight="695.2" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="11.0" layoutY="9.0" prefHeight="670.0" prefWidth="1020.0" stylesheets="@../css/superAdmin.css">
                                  <styleClass>
@@ -631,7 +631,7 @@
                                           <String fx:value="ex-padding" />
                                        </styleClass>
                                     </ComboBox>
-                                    <Button fx:id="student_reg_add" layoutX="428.0" layoutY="585.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Add Student">
+                                    <Button fx:id="student_reg_add" layoutX="428.0" layoutY="585.0" mnemonicParsing="false" onAction="#addStudentData" prefHeight="50.0" prefWidth="150.0" stylesheets="@../css/superAdmin.css" text="Add Student">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-green" />
@@ -969,7 +969,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="semester" layoutX="10.0" layoutY="10.0" prefHeight="705.6" prefWidth="1063.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="semester" layoutX="10.0" layoutY="10.0" prefHeight="705.6" prefWidth="1063.2" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="679.0" prefWidth="328.0" stylesheets="@../css/superAdmin.css">
                                  <styleClass>

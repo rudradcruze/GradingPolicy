@@ -810,6 +810,7 @@ public class SuperAdminController implements Initializable {
 
         ObservableList obList = FXCollections.observableArrayList(genderArrayList);
         allStudent_edit_gender.setItems(obList);
+        student_reg_gender.setItems(obList);
     }
 
     private String[] statusList = {"Active", "Inactive", "Suspended"};
@@ -821,6 +822,7 @@ public class SuperAdminController implements Initializable {
 
         ObservableList obList = FXCollections.observableArrayList(statusArrayLise);
         allStudent_edit_status.setItems(obList);
+        student_reg_status.setItems(obList);
     }
 
     public ObservableList<StudentData> addStudentListData() throws FileNotFoundException, ParseException {
@@ -838,7 +840,7 @@ public class SuperAdminController implements Initializable {
 
             String row = studentFileReader.nextLine();
             String[] data = row.split(",");
-            Date studentDob = new SimpleDateFormat("dd/MM/yyyy").parse(data[3]);
+            Date studentDob = new SimpleDateFormat("yyyy-MM-DD").parse(data[3]);
 
             studentData = new StudentData(data[0],
                     data[1],
@@ -906,6 +908,52 @@ public class SuperAdminController implements Initializable {
 
     }
 
+    public void addStudentData() throws IOException, ParseException {
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+
+        try {
+            fw = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/students.csv", true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+
+            if (student_reg_id.getText().isEmpty() || student_reg_name.getText().isEmpty() || student_reg_phone.getText().isEmpty() || student_reg_ssc.getText().isEmpty() || student_reg_hsc.getText().isEmpty() || student_reg_gurdianName.getText().isEmpty() || student_reg_gurdianPhone.getText().isEmpty()) {
+                Common.alertError("Error Message", "Please fill up all blank fields.");
+            } else {
+                pw.println(student_reg_id.getText() + "," + student_reg_name.getText() + "," + student_reg_gender.getValue() + "," + student_reg_dob.getValue() + "," + student_reg_phone.getText() + "," + student_reg_ssc.getText() + "," + student_reg_hsc.getText() + "," + student_reg_gurdianName.getText() + "," + student_reg_gurdianPhone.getText() + "," + student_reg_status.getValue());
+
+                Common.alertInfo("Information Message", "Student Create Successfully!");
+            }
+            pw.flush();
+
+        } finally {
+            try {
+                pw.close();
+                bw.close();
+                fw.close();
+            } catch (IOException io) {
+                System.out.println("Something went wrong!");
+            }
+            clearStudentAddViewData();
+        }
+    }
+
+    public void clearStudentAddViewData() {
+        student_reg_id.setText("");
+        student_reg_name.setText("");
+        student_reg_gender.setPromptText("Choose");
+        student_reg_dob.setPromptText("Choose");
+        student_reg_phone.setText("");
+        student_reg_ssc.setText("");
+        student_reg_hsc.setText("");
+        student_reg_gurdianName.setText("");
+        student_reg_gurdianPhone.setText("");
+        student_reg_status.setPromptText("Choose");
+    }
+
+    
+
     // ***********************************
     // ************* Semester ************
     // ***********************************
@@ -927,7 +975,7 @@ public class SuperAdminController implements Initializable {
 
         ObservableList<SemesterData> listSemester = FXCollections.observableArrayList();
 
-        semesterFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv");
+        semesterFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/semesters.csv");
         Scanner semesterFileReader = new Scanner(semesterFile);
 
         while (semesterFileReader.hasNextLine()) {
@@ -973,14 +1021,14 @@ public class SuperAdminController implements Initializable {
         PrintWriter pw = null;
 
         try {
-            fw = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv", true);
+            fw = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/semesters.csv", true);
             bw = new BufferedWriter(fw);
             pw = new PrintWriter(bw);
 
             if (semester_year.getText().isEmpty()) {
                 Common.alertError("Error Message", "Please fill up all blank fields.");
             } else {
-                pw.write("\n" + semester_season.getValue() + "," + semester_year.getText());
+                pw.println(semester_season.getValue() + "," + semester_year.getText());
                 Common.alertInfo("Information Message", "Semester Create Successfully.");
             }
             pw.flush();
@@ -1003,11 +1051,10 @@ public class SuperAdminController implements Initializable {
         semester_year.setText("");
     }
 
-    Scanner semesterFileEdit = null;
     Scanner sca = null;
     public void updateSemesterData() throws IOException, ParseException {
 
-        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv";
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/semesters.csv";
         String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/temp.csv";
 
         File oldFile = new File(filePath);
@@ -1078,6 +1125,7 @@ public class SuperAdminController implements Initializable {
             setAddSemesterShowListData();
             clearSemesterData();
             updateSemesterData();
+            clearStudentAddViewData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
