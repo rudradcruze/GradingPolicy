@@ -892,28 +892,39 @@ public class SuperAdminController implements Initializable {
 
     public void addStudentData() throws IOException, ParseException {
         FileWriter fw = null;
+        FileWriter userCreate = null;
         BufferedWriter bw = null;
+        BufferedWriter userCreateBuffer = null;
         PrintWriter pw = null;
+        PrintWriter userCreatePrintWriter = null;
 
         try {
             fw = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/students.csv", true);
+            userCreate = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/users.csv", true);
             bw = new BufferedWriter(fw);
+            userCreateBuffer = new BufferedWriter(userCreate);
             pw = new PrintWriter(bw);
+            userCreatePrintWriter = new PrintWriter(userCreateBuffer);
 
             if (student_reg_id.getText().isEmpty() || student_reg_name.getText().isEmpty() || student_reg_phone.getText().isEmpty() || student_reg_ssc.getText().isEmpty() || student_reg_hsc.getText().isEmpty() || student_reg_gurdianName.getText().isEmpty() || student_reg_gurdianPhone.getText().isEmpty()) {
                 Common.alertError("Error Message", "Please fill up all blank fields.");
             } else {
                 pw.println(student_reg_id.getText() + "," + student_reg_name.getText() + "," + student_reg_gender.getValue() + "," + student_reg_phone.getText() + "," + student_reg_ssc.getText() + "," + student_reg_hsc.getText() + "," + student_reg_gurdianName.getText() + "," + student_reg_gurdianPhone.getText() + "," + student_reg_status.getValue());
-
+                userCreatePrintWriter.println(student_reg_id.getText() + "," + "Student" + "," + student_reg_id.getText());
                 Common.alertInfo("Information Message", "Student Create Successfully!");
+                Common.alertInfo("Information Message", "Student account also created successfully!");
             }
             pw.flush();
+            userCreatePrintWriter.flush();
 
         } finally {
             try {
                 pw.close();
+                userCreatePrintWriter.close();
                 bw.close();
+                userCreateBuffer.close();
                 fw.close();
+                userCreate.close();
             } catch (IOException io) {
                 System.out.println("Something went wrong!");
             }
@@ -1108,7 +1119,6 @@ public class SuperAdminController implements Initializable {
         semester_season.setPromptText("Choose");
         semester_year.setText("");
     }
-
     Scanner sca = null;
     public void updateSemesterData() throws IOException, ParseException {
 
