@@ -979,13 +979,13 @@
                                  <children>
                                     <Label layoutX="9.0" layoutY="38.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Semester Season:" textAlignment="RIGHT" />
                                     <ComboBox fx:id="semester_season" layoutX="139.0" layoutY="30.0" prefWidth="180.0" promptText="Choose" styleClass="input-box" stylesheets="@../css/superAdmin.css" />
-                                    <Button fx:id="semester_add" layoutX="28.0" layoutY="189.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Add">
+                                    <Button fx:id="semester_add" layoutX="28.0" layoutY="189.0" mnemonicParsing="false" onAction="#addSemesterData" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Add">
                                        <styleClass>
                                           <String fx:value="button-green" />
                                           <String fx:value="button-common" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="semester_update" layoutX="182.0" layoutY="189.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Update">
+                                    <Button fx:id="semester_update" layoutX="182.0" layoutY="189.0" mnemonicParsing="false" onAction="#updateSemesterData" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Update">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-blue" />
@@ -993,6 +993,12 @@
                                     </Button>
                                     <Label layoutX="10.0" layoutY="106.0" styleClass="input-title" stylesheets="@../css/superAdmin.css" text="Season Year:" />
                                     <TextField fx:id="semester_year" layoutX="139.0" layoutY="101.0" prefHeight="23.0" prefWidth="180.0" promptText="202..." styleClass="input-box" stylesheets="@../css/superAdmin.css" />
+                                    <Button fx:id="semester_clear" layoutX="107.0" layoutY="258.0" mnemonicParsing="false" onAction="#clearSemesterData" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Clear">
+                                       <styleClass>
+                                          <String fx:value="button-common" />
+                                          <String fx:value="button-purple" />
+                                       </styleClass>
+                                    </Button>
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="348.0" layoutY="9.0" prefHeight="679.0" prefWidth="685.0" stylesheets="@../css/superAdmin.css">

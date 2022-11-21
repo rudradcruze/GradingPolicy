@@ -19,9 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.security.auth.callback.Callback;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -533,15 +531,12 @@ public class SuperAdminController implements Initializable {
     @FXML
     private TableView<SemesterData> viewSemesterTableView;
 
+    @FXML
+    private Button semester_clear;
+
     // ***********************************I
     // ******* Basic Initial Work ********
     // ***********************************I
-
-    // Files
-    Scanner studentFileReader = null;
-    Scanner semesterFileReader = null;
-    File studentFile = null;
-    File semesterFile = null;
 
     // Method to close the screen
     @FXML
@@ -830,10 +825,12 @@ public class SuperAdminController implements Initializable {
 
     public ObservableList<StudentData> addStudentListData() throws FileNotFoundException, ParseException {
 
+        File studentFile = null;
+
         ObservableList<StudentData> listStudents = FXCollections.observableArrayList();
 
         studentFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/students.csv");
-        studentFileReader = new Scanner(studentFile);
+        Scanner studentFileReader = new Scanner(studentFile);
 
         while (studentFileReader.hasNextLine()) {
 
@@ -926,10 +923,12 @@ public class SuperAdminController implements Initializable {
 
     public ObservableList<SemesterData> addSemesterListData() throws FileNotFoundException, ParseException {
 
+        File semesterFile = null;
+
         ObservableList<SemesterData> listSemester = FXCollections.observableArrayList();
 
         semesterFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv");
-        semesterFileReader = new Scanner(semesterFile);
+        Scanner semesterFileReader = new Scanner(semesterFile);
 
         while (semesterFileReader.hasNextLine()) {
 
@@ -968,6 +967,105 @@ public class SuperAdminController implements Initializable {
         semester_year.setText(String.valueOf(semesterData.getSemester_year()));
     }
 
+    public void addSemesterData() throws IOException, ParseException {
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        PrintWriter pw = null;
+
+        try {
+            fw = new FileWriter("src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv", true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+
+            if (semester_year.getText().isEmpty()) {
+                Common.alertError("Error Message", "Please fill up all blank fields.");
+            } else {
+                pw.write("\n" + semester_season.getValue() + "," + semester_year.getText());
+                Common.alertInfo("Information Message", "Semester Create Successfully.");
+            }
+            pw.flush();
+
+        } finally {
+            try {
+                pw.close();
+                bw.close();
+                fw.close();
+            } catch (IOException io) {
+                System.out.println("Something went wrong!");
+            }
+            setAddSemesterShowListData();
+            clearSemesterData();
+        }
+    }
+
+    public void clearSemesterData() {
+        semester_season.setPromptText("Choose");
+        semester_year.setText("");
+    }
+
+    Scanner semesterFileEdit = null;
+    Scanner sca = null;
+    public void updateSemesterData() throws IOException, ParseException {
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv";
+        String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/temp.csv";
+
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+
+        SemesterData semesterData = viewSemesterTableView.getSelectionModel().getSelectedItem();
+        int num = viewSemesterTableView.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        String oldSeason = String.valueOf(semesterData.getSemester_season());
+        String oldYear = String.valueOf(semesterData.getSemester_year());
+        String newSeason = (String) semester_season.getValue();
+        String newYear = semester_year.getText();
+
+        FileWriter fw = new FileWriter(tempFile, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+
+        sca = new Scanner(new File(filePath));
+        sca.useDelimiter("[,\n]");
+
+        String fileSeason = null, fileYear = null;
+
+        Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Semester");
+
+        if(option.get().equals(ButtonType.OK)) {
+
+            while (sca.hasNextLine()) {
+
+                String row = sca.nextLine();
+                String[] data = row.split(",");
+
+                fileSeason = data[0];
+                fileYear = data[1];
+
+                if (fileSeason.equals(oldSeason) && fileYear.equals(oldYear))
+                    pw.println(newSeason + "," + newYear);
+                else
+                    pw.println(fileSeason + "," + fileYear);
+            }
+            sca.close();
+            oldFile.delete();
+
+            pw.flush();
+            pw.close();
+
+            File rename = new File(filePath);
+            newFile.renameTo(rename);
+
+            Common.alertInfo("Information Message", "Semester update successfully");
+
+            setAddSemesterShowListData();
+            clearSemesterData();
+        } else return;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -978,7 +1076,9 @@ public class SuperAdminController implements Initializable {
             addStatusList();
             addSemesterList();
             setAddSemesterShowListData();
-        } catch (FileNotFoundException | ParseException e) {
+            clearSemesterData();
+            updateSemesterData();
+        } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
     }

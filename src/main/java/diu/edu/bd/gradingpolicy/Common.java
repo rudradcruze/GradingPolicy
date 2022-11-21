@@ -1,5 +1,5 @@
 package diu.edu.bd.gradingpolicy;
-
+// https://designs.ai/colors/palette/1532 - Color Palate
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
