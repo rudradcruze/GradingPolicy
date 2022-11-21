@@ -342,7 +342,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="viewStudent" layoutX="121.0" layoutY="134.0" prefHeight="695.2" prefWidth="1052.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="viewStudent" layoutX="121.0" layoutY="134.0" prefHeight="695.2" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <TextField fx:id="viewStudent_searchId" layoutX="12.0" layoutY="10.0" prefHeight="32.0" prefWidth="238.0" promptText="Search By Id" styleClass="search" stylesheets="@../css/superAdmin.css" />
                               <FontAwesomeIcon fill="#d789d7" glyphName="SEARCH" layoutX="21.0" layoutY="33.0" size="1.5em" />
@@ -355,15 +355,15 @@
                               </ComboBox>
                               <TableView fx:id="studentAllTableView" editable="true" layoutX="13.0" layoutY="53.0" prefHeight="630.0" prefWidth="1023.0" stylesheets="@../css/superAdmin.css">
                                 <columns>
-                                  <TableColumn fx:id="viewStudent_id" prefWidth="75.0" styleClass="colum-header" text="Id" />
-                                  <TableColumn fx:id="viewStudent_name" prefWidth="176.26667022705078" text="Name" />
-                                    <TableColumn fx:id="viewStudent_gender" prefWidth="50.39996337890625" text="Gender" />
-                                    <TableColumn fx:id="viewStudent_phone" prefWidth="146.13333129882812" text="Phone" />
-                                    <TableColumn fx:id="viewStudent_ssc" prefWidth="49.333251953125" text="SSC" />
-                                    <TableColumn fx:id="viewStudent_hsc" prefWidth="45.066650390625" text="HSC" />
-                                    <TableColumn fx:id="viewStudent_gName" prefWidth="187.73333740234375" text="G. Name" />
-                                    <TableColumn fx:id="viewStudent_gphone" prefWidth="106.1334228515625" text="G. Phone" />
-                                    <TableColumn fx:id="viewStudent_status" prefWidth="95.199951171875" text="Status" />
+                                  <TableColumn fx:id="viewStudent_id" prefWidth="95.46664237976074" styleClass="colum-header" text="Id" />
+                                  <TableColumn fx:id="viewStudent_name" prefWidth="226.13333892822266" text="Name" />
+                                    <TableColumn fx:id="viewStudent_gender" prefWidth="75.99993896484375" text="Gender" />
+                                    <TableColumn fx:id="viewStudent_phone" prefWidth="104.79995727539062" text="Phone" />
+                                    <TableColumn fx:id="viewStudent_ssc" prefWidth="59.4666748046875" text="SSC" />
+                                    <TableColumn fx:id="viewStudent_hsc" prefWidth="50.6666259765625" text="HSC" />
+                                    <TableColumn fx:id="viewStudent_gName" prefWidth="211.73333740234375" text="G. Name" />
+                                    <TableColumn fx:id="viewStudent_gphone" prefWidth="107.99981689453125" text="G. Phone" />
+                                    <TableColumn fx:id="viewStudent_status" prefWidth="92.5333251953125" text="Status" />
                                 </columns>
                               </TableView>
                            </children>
@@ -433,7 +433,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="allStudent" layoutX="10.0" layoutY="10.0" prefHeight="689.6" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="16.0">
                                  <children>

@@ -918,6 +918,7 @@ public class SuperAdminController implements Initializable {
                 System.out.println("Something went wrong!");
             }
             clearStudentAddViewData();
+            setAddStudentsShowListData();
         }
     }
 
@@ -931,6 +932,17 @@ public class SuperAdminController implements Initializable {
         student_reg_gurdianName.setText("");
         student_reg_gurdianPhone.setText("");
         student_reg_status.setPromptText("Choose");
+    }
+
+    public void clearStudentEditSection() {
+        allStudent_edit_name.setText("");
+        allStudent_edit_gender.setPromptText("Choose");
+        allStudent_edit_phone.setText("");
+        allStudent_edit_status.setPromptText("Choose");
+        allStudent_edit_ssc.setText("");
+        allStudent_edit_hsc.setText("");
+        allStudent_edit_gName.setText("");
+        allStudent_edit_gPhone.setText("");
     }
 
     public void updateStudentData() throws IOException, ParseException {
@@ -948,15 +960,6 @@ public class SuperAdminController implements Initializable {
             return;
 
         String oldUserId = String.valueOf(studentData.getUserId());
-        String oldUserName = String.valueOf(studentData.getUserName());
-        String oldUserGender = String.valueOf(studentData.getUserGender());
-        String oldUserPhone = String.valueOf(studentData.getUserPhone());
-        String oldUserSSC = String.valueOf(studentData.getUserSSC());
-        String oldUserHSC = String.valueOf(studentData.getUserHSC());
-        String oldUserGName = String.valueOf(studentData.getStudentGuardianName());
-        String oldUserGPhone = String.valueOf(studentData.getStudentGuardianPhone());
-        String oldUserStatus = String.valueOf(studentData.getUserStatus());
-
 
         String newUserName = allStudent_edit_name.getText();
         String newUserGender = (String) allStudent_edit_gender.getValue();
@@ -978,15 +981,21 @@ public class SuperAdminController implements Initializable {
 
         if(option.get().equals(ButtonType.OK)) {
 
+            String ID = null;
+
             while (sca.hasNextLine()) {
 
                 String row = sca.nextLine();
                 String[] data = row.split(",");
 
-                if (data[0].equals(oldUserId))
+                ID = data[0];
+
+                if (ID.contains(oldUserId))
+                {
                     pw.println(oldUserId + "," + newUserName + "," + newUserGender + "," + newUserPhone + "," + newUserSSC + "," + newUserHSC + "," + newUserGName + "," + newUserGPhone + "," + newUserStatus);
+                }
                 else
-                    pw.println(oldUserId + "," + oldUserName + "," + oldUserGender + "," + oldUserPhone + "," + oldUserSSC + "," + oldUserHSC + "," + oldUserGName + "," + oldUserGPhone + "," + oldUserStatus);
+                    pw.println(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6] + "," + data[7] + "," + data[8]);
             }
             sca.close();
             oldFile.delete();
@@ -998,8 +1007,9 @@ public class SuperAdminController implements Initializable {
             newFile.renameTo(rename);
 
             Common.alertInfo("Information Message", "Student update successfully");
-            setAddStudentsShowListData();
         } else return;
+        clearStudentEditSection();
+        setAddStudentsShowListData();
     }
 
     // ***********************************
@@ -1174,6 +1184,7 @@ public class SuperAdminController implements Initializable {
             clearSemesterData();
             updateSemesterData();
             clearStudentAddViewData();
+            updateStudentData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
