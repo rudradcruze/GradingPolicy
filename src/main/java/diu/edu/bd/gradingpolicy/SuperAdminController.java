@@ -1003,32 +1003,6 @@ public class SuperAdminController implements Initializable {
         semester_year.setText("");
     }
 
-//    public void updateSemesterData2() throws IOException {
-//        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/semester.csv";
-//        String tempPath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/temp.csv";
-//
-//        File oldFile = new File(filePath);
-//        File newFile = new File(tempPath);
-//
-//        Scanner semesterFileScanner = new Scanner(new File(tempPath));
-//
-//        SemesterData semesterData = viewSemesterTableView.getSelectionModel().getSelectedItem();
-//        int num = viewSemesterTableView.getSelectionModel().getSelectedIndex();
-//
-//        if((num -1) < -1)
-//            return;
-//
-//        String oldSeason = String.valueOf(semesterData.getSemester_season());
-//        String oldYear = String.valueOf(semesterData.getSemester_year());
-//        String newSeason = (String) semester_season.getValue();
-//        String newYear = semester_year.getText();
-//
-//        FileWriter fileWriter = new FileWriter(tempPath, true);
-//        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-//        PrintWriter printWriter = new PrintWriter(bufferedWriter);
-//
-//    }
-
     Scanner semesterFileEdit = null;
     Scanner sca = null;
     public void updateSemesterData() throws IOException, ParseException {
@@ -1059,32 +1033,37 @@ public class SuperAdminController implements Initializable {
 
         String fileSeason = null, fileYear = null;
 
-        while (sca.hasNextLine()) {
+        Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Semester");
 
-            String row = sca.nextLine();
-            String[] data = row.split(",");
+        if(option.get().equals(ButtonType.OK)) {
 
-            fileSeason = data[0];
-            fileYear = data[1];
+            while (sca.hasNextLine()) {
 
-            System.out.println(fileSeason + " - " + fileYear);
+                String row = sca.nextLine();
+                String[] data = row.split(",");
 
-            if (fileSeason.equals(oldSeason) && fileYear.equals(oldYear))
-                pw.println(newSeason + "," + newYear);
-            else
-                pw.println(fileSeason + "," + fileYear);
-        }
-        sca.close();
-        if (oldFile.delete())
-            System.out.println("File Deleted Successfully!");
-        else
-            System.out.println("Can't Deleted");
+                fileSeason = data[0];
+                fileYear = data[1];
 
-        pw.flush();
-        pw.close();
+                if (fileSeason.equals(oldSeason) && fileYear.equals(oldYear))
+                    pw.println(newSeason + "," + newYear);
+                else
+                    pw.println(fileSeason + "," + fileYear);
+            }
+            sca.close();
+            oldFile.delete();
 
-        File rename = new File(filePath);
-        newFile.renameTo(rename);
+            pw.flush();
+            pw.close();
+
+            File rename = new File(filePath);
+            newFile.renameTo(rename);
+
+            Common.alertInfo("Information Message", "Semester update successfully");
+
+            setAddSemesterShowListData();
+            clearSemesterData();
+        } else return;
     }
 
     @Override
@@ -1098,7 +1077,7 @@ public class SuperAdminController implements Initializable {
             addSemesterList();
             setAddSemesterShowListData();
             clearSemesterData();
-            // updateSemesterData();
+            updateSemesterData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
