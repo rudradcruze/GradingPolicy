@@ -116,7 +116,7 @@ TableView {
     -fx-padding: 0px;
     -fx-border-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
     -fx-border-width: 1.2px;
-    -fx-alignment: CENTER;
+    -fx-alignment: RIGHT;
 }
 
 .table-view .column-header {
@@ -124,7 +124,7 @@ TableView {
     -fx-background-inset: 0 0 0 0;
     -fx-text-fill: #000;
     -fx-padding: 5px 0;
-    -fx-alignment: CENTER;
+    -fx-alignment: RIGHT;
 }
 
 .input-title {

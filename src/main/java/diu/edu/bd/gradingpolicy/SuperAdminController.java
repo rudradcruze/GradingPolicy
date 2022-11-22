@@ -292,7 +292,7 @@ public class SuperAdminController implements Initializable {
     private TableColumn<?, ?> marks_view_final;
 
     @FXML
-    private TableColumn<?, ?> marks_view_id;
+    private TableColumn<AdminMarksData, String> marks_view_id;
 
     @FXML
     private TableColumn<?, ?> marks_view_name;
@@ -753,6 +753,8 @@ public class SuperAdminController implements Initializable {
             admin_available_btn.setStyle("-fx-background-color: #fff");
             admin_marks_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
             admin_create_semester_btn.setStyle("-fx-background-color: #fff");
+
+            setAddMarksAssignShowListData();
         } else if (event.getSource() == admin_create_semester_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -1785,7 +1787,7 @@ public class SuperAdminController implements Initializable {
             if(courseAssgn_studentId.getText().isEmpty())
                 Common.alertError("Error Message", "Please fill up all blank fields");
             else {
-                printWriter.println(courseAssign_courseCode.getValue() + "," + courseAssgn_studentId.getText() + "," + courseAssign_courseSemester.getValue() + 0 + 0 + 0 + 0);
+                printWriter.println(courseAssign_courseCode.getValue() + "," + courseAssgn_studentId.getText() + "," + courseAssign_courseSemester.getValue() + "," + 0 + "," + 0 + "," + 0 + "," + 0);
 
                 clearCourseAssign();
                 Common.alertInfo("Information Message", "CourseAssign Successfully");
@@ -1798,6 +1800,70 @@ public class SuperAdminController implements Initializable {
         } catch (IOException | ParseException e) {
             throw new IOException(e);
         }
+    }
+
+    // ***********************************
+    // ************** Marks **************
+    // ***********************************
+
+    @FXML
+    private TableView<AdminMarksData> marksEditViewTable_admin;
+
+    @FXML
+    private TableColumn<AdminMarksData, String> marks_view_semester;
+
+    @FXML
+    private TableColumn<AdminMarksData, Double> marks_view_total;
+
+    @FXML
+    private TableColumn<AdminMarksData, Double> marks_view_grade;
+
+    public ObservableList<AdminMarksData> addMarksListData() throws FileNotFoundException {
+
+        File marksAssignFile = null;
+
+        ObservableList<AdminMarksData> listMarksAssign = FXCollections.observableArrayList();
+
+        marksAssignFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/courseAssign.csv");
+        Scanner marksAssignFileReader = new Scanner(marksAssignFile);
+
+        while (marksAssignFileReader.hasNextLine()) {
+
+            AdminMarksData adminMarksData;
+
+            String row = marksAssignFileReader.nextLine();
+            String[] data = row.split(",");
+
+            adminMarksData = new AdminMarksData(
+                    data[0],
+                    data[1],
+                    data[2],
+                    Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]),
+                    Integer.parseInt(data[5]),
+                    Integer.parseInt(data[6]));
+
+            listMarksAssign.add(adminMarksData);
+        }
+        return listMarksAssign;
+    }
+
+    private ObservableList<AdminMarksData> addMarksAssignListD;
+    public void setAddMarksAssignShowListData() throws FileNotFoundException, ParseException {
+        addMarksAssignListD = addMarksListData();
+
+        marks_view_id.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        marks_view_name.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        marks_view_course_code.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        marks_view_semester.setCellValueFactory(new PropertyValueFactory<>("courseSemester"));
+        marks_view_attendance.setCellValueFactory(new PropertyValueFactory<>("attendanceMarks"));
+        marks_view_quiz.setCellValueFactory(new PropertyValueFactory<>("quizMarks"));
+        marks_view_assignment.setCellValueFactory(new PropertyValueFactory<>("assignmentMarks"));
+        marks_view_final.setCellValueFactory(new PropertyValueFactory<>("finalMarks"));
+        marks_view_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        marks_view_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
+
+        marksEditViewTable_admin.setItems(addMarksAssignListD);
     }
 
     @Override
@@ -1820,6 +1886,7 @@ public class SuperAdminController implements Initializable {
             setAddCourseShowListData();
             addCourseToSelectBox();
             setAddCourseAssignShowListData();
+            setAddMarksAssignShowListData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
