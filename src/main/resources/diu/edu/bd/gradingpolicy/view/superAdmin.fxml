@@ -831,7 +831,7 @@
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="15.0">
                                  <children>
-                                    <TableView fx:id="marksEditViewTable_admin" layoutX="5.0" prefHeight="355.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
+                                    <TableView fx:id="marksEditViewTable_admin" layoutX="5.0" onMouseClicked="#selectMarksAssignEdit" prefHeight="355.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
                                        <columns>
                                           <TableColumn fx:id="marks_view_id" prefWidth="90.13332939147949" text="Id">
                                              <styleClass>

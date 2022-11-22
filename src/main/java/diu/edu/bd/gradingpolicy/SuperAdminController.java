@@ -1866,6 +1866,21 @@ public class SuperAdminController implements Initializable {
         marksEditViewTable_admin.setItems(addMarksAssignListD);
     }
 
+    public void selectMarksAssignEdit() {
+        AdminMarksData adminMarksData = marksEditViewTable_admin.getSelectionModel().getSelectedItem();
+        int num = marksEditViewTable_admin.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        marks_insert_attendance.setText(String.valueOf(adminMarksData.getAttendanceMarks()));
+        marks_insert_quiz.setText(String.valueOf(adminMarksData.getQuizMarks()));
+        marks_insert_assignment.setText(String.valueOf(adminMarksData.getAssignmentMarks()));
+        marks_insert_final.setText(String.valueOf(adminMarksData.getFinalMarks()));
+        marks_insert_course_code.setText(String.valueOf(adminMarksData.getCourseCode()));
+        marks_insert_semester.setPromptText(String.valueOf(adminMarksData.getCourseSemester()));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
