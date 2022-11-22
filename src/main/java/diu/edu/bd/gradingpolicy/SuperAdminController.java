@@ -1413,6 +1413,20 @@ public class SuperAdminController implements Initializable {
     // ************* Course **************
     // ***********************************
 
+    public void selectCourseEdit() {
+        CourseData courseData = courseTableView.getSelectionModel().getSelectedItem();
+        int num = courseTableView.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        availableCourse_course.setText(String.valueOf(courseData.getCourseName()));
+        availableCourse_courseCode.setText(String.valueOf(courseData.getCourseCode()));
+        availableCourse_semester.setPromptText(String.valueOf(courseData.getSemester()));
+        availableCourse_type.setPromptText(String.valueOf(courseData.getCourseType()));
+        availableCourse_teacher.setText(String.valueOf(courseData.getTeacherId()));
+    }
+
     private String[] courseTypeList = {"Theory", "Lab"};
     public void addCourseType() {
         List<String> courseTypeArrayList = new ArrayList<>();
