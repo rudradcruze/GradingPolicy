@@ -1427,6 +1427,74 @@ public class SuperAdminController implements Initializable {
         availableCourse_teacher.setText(String.valueOf(courseData.getTeacherId()));
     }
 
+    Scanner scan = null;
+    public void updateCourseData() throws IOException, ParseException {
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/courses.csv";
+        String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/tempCourses.csv";
+
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+
+        CourseData courseData = courseTableView.getSelectionModel().getSelectedItem();
+        int num = courseTableView.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        String oldCourseCode = String.valueOf(courseData.getCourseCode());
+        String oldSemesterName = String.valueOf(courseData.getSemester());
+
+        String newCourseName = availableCourse_course.getText();
+        String newCourseCode = availableCourse_courseCode.getText();
+        String newCourseSemester = (String) availableCourse_semester.getValue();
+        String newCourseType = (String) availableCourse_type.getValue();
+        String newCourseTeacherId = availableCourse_teacher.getText();
+
+        FileWriter fw = new FileWriter(tempFile, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+
+        scan = new Scanner(new File(filePath));
+        scan.useDelimiter("[,\n]");
+
+        Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Course Data!");
+
+        if(option.get().equals(ButtonType.OK)) {
+
+            String courseCode = null;
+            String courseSemester = null;
+
+            while (scan.hasNextLine()) {
+
+                String row = scan.nextLine();
+                String[] data = row.split(",");
+
+                courseCode = data[1];
+                courseSemester = data[2];
+
+                if (courseCode.equals(oldCourseCode) && courseSemester.equals(oldSemesterName))
+                {
+                    pw.println(newCourseName + "," + newCourseCode + "," + newCourseSemester + "," + newCourseType + "," + newCourseTeacherId);
+                }
+                else
+                    pw.println(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4]);
+            }
+            scan.close();
+            oldFile.delete();
+
+            pw.flush();
+            pw.close();
+
+            File rename = new File(filePath);
+            newFile.renameTo(rename);
+
+            Common.alertInfo("Information Message", "Teacher update successfully");
+        } else return;
+        courseClear();
+        setAddCourseShowListData();
+    }
+
     private String[] courseTypeList = {"Theory", "Lab"};
     public void addCourseType() {
         List<String> courseTypeArrayList = new ArrayList<>();

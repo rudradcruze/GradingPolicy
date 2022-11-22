@@ -390,7 +390,7 @@
                                           <String fx:value="button-common" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="availableCourse_update" layoutX="182.0" layoutY="287.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Update">
+                                    <Button fx:id="availableCourse_update" layoutX="182.0" layoutY="287.0" mnemonicParsing="false" onAction="#updateCourseData" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Update">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-blue" />
