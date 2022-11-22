@@ -1016,15 +1016,15 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="assign_ViewTable" layoutX="-12.0" layoutY="-5.0" onMouseClicked="#selectCourseEdit" onSort="#setAddCourseShowListData" prefHeight="674.4" prefWidth="698.4" stylesheets="@../css/superAdmin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="assign_ViewTable" layoutX="-12.0" layoutY="-5.0" onMouseClicked="#selectCourseEdit" onSort="#setAddCourseAssignShowListData" prefHeight="674.4" prefWidth="698.4" stylesheets="@../css/superAdmin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
-                                          <TableColumn fx:id="assign_codeCode" prefWidth="80.5333251953125" styleClass="column-header-background" text="Course Code" />
-                                          <TableColumn fx:id="assign_semester" prefWidth="80.5333251953125" styleClass="column-header-background" text="Semester" />
-                                          <TableColumn fx:id="assign_courseName" prefWidth="114.39996337890625" styleClass="column-header-background" text="Course Name" />
-                                          <TableColumn fx:id="assign_studentId" prefWidth="70.39996337890625" styleClass="column-header-background" text="Student Id" />
-                                          <TableColumn fx:id="assign_studentName" prefWidth="115.199951171875" styleClass="column-header-background" text="Student Name" />
-                                          <TableColumn fx:id="assign_teacherId" minWidth="5.60009765625" prefWidth="94.4000244140625" styleClass="column-header-background" text="Teacher Id" />
-                                          <TableColumn fx:id="assign_teacherName" prefWidth="140.0" styleClass="column-header-background" text="Teacher Name" />
+                                          <TableColumn fx:id="assign_codeCode" prefWidth="75.20001220703125" styleClass="column-header-background" text="Course Code" />
+                                          <TableColumn fx:id="assign_semester" prefWidth="64.0" styleClass="column-header-background" text="Semester" />
+                                          <TableColumn fx:id="assign_courseName" prefWidth="173.60000610351562" styleClass="column-header-background" text="Course Name" />
+                                          <TableColumn fx:id="assign_studentId" prefWidth="79.20001220703125" styleClass="column-header-background" text="Student Id" />
+                                          <TableColumn fx:id="assign_studentName" prefWidth="139.99993896484375" styleClass="column-header-background" text="Student Name" />
+                                          <TableColumn fx:id="assign_teacherId" minWidth="5.60009765625" prefWidth="67.9998779296875" styleClass="column-header-background" text="Teacher Id" />
+                                          <TableColumn fx:id="assign_teacherName" prefWidth="100.7999267578125" styleClass="column-header-background" text="Teacher Name" />
                                        </columns>
                                     </TableView>
                                  </children>

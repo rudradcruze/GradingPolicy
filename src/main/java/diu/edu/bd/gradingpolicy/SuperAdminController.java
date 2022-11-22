@@ -800,6 +800,7 @@ public class SuperAdminController implements Initializable {
             admin_assign_course.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
 
             addCourseToSelectBox();
+            setAddCourseAssignShowListData();
         }
     }
 
@@ -1661,6 +1662,9 @@ public class SuperAdminController implements Initializable {
     // ***********************************
 
     @FXML
+    private TableView<CourseAssignData> assign_ViewTable;
+
+    @FXML
     private ComboBox<?> courseAssign_courseCode;
 
     @FXML
@@ -1668,6 +1672,67 @@ public class SuperAdminController implements Initializable {
 
     @FXML
     private ComboBox<?> courseAssign_courseSemester;
+
+    @FXML
+    private TableColumn<CourseAssignData, String> assign_codeCode;
+
+    @FXML
+    private TableColumn<CourseAssignData, String> assign_semester;
+
+    @FXML
+    private TableColumn<CourseAssignData, String> assign_courseName;
+
+    @FXML
+    private TableColumn<CourseAssignData, String> assign_studentId;
+
+    @FXML
+    private TableColumn<CourseAssignData, String> assign_studentName;
+
+    @FXML
+    private TableColumn<CourseAssignData, String> assign_teacherId;
+
+    @FXML
+    private TableColumn<CourseAssignData, String> assign_teacherName;
+
+    public ObservableList<CourseAssignData> addCourseAssignListData() throws FileNotFoundException {
+
+        File courseFileAssign = null;
+
+        ObservableList<CourseAssignData> listCourseAssign = FXCollections.observableArrayList();
+
+        courseFileAssign = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/courseAssign.csv");
+        Scanner courseAssignFileReader = new Scanner(courseFileAssign);
+
+        while (courseAssignFileReader.hasNextLine()) {
+
+            CourseAssignData courseAssignData;
+
+            String row = courseAssignFileReader.nextLine();
+            String[] data = row.split(",");
+
+            courseAssignData = new CourseAssignData(data[0],
+                    data[1],
+                    data[2]);
+
+            listCourseAssign.add(courseAssignData);
+        }
+        return listCourseAssign;
+    }
+
+    private ObservableList<CourseAssignData> addCourseAssignListD;
+    public void setAddCourseAssignShowListData () throws FileNotFoundException, ParseException {
+        addCourseAssignListD = addCourseAssignListData();
+
+        assign_codeCode.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        assign_semester.setCellValueFactory(new PropertyValueFactory<>("semester"));
+        assign_courseName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        assign_studentId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        assign_studentName.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        assign_teacherId.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
+        assign_teacherName.setCellValueFactory(new PropertyValueFactory<>("teacherName"));
+
+        assign_ViewTable.setItems(addCourseAssignListD);
+    }
 
     public void clearCourseAssign() {
         courseAssign_courseCode.setPromptText("Choose");
@@ -1717,8 +1782,8 @@ public class SuperAdminController implements Initializable {
             fileWriter.close();
             bufferedWriter.close();
             printWriter.close();
-//            setAddCourseShowListData();
-        } catch (IOException e) {
+            setAddCourseAssignShowListData();
+        } catch (IOException | ParseException e) {
             throw new IOException(e);
         }
     }
@@ -1742,6 +1807,7 @@ public class SuperAdminController implements Initializable {
             addSemesterToSelectBox();
             setAddCourseShowListData();
             addCourseToSelectBox();
+            setAddCourseAssignShowListData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
