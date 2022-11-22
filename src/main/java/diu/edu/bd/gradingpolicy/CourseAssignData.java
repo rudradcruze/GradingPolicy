@@ -13,6 +13,10 @@ public class CourseAssignData {
     private String studentName;
     private String teacherId;
     private String teacherName;
+    private int assignmentMarks;
+    private int attendanceMarks;
+    private int quizMarks;
+    private int finalMarks;
 
     public CourseAssignData(String courseCode,String studentId, String semester) throws FileNotFoundException {
 
@@ -56,6 +60,27 @@ public class CourseAssignData {
             if(data[0].equals(teacherId))
                 this.teacherName = data[1];
         }
+
+        this.attendanceMarks = 0;
+        this.quizMarks = 0;
+        this.assignmentMarks = 0;
+        this.finalMarks = 0;
+    }
+
+    public int getAssignmentMarks() {
+        return assignmentMarks;
+    }
+
+    public int getAttendanceMarks() {
+        return attendanceMarks;
+    }
+
+    public int getQuizMarks() {
+        return quizMarks;
+    }
+
+    public int getFinalMarks() {
+        return finalMarks;
     }
 
     public String getCourseCode() {

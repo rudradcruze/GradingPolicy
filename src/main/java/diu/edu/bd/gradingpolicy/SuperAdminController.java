@@ -1785,7 +1785,7 @@ public class SuperAdminController implements Initializable {
             if(courseAssgn_studentId.getText().isEmpty())
                 Common.alertError("Error Message", "Please fill up all blank fields");
             else {
-                printWriter.println(courseAssign_courseCode.getValue() + "," + courseAssgn_studentId.getText() + "," + courseAssign_courseSemester.getValue());
+                printWriter.println(courseAssign_courseCode.getValue() + "," + courseAssgn_studentId.getText() + "," + courseAssign_courseSemester.getValue() + 0 + 0 + 0 + 0);
 
                 clearCourseAssign();
                 Common.alertInfo("Information Message", "CourseAssign Successfully");
