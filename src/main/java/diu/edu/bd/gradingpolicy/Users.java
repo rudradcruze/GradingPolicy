@@ -1,9 +1,5 @@
 package diu.edu.bd.gradingpolicy;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Users {
     private String userId;
     private String userName;
