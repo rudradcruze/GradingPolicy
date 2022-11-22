@@ -535,6 +535,9 @@ public class SuperAdminController implements Initializable {
         Common.close();
     }
 
+    @FXML
+    private TableView<CourseData> courseTableView;
+
     // Method to minimize screen
     public void minimize(){
         Stage stage = (Stage) admin.getScene().getWindow();
@@ -705,6 +708,7 @@ public class SuperAdminController implements Initializable {
 
             addCourseType();
             addSemesterToSelectBox();
+            setAddCourseShowListData();
         } else if (event.getSource() == admin_marks_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -1438,6 +1442,47 @@ public class SuperAdminController implements Initializable {
         availableCourse_semester.setItems(observableList);
     }
 
+    public ObservableList<CourseData> addCourseListData() throws FileNotFoundException {
+
+        File courseFile = null;
+
+        ObservableList<CourseData> listCourse = FXCollections.observableArrayList();
+
+        courseFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/courses.csv");
+        Scanner courseFileReader = new Scanner(courseFile);
+
+        while (courseFileReader.hasNextLine()) {
+
+            CourseData courseData;
+
+            String row = courseFileReader.nextLine();
+            String[] data = row.split(",");
+
+            courseData = new CourseData(data[1],
+                    data[0],
+                    data[2],
+                    data[3],
+                    data[4]);
+
+            listCourse.add(courseData);
+        }
+        return listCourse;
+    }
+
+    private ObservableList<CourseData> addCourseListD;
+    public void setAddCourseShowListData () throws FileNotFoundException, ParseException {
+        addCourseListD = addCourseListData();
+
+        availableCourseView_code.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        availableCourseView_name.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        availableCourseView_type.setCellValueFactory(new PropertyValueFactory<>("courseType"));
+        availableCourseView_credit.setCellValueFactory(new PropertyValueFactory<>("courseCredit"));
+        availableCourseView_teacher.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
+        availableCourseView_teacherName.setCellValueFactory(new PropertyValueFactory<>("teacherName"));
+
+        courseTableView.setItems(addCourseListD);
+    }
+
     public void courseClear() {
         availableCourse_course.setText("");
         availableCourse_courseCode.setText("");
@@ -1470,8 +1515,11 @@ public class SuperAdminController implements Initializable {
             fileWriter.close();
             bufferedWriter.close();
             printWriter.close();
+            setAddCourseShowListData();
         } catch (IOException e) {
             throw new IOException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -1492,6 +1540,7 @@ public class SuperAdminController implements Initializable {
             setAddTeacherShowListData();
             addCourseType();
             addSemesterToSelectBox();
+            setAddCourseShowListData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
