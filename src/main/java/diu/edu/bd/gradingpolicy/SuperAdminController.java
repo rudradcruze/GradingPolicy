@@ -1734,6 +1734,18 @@ public class SuperAdminController implements Initializable {
         assign_ViewTable.setItems(addCourseAssignListD);
     }
 
+    public void selectCourseAssignEdit() {
+        CourseAssignData courseAssignData = assign_ViewTable.getSelectionModel().getSelectedItem();
+        int num = assign_ViewTable.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        courseAssign_courseCode.setPromptText(String.valueOf(courseAssignData.getCourseCode()));
+        courseAssgn_studentId.setText(String.valueOf(courseAssignData.getStudentId()));
+        courseAssign_courseSemester.setPromptText(String.valueOf(courseAssignData.getSemester()));
+    }
+
     public void clearCourseAssign() {
         courseAssign_courseCode.setPromptText("Choose");
         courseAssgn_studentId.setText("");

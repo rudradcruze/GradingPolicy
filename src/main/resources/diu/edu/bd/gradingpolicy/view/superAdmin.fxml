@@ -994,7 +994,7 @@
                                           <String fx:value="button-blue" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="courAssign_clear" layoutX="30.0" layoutY="296.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Clear">
+                                    <Button fx:id="courAssign_clear" layoutX="30.0" layoutY="296.0" mnemonicParsing="false" onAction="#clearCourseAssign" prefHeight="35.0" prefWidth="110.0" stylesheets="@../css/superAdmin.css" text="Clear">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-purple" />
@@ -1016,7 +1016,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="assign_ViewTable" layoutX="-12.0" layoutY="-5.0" onMouseClicked="#selectCourseEdit" onSort="#setAddCourseAssignShowListData" prefHeight="674.4" prefWidth="698.4" stylesheets="@../css/superAdmin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="assign_ViewTable" layoutX="-12.0" layoutY="-5.0" onMouseClicked="#selectCourseAssignEdit" onSort="#setAddCourseAssignShowListData" prefHeight="674.4" prefWidth="698.4" stylesheets="@../css/superAdmin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
                                           <TableColumn fx:id="assign_codeCode" prefWidth="75.20001220703125" styleClass="column-header-background" text="Course Code" />
                                           <TableColumn fx:id="assign_semester" prefWidth="64.0" styleClass="column-header-background" text="Semester" />
