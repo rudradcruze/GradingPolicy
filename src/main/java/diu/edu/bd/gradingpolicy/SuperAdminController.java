@@ -133,9 +133,6 @@ public class SuperAdminController implements Initializable {
     private ComboBox<?> allStudent_edit_status;
 
     @FXML
-    private TextField allStudent_search_id;
-
-    @FXML
     private TableColumn<?, ?> allStudent_view_gName;
 
     @FXML
@@ -292,7 +289,7 @@ public class SuperAdminController implements Initializable {
     private TableColumn<?, ?> marks_view_final;
 
     @FXML
-    private TableColumn<?, ?> marks_view_id;
+    private TableColumn<AdminMarksData, String> marks_view_id;
 
     @FXML
     private TableColumn<?, ?> marks_view_name;
@@ -525,9 +522,9 @@ public class SuperAdminController implements Initializable {
     @FXML
     private TableView<TeacherData> teacherEditTableView;
 
-    // ***********************************I
+    // ***********************************
     // ******* Basic Initial Work ********
-    // ***********************************I
+    // ***********************************
 
     // Method to close the screen
     @FXML
@@ -574,6 +571,8 @@ public class SuperAdminController implements Initializable {
             admin_marks_btn.setStyle("-fx-background-color: #fff");
             admin_create_semester_btn.setStyle("-fx-background-color: #fff");
             admin_assign_course.setStyle("-fx-background-color: #fff");
+
+            setStudentData();
         } else if (event.getSource() == admin_student_btn_all) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -753,6 +752,8 @@ public class SuperAdminController implements Initializable {
             admin_available_btn.setStyle("-fx-background-color: #fff");
             admin_marks_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
             admin_create_semester_btn.setStyle("-fx-background-color: #fff");
+
+            setAddMarksAssignShowListData();
         } else if (event.getSource() == admin_create_semester_btn) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -1734,6 +1735,18 @@ public class SuperAdminController implements Initializable {
         assign_ViewTable.setItems(addCourseAssignListD);
     }
 
+    public void selectCourseAssignEdit() {
+        CourseAssignData courseAssignData = assign_ViewTable.getSelectionModel().getSelectedItem();
+        int num = assign_ViewTable.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        courseAssign_courseCode.setPromptText(String.valueOf(courseAssignData.getCourseCode()));
+        courseAssgn_studentId.setText(String.valueOf(courseAssignData.getStudentId()));
+        courseAssign_courseSemester.setPromptText(String.valueOf(courseAssignData.getSemester()));
+    }
+
     public void clearCourseAssign() {
         courseAssign_courseCode.setPromptText("Choose");
         courseAssgn_studentId.setText("");
@@ -1773,7 +1786,7 @@ public class SuperAdminController implements Initializable {
             if(courseAssgn_studentId.getText().isEmpty())
                 Common.alertError("Error Message", "Please fill up all blank fields");
             else {
-                printWriter.println(courseAssign_courseCode.getValue() + "," + courseAssgn_studentId.getText() + "," + courseAssign_courseSemester.getValue());
+                printWriter.println(courseAssign_courseCode.getValue() + "," + courseAssgn_studentId.getText() + "," + courseAssign_courseSemester.getValue() + "," + 0 + "," + 0 + "," + 0 + "," + 0);
 
                 clearCourseAssign();
                 Common.alertInfo("Information Message", "CourseAssign Successfully");
@@ -1786,6 +1799,189 @@ public class SuperAdminController implements Initializable {
         } catch (IOException | ParseException e) {
             throw new IOException(e);
         }
+    }
+
+    // ***********************************
+    // ************** Marks **************
+    // ***********************************
+
+    Scanner scanMarks = null;
+    public void updateMarksData() throws IOException, ParseException {
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/courseAssign.csv";
+        String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/tempMarks.csv";
+
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+
+        AdminMarksData adminMarksData = marksEditViewTable_admin.getSelectionModel().getSelectedItem();
+        int num = marksEditViewTable_admin.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        String oldStudentId = String.valueOf(adminMarksData.getStudentId());
+        String oldCourseCode = String.valueOf(adminMarksData.getCourseCode());
+        String oldCourseSemester = String.valueOf(adminMarksData.getCourseSemester());
+
+        String newAttendanceMarks = marks_insert_attendance.getText();
+        String newQuizMarks = marks_insert_quiz.getText();
+        String newAssignmentMarks = marks_insert_assignment.getText();
+        String newFinalMarks = marks_insert_final.getText();
+
+        if(Integer.parseInt(newAttendanceMarks) > 10 || Integer.parseInt(newQuizMarks) > 15 || Integer.parseInt(newAssignmentMarks) > 35 || Integer.parseInt(newFinalMarks) > 40)
+            Common.alertError("Marks Update Error", "The Marks Distribution will be:\n" +
+                    "Attendance marks = 10\n" +
+                    "Quiz marks = 15\n" +
+                    "Assignment marks = 35\n" +
+                    "Final marks = 40");
+        else {
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            scanMarks = new Scanner(new File(filePath));
+            scanMarks.useDelimiter("[,\n]");
+
+            Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Marks Data!");
+
+            if (option.get().equals(ButtonType.OK)) {
+
+                String fileCourseCode = null;
+                String fileStudentId = null;
+                String fileCourseSemester = null;
+
+                while (scanMarks.hasNextLine()) {
+
+                    String row = scanMarks.nextLine();
+                    String[] data = row.split(",");
+
+                    fileCourseCode = data[0];
+                    fileStudentId = data[1];
+                    fileCourseSemester = data[2];
+
+                    if (fileCourseCode.equals(oldCourseCode) && fileStudentId.equals(oldStudentId) && fileCourseSemester.equals(oldCourseSemester)) {
+                        pw.println(oldCourseCode + "," + oldStudentId + "," + oldCourseSemester + "," + newAttendanceMarks + "," + newQuizMarks + "," + newAssignmentMarks + "," + newFinalMarks);
+                    } else
+                        pw.println(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6]);
+                }
+                scanMarks.close();
+                oldFile.delete();
+
+                pw.flush();
+                pw.close();
+
+                File rename = new File(filePath);
+                newFile.renameTo(rename);
+
+                Common.alertInfo("Information Message", "Student Marks update successfully");
+            } else return;
+            courseClear();
+            setAddMarksAssignShowListData();
+        }
+    }
+
+    @FXML
+    private TableView<AdminMarksData> marksEditViewTable_admin;
+
+    @FXML
+    private TableColumn<AdminMarksData, String> marks_view_semester;
+
+    @FXML
+    private TableColumn<AdminMarksData, Double> marks_view_total;
+
+    @FXML
+    private TableColumn<AdminMarksData, Double> marks_view_grade;
+
+    public ObservableList<AdminMarksData> addMarksListData() throws FileNotFoundException {
+
+        File marksAssignFile = null;
+
+        ObservableList<AdminMarksData> listMarksAssign = FXCollections.observableArrayList();
+
+        marksAssignFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/courseAssign.csv");
+        Scanner marksAssignFileReader = new Scanner(marksAssignFile);
+
+        while (marksAssignFileReader.hasNextLine()) {
+
+            AdminMarksData adminMarksData;
+
+            String row = marksAssignFileReader.nextLine();
+            String[] data = row.split(",");
+
+            adminMarksData = new AdminMarksData(
+                    data[0],
+                    data[1],
+                    data[2],
+                    Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]),
+                    Integer.parseInt(data[5]),
+                    Integer.parseInt(data[6]));
+
+            listMarksAssign.add(adminMarksData);
+        }
+        return listMarksAssign;
+    }
+
+    private ObservableList<AdminMarksData> addMarksAssignListD;
+    public void setAddMarksAssignShowListData() throws FileNotFoundException, ParseException {
+        addMarksAssignListD = addMarksListData();
+
+        marks_view_id.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        marks_view_name.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        marks_view_course_code.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        marks_view_semester.setCellValueFactory(new PropertyValueFactory<>("courseSemester"));
+        marks_view_attendance.setCellValueFactory(new PropertyValueFactory<>("attendanceMarks"));
+        marks_view_quiz.setCellValueFactory(new PropertyValueFactory<>("quizMarks"));
+        marks_view_assignment.setCellValueFactory(new PropertyValueFactory<>("assignmentMarks"));
+        marks_view_final.setCellValueFactory(new PropertyValueFactory<>("finalMarks"));
+        marks_view_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        marks_view_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
+
+        marksEditViewTable_admin.setItems(addMarksAssignListD);
+    }
+
+    public void selectMarksAssignEdit() {
+        AdminMarksData adminMarksData = marksEditViewTable_admin.getSelectionModel().getSelectedItem();
+        int num = marksEditViewTable_admin.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        marks_insert_attendance.setText(String.valueOf(adminMarksData.getAttendanceMarks()));
+        marks_insert_quiz.setText(String.valueOf(adminMarksData.getQuizMarks()));
+        marks_insert_assignment.setText(String.valueOf(adminMarksData.getAssignmentMarks()));
+        marks_insert_final.setText(String.valueOf(adminMarksData.getFinalMarks()));
+        marks_insert_course_code.setText(String.valueOf(adminMarksData.getCourseCode()));
+        marks_insert_semester.setPromptText(String.valueOf(adminMarksData.getCourseSemester()));
+    }
+
+
+    // ***********************************
+    // *********** Admin Panel ***********
+    // ***********************************
+
+    public void setStudentData() throws FileNotFoundException {
+        String studentFilePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/students.csv";
+        Scanner studentFileScanner = new Scanner(new File(studentFilePath));
+        int allStudents = 0;
+        int allFemaleStudents = 0;
+        int allMaleStudents = 0;
+
+        String gender = "Male";
+        while (studentFileScanner.hasNextLine()) {
+            allStudents++;
+            String row = studentFileScanner.nextLine();
+            String[] data = row.split(",");
+            if (gender.equals(data[2]))
+                allMaleStudents++;
+            else
+                allFemaleStudents++;
+        }
+
+        admin_student.setText(String.valueOf(allStudents));
+        admin_studentMale.setText(String.valueOf(allMaleStudents));
+        admin_studentFemale.setText(String.valueOf(allFemaleStudents));
     }
 
     @Override
@@ -1808,6 +2004,8 @@ public class SuperAdminController implements Initializable {
             setAddCourseShowListData();
             addCourseToSelectBox();
             setAddCourseAssignShowListData();
+            setAddMarksAssignShowListData();
+            setStudentData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
