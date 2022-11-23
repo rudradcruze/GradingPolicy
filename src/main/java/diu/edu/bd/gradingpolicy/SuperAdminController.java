@@ -133,9 +133,6 @@ public class SuperAdminController implements Initializable {
     private ComboBox<?> allStudent_edit_status;
 
     @FXML
-    private TextField allStudent_search_id;
-
-    @FXML
     private TableColumn<?, ?> allStudent_view_gName;
 
     @FXML
@@ -525,9 +522,9 @@ public class SuperAdminController implements Initializable {
     @FXML
     private TableView<TeacherData> teacherEditTableView;
 
-    // ***********************************I
+    // ***********************************
     // ******* Basic Initial Work ********
-    // ***********************************I
+    // ***********************************
 
     // Method to close the screen
     @FXML
@@ -574,6 +571,8 @@ public class SuperAdminController implements Initializable {
             admin_marks_btn.setStyle("-fx-background-color: #fff");
             admin_create_semester_btn.setStyle("-fx-background-color: #fff");
             admin_assign_course.setStyle("-fx-background-color: #fff");
+
+            setStudentData();
         } else if (event.getSource() == admin_student_btn_all) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -1846,7 +1845,7 @@ public class SuperAdminController implements Initializable {
 
             Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Marks Data!");
 
-            if(option.get().equals(ButtonType.OK)) {
+            if (option.get().equals(ButtonType.OK)) {
 
                 String fileCourseCode = null;
                 String fileStudentId = null;
@@ -1861,14 +1860,9 @@ public class SuperAdminController implements Initializable {
                     fileStudentId = data[1];
                     fileCourseSemester = data[2];
 
-                    System.out.println(fileCourseCode + " " + fileCourseSemester + " " + fileStudentId);
-                    System.out.println(oldCourseSemester + " " + oldCourseCode + " " + oldStudentId);
-
-                    if (fileCourseCode.equals(oldCourseCode) && fileStudentId.equals(oldStudentId) && fileCourseSemester.equals(oldCourseSemester))
-                    {
+                    if (fileCourseCode.equals(oldCourseCode) && fileStudentId.equals(oldStudentId) && fileCourseSemester.equals(oldCourseSemester)) {
                         pw.println(oldCourseCode + "," + oldStudentId + "," + oldCourseSemester + "," + newAttendanceMarks + "," + newQuizMarks + "," + newAssignmentMarks + "," + newFinalMarks);
-                    }
-                    else
+                    } else
                         pw.println(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6]);
                 }
                 scanMarks.close();
@@ -1883,8 +1877,8 @@ public class SuperAdminController implements Initializable {
                 Common.alertInfo("Information Message", "Student Marks update successfully");
             } else return;
             courseClear();
+            setAddMarksAssignShowListData();
         }
-        setAddMarksAssignShowListData();
     }
 
     @FXML
@@ -1962,6 +1956,34 @@ public class SuperAdminController implements Initializable {
         marks_insert_semester.setPromptText(String.valueOf(adminMarksData.getCourseSemester()));
     }
 
+
+    // ***********************************
+    // *********** Admin Panel ***********
+    // ***********************************
+
+    public void setStudentData() throws FileNotFoundException {
+        String studentFilePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/students.csv";
+        Scanner studentFileScanner = new Scanner(new File(studentFilePath));
+        int allStudents = 0;
+        int allFemaleStudents = 0;
+        int allMaleStudents = 0;
+
+        String gender = "Male";
+        while (studentFileScanner.hasNextLine()) {
+            allStudents++;
+            String row = studentFileScanner.nextLine();
+            String[] data = row.split(",");
+            if (gender.equals(data[2]))
+                allMaleStudents++;
+            else
+                allFemaleStudents++;
+        }
+
+        admin_student.setText(String.valueOf(allStudents));
+        admin_studentMale.setText(String.valueOf(allMaleStudents));
+        admin_studentFemale.setText(String.valueOf(allFemaleStudents));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -1983,6 +2005,7 @@ public class SuperAdminController implements Initializable {
             addCourseToSelectBox();
             setAddCourseAssignShowListData();
             setAddMarksAssignShowListData();
+            setStudentData();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
