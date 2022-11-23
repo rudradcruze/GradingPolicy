@@ -1806,6 +1806,76 @@ public class SuperAdminController implements Initializable {
     // ************** Marks **************
     // ***********************************
 
+    Scanner scanMarks = null;
+    public void updateMarksData() throws IOException, ParseException {
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/courseAssign.csv";
+        String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/tempMarks.csv";
+
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+
+        AdminMarksData adminMarksData = marksEditViewTable_admin.getSelectionModel().getSelectedItem();
+        int num = marksEditViewTable_admin.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        String oldStudentId = String.valueOf(adminMarksData.getStudentId());
+        String oldCourseCode = String.valueOf(adminMarksData.getCourseCode());
+        String oldCourseSemester = String.valueOf(adminMarksData.getCourseSemester());
+
+        String newAttendanceMarks = marks_insert_attendance.getText();
+        String newQuizMarks = marks_insert_quiz.getText();
+        String newAssignmentMarks = marks_insert_assignment.getText();
+        String newFinalMarks = marks_insert_final.getText();
+
+        FileWriter fw = new FileWriter(tempFile, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+
+        scanMarks = new Scanner(new File(filePath));
+        scanMarks.useDelimiter("[,\n]");
+
+        Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update Marks Data!");
+
+        if(option.get().equals(ButtonType.OK)) {
+
+            String fileCourseCode = null;
+            String fileStudentId = null;
+            String fileCourseSemester = null;
+
+            while (scanMarks.hasNextLine()) {
+
+                String row = scanMarks.nextLine();
+                String[] data = row.split(",");
+
+                fileCourseCode = data[0];
+                fileStudentId = data[1];
+                fileCourseSemester = data[3];
+
+                if (fileCourseCode.equals(oldCourseCode) && fileStudentId.equals(oldStudentId) && fileCourseSemester.equals(oldCourseSemester))
+                {
+                    pw.println(oldCourseCode + "," + oldStudentId + "," + oldCourseSemester + "," + newAttendanceMarks + "," + newQuizMarks + "," + newAssignmentMarks + "," + newFinalMarks);
+                }
+                else
+                    pw.println(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6]);
+            }
+            scanMarks.close();
+            oldFile.delete();
+
+            pw.flush();
+            pw.close();
+
+            File rename = new File(filePath);
+            newFile.renameTo(rename);
+
+            Common.alertInfo("Information Message", "Teacher update successfully");
+        } else return;
+        courseClear();
+        setAddCourseShowListData();
+    }
+
     @FXML
     private TableView<AdminMarksData> marksEditViewTable_admin;
 
