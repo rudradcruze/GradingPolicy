@@ -160,7 +160,7 @@
                                     <children>
                                         <AnchorPane layoutX="7.0" layoutY="15.0">
                                             <children>
-                                                <TableView fx:id="marksEditViewTable_admin" layoutX="5.0" onMouseClicked="#selectMarksAssignEdit" prefHeight="355.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
+                                                <TableView fx:id="marksEditViewTable_admin" layoutX="5.0" onMouseClicked="#selectTeacherViewMarksAssignEdit" prefHeight="355.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
                                                     <columns>
                                                         <TableColumn fx:id="marks_view_id" prefWidth="69.06664848327637" text=" Student Id">
                                                             <styleClass>
@@ -226,7 +226,7 @@
                                                                 <String fx:value="ex-ex-font-size" />
                                                             </styleClass>
                                                         </TextField>
-                                                        <Button fx:id="marks_clear" layoutX="303.0" layoutY="237.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="251.0" stylesheets="@../css/superAdmin.css" text="Clear">
+                                                        <Button fx:id="marks_clear" layoutX="303.0" layoutY="237.0" mnemonicParsing="false" onAction="#clearTeacherMarksViewData" prefHeight="50.0" prefWidth="251.0" stylesheets="@../css/superAdmin.css" text="Clear">
                                                             <styleClass>
                                                                 <String fx:value="button-common" />
                                                                 <String fx:value="button-purple" />

@@ -217,6 +217,34 @@ public class TeacherController implements Initializable {
 
     }
 
+    public void clearTeacherMarksViewData() {
+        marks_insert_attendance.setText("");
+        marks_insert_quiz.setText("");
+        marks_insert_assignment.setText("");
+        marks_insert_final.setText("");
+        marks_insert_course_code.setText("");
+        marks_insert_semester.setPromptText("");
+        marks_insert_student_id.setPromptText("");
+        marks_insert_student_name.setPromptText("");
+    }
+
+    public void selectTeacherViewMarksAssignEdit() {
+        TeacherDashboardData teacherDashboardData = marksEditViewTable_admin.getSelectionModel().getSelectedItem();
+        int num = marksEditViewTable_admin.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        marks_insert_attendance.setText(String.valueOf(teacherDashboardData.getAttendance()));
+        marks_insert_quiz.setText(String.valueOf(teacherDashboardData.getQuiz()));
+        marks_insert_assignment.setText(String.valueOf(teacherDashboardData.getAssignment()));
+        marks_insert_final.setText(String.valueOf(teacherDashboardData.getFinalMarks()));
+        marks_insert_course_code.setText(String.valueOf(teacherDashboardData.getCourseCode()));
+        marks_insert_semester.setPromptText(String.valueOf(teacherDashboardData.getSemester()));
+        marks_insert_student_id.setPromptText(String.valueOf(teacherDashboardData.getStudentId()));
+        marks_insert_student_name.setPromptText(String.valueOf(teacherDashboardData.getStudentName()));
+    }
+
     public ObservableList<TeacherDashboardData> addTeacherViewTableList() throws FileNotFoundException {
         File courseAssignFile = null;
 
