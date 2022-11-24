@@ -1,5 +1,7 @@
 package diu.edu.bd.gradingpolicy;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -59,7 +62,7 @@ public class TeacherController implements Initializable {
     private Button home_btn;
 
     @FXML
-    private TableView<?> marksEditViewTable_admin;
+    private TableView<TeacherDashboardData> marksEditViewTable_admin;
 
     @FXML
     private Button marks_clear;
@@ -214,8 +217,70 @@ public class TeacherController implements Initializable {
 
     }
 
+    public ObservableList<TeacherDashboardData> addTeacherViewTableList() throws FileNotFoundException {
+        File courseAssignFile = null;
+
+        ObservableList<TeacherDashboardData> listTeacherViewAssign = FXCollections.observableArrayList();
+
+        courseAssignFile = new File("src/main/resources/diu/edu/bd/gradingpolicy/csv/courseAssign.csv");
+
+        Scanner courseAssignFileReader = new Scanner(courseAssignFile);
+
+        while (courseAssignFileReader.hasNextLine()) {
+
+            TeacherDashboardData teacherDashboardData;
+
+            String row = courseAssignFileReader.nextLine();
+            String[] data = row.split(",");
+
+            teacherDashboardData = new TeacherDashboardData(data[1],
+                    data[0],
+                    data[2],
+                    Double.parseDouble(data[3]),
+                    Double.parseDouble(data[4]),
+                    Double.parseDouble(data[5]),
+                    Double.parseDouble(data[6]));
+
+            if (checkTeachersStudent(data[0], data[2]) == true)
+                listTeacherViewAssign.add(teacherDashboardData);
+        }
+        return listTeacherViewAssign;
+    }
+
+    public boolean checkTeachersStudent(String sendingCourseCode, String sendingCourseSemester) throws FileNotFoundException {
+        String coursesFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/courses.csv";
+        Scanner scanner = new Scanner(new File(coursesFile));
+
+        while (scanner.hasNextLine()) {
+            String row = scanner.nextLine();
+            String[] data = row.split(",");
+
+            if (sendingCourseCode.equals(data[1]) && sendingCourseSemester.equals(data[2]) && data[4].equals(getTeacherLoginId()))
+                return true;
+        }
+        return false;
+    }
+
+    private ObservableList<TeacherDashboardData> addTeacherMarksAssignListD;
+    public void setAddTeacherMarksAssignShowListData() throws FileNotFoundException, ParseException {
+        addTeacherMarksAssignListD = addTeacherViewTableList();
+
+        marks_view_id.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        marks_view_teacher_id.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
+        marks_view_name.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        marks_view_course_code.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        marks_view_semester.setCellValueFactory(new PropertyValueFactory<>("semester"));
+        marks_view_attendance.setCellValueFactory(new PropertyValueFactory<>("attendance"));
+        marks_view_quiz.setCellValueFactory(new PropertyValueFactory<>("quiz"));
+        marks_view_assignment.setCellValueFactory(new PropertyValueFactory<>("assignment"));
+        marks_view_final.setCellValueFactory(new PropertyValueFactory<>("finalMarks"));
+        marks_view_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+        marksEditViewTable_admin.setItems(addTeacherMarksAssignListD);
+    }
+
     @FXML
-    void switchScreen(ActionEvent event) throws FileNotFoundException {
+    void switchScreen(ActionEvent event) throws FileNotFoundException, ParseException {
         if(event.getSource() == home_btn) {
             teacher_home.setVisible(true);
             admin_marks.setVisible(false);
@@ -231,6 +296,8 @@ public class TeacherController implements Initializable {
 
             admin_marks_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
             home_btn.setStyle("-fx-background-color: #fff");
+
+            setAddTeacherMarksAssignShowListData();
         }
     }
 
@@ -268,7 +335,8 @@ public class TeacherController implements Initializable {
 
         try {
             showTeacherData();
-        } catch (FileNotFoundException e) {
+            setAddTeacherMarksAssignShowListData();
+        } catch (FileNotFoundException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
