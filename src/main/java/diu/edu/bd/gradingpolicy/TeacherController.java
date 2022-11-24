@@ -3,6 +3,7 @@ package diu.edu.bd.gradingpolicy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -11,13 +12,35 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
-public class TeacherController {
+public class TeacherController implements Initializable {
+
+    private String teacherLoginId;
+
+    public String getTeacherLoginId() {
+        return teacherLoginId;
+    }
+
+    public void setTeacherLoginId(String teacherLoginId) {
+        this.teacherLoginId = teacherLoginId;
+    }
+
+    public void setIdOfTeacher(String teacherId) {
+        setTeacherLoginId(teacherId);
+    }
 
     private double x = 0;
     private double y = 0;
+
+    @FXML
+    private Label teacherShowId;
 
     @FXML
     private AnchorPane admin_marks;
@@ -208,4 +231,20 @@ public class TeacherController {
         }
     }
 
+//    public void showTeacherData() throws FileNotFoundException {
+//        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv";
+//        Scanner teacherFile = new Scanner(new File(filePath));
+//
+//        while (teacherFile.hasNextLine())
+//    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(LoginDataSave.staticId.equals(""))
+            teacherShowId.setText("Teacher id error!");
+        else {
+            teacherShowId.setText(LoginDataSave.staticId);
+            setTeacherLoginId(LoginDataSave.staticId);
+        }
+    }
 }

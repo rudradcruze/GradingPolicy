@@ -55,7 +55,7 @@
                                         <Image url="@../images/admin-avater.png" />
                                     </image>
                                 </ImageView>
-                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="133.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="250.0" text="Teacher" textFill="WHITE" AnchorPane.topAnchor="133.0" />
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="72.0" layoutY="131.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="54.0" text="Teacher -" textFill="WHITE" AnchorPane.topAnchor="131.0" />
                                 <Label fx:id="teacherName_forlogin" alignment="CENTER" contentDisplay="CENTER" layoutY="105.0" prefHeight="26.0" prefWidth="250.0" text="Francis Rudra D Cruze" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                     <font>
                                         <Font size="22.0" />
@@ -82,6 +82,7 @@
                                         <FontAwesomeIcon glyphName="ADJUST" selectionFill="BLACK" size="1.2em" />
                                     </graphic>
                                 </Button>
+                        <Label fx:id="teacherShowId" layoutX="129.0" layoutY="131.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="80.0" text="Teacher" textFill="WHITE" />
                             </children>
                         </AnchorPane>
                     </left>

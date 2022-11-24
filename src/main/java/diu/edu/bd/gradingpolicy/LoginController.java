@@ -80,12 +80,15 @@ public class LoginController implements Initializable {
                     common.alertInfo("Login Successful", "Your have successfully login as " + userType + " in Grading Policy system.");
 
                     // Change the viewing dashboard according to the users.
-                    if (userType.equals("Student"))
+                    if (userType.equals("Student")) {
                         changeScreen("view/student.fxml");
+                    }
                     else if (userType.equals("Super Admin"))
                         changeScreen("view/superAdmin.fxml");
-                    else
+                    else {
+                        LoginDataSave.staticId = id;
                         changeScreen("view/teacher.fxml");
+                    }
                 }
             }
             if (flag == 1)
