@@ -1,6 +1,5 @@
 package diu.edu.bd.gradingpolicy;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,23 +17,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.security.auth.callback.Callback;
 import java.io.*;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class SuperAdminController implements Initializable {
 
     private double x = 0;
     private double y = 0;
-
-    @FXML
-    private MenuItem addStudent_btn;
-
-    @FXML
-    private MenuItem addTeacher_btn;
 
     @FXML
     private AnchorPane admin;
@@ -573,6 +564,7 @@ public class SuperAdminController implements Initializable {
             admin_assign_course.setStyle("-fx-background-color: #fff");
 
             setStudentData();
+            teacherCount();
         } else if (event.getSource() == admin_student_btn_all) {
             admin.setVisible(false);
             allStudent.setVisible(false);
@@ -1984,6 +1976,19 @@ public class SuperAdminController implements Initializable {
         admin_studentFemale.setText(String.valueOf(allFemaleStudents));
     }
 
+    public void teacherCount() throws FileNotFoundException {
+        String teacherFilePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv";
+        Scanner teacherFileScanner = new Scanner(new File(teacherFilePath));
+        int allTeachers = 0;
+
+        while (teacherFileScanner.hasNextLine()) {
+            allTeachers++;
+            String row = teacherFileScanner.nextLine();
+            String[] data = row.split(",");
+        }
+        admin_teacher.setText(String.valueOf(allTeachers));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -2006,6 +2011,7 @@ public class SuperAdminController implements Initializable {
             setAddCourseAssignShowListData();
             setAddMarksAssignShowListData();
             setStudentData();
+            teacherCount();
         } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
