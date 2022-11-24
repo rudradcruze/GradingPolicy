@@ -177,12 +177,12 @@
                                                         <TableColumn fx:id="marks_view_name" prefWidth="201.33334350585938" styleClass="column-header-background" text="Name" />
                                                         <TableColumn fx:id="marks_view_course_code" prefWidth="83.46661376953125" styleClass="column-header-background" text="Course Code" />
                                                         <TableColumn fx:id="marks_view_semester" prefWidth="87.99996948242188" styleClass="column-header-background" text="Semester" />
-                                                        <TableColumn fx:id="marks_view_attendance" prefWidth="93.86663818359375" styleClass="column-header-background" text="Attendance" />
-                                                        <TableColumn fx:id="marks_view_quiz" prefWidth="101.59991455078125" styleClass="column-header-background" text="Quiz" />
-                                                        <TableColumn fx:id="marks_view_assignment" prefWidth="93.3331298828125" styleClass="column-header-background" text="Assignment" />
-                                                        <TableColumn fx:id="marks_view_final" prefWidth="87.7333984375" styleClass="column-header-background" text="Final" />
-                                                        <TableColumn fx:id="marks_view_total" prefWidth="103.2001953125" styleClass="column-header-background" text="Total" />
-                                                        <TableColumn fx:id="marks_view_grade" prefWidth="75.1998291015625" styleClass="column-header-background" text="Greade" />
+                                                        <TableColumn fx:id="marks_view_attendance" prefWidth="88.800048828125" styleClass="column-header-background" text="Attendance" />
+                                                        <TableColumn fx:id="marks_view_quiz" prefWidth="74.39996337890625" styleClass="column-header-background" text="Quiz" />
+                                                        <TableColumn fx:id="marks_view_assignment" prefWidth="92.0001220703125" styleClass="column-header-background" text="Assignment" />
+                                                        <TableColumn fx:id="marks_view_final" prefWidth="68.800048828125" styleClass="column-header-background" text="Final" />
+                                                        <TableColumn fx:id="marks_view_total" prefWidth="63.9998779296875" styleClass="column-header-background" text="Total" />
+                                                        <TableColumn fx:id="marks_view_grade" prefWidth="94.4000244140625" styleClass="column-header-background" text="Greade" />
                                                     </columns>
                                                 </TableView>
                                                 <AnchorPane layoutX="5.0" layoutY="368.0" prefHeight="294.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
@@ -247,7 +247,7 @@
                                                                 <String fx:value="input-box" />
                                                             </styleClass>
                                                         </ComboBox>
-                                                        <Button fx:id="marks_update" layoutX="582.0" layoutY="237.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="251.0" stylesheets="@../css/superAdmin.css" text="Update">
+                                                        <Button fx:id="marks_update" layoutX="582.0" layoutY="237.0" mnemonicParsing="false" onAction="#updateSemesterData" prefHeight="50.0" prefWidth="251.0" stylesheets="@../css/superAdmin.css" text="Update">
                                                             <styleClass>
                                                                 <String fx:value="button-common" />
                                                                 <String fx:value="button-blue" />

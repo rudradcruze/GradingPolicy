@@ -15,6 +15,9 @@ public class TeacherDashboardData {
     private double assignment;
     private double finalMarks;
     private double total;
+    private String grade;
+
+    Common common = new Common();
 
     public TeacherDashboardData(String studentId, String courseCode, String semester, double attendance, double quiz, double assignment, double finalMarks) throws FileNotFoundException {
         String courseFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/courses.csv";
@@ -46,11 +49,15 @@ public class TeacherDashboardData {
         this.quiz = quiz;
         this.assignment = assignment;
         this.finalMarks = finalMarks;
-
         this.total = (attendance + quiz + assignment + finalMarks);
+        this.grade = common.gradeGenerate(this.total);
 
         courseFileScanner.close();
         studentFileScanner.close();
+    }
+
+    public String getGrade() {
+        return grade;
     }
 
     public double getAssignment() {
