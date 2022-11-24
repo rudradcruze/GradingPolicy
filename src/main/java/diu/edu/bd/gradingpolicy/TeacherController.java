@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -214,13 +215,15 @@ public class TeacherController implements Initializable {
     }
 
     @FXML
-    void switchScreen(ActionEvent event) {
+    void switchScreen(ActionEvent event) throws FileNotFoundException {
         if(event.getSource() == home_btn) {
             teacher_home.setVisible(true);
             admin_marks.setVisible(false);
 
             home_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #d789d7, #d789d7, #9d65c9, #d789d7);");
             admin_marks_btn.setStyle("-fx-background-color: #fff");
+
+            showTeacherData();
         }
         else if (event.getSource() == admin_marks_btn) {
             teacher_home.setVisible(false);
@@ -231,12 +234,28 @@ public class TeacherController implements Initializable {
         }
     }
 
-//    public void showTeacherData() throws FileNotFoundException {
-//        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv";
-//        Scanner teacherFile = new Scanner(new File(filePath));
-//
-//        while (teacherFile.hasNextLine())
-//    }
+    public void showTeacherData() throws FileNotFoundException {
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv";
+        Scanner teacherFile = new Scanner(new File(filePath));
+
+        while (teacherFile.hasNextLine()) {
+            String row = teacherFile.nextLine();
+            String[] data = row.split(",");
+
+            if(data[0].equals(getTeacherLoginId()))
+            {
+                teacher_home_name.setText(data[1]);
+                teacher_home_id.setText(data[0]);
+                teacher_home_gender.setText(data[2]);
+                teacher_home_phone.setText(data[3]);
+                teacher_home_ssc.setText(data[4]);
+                teacher_home_hsc.setText(data[5]);
+                bsc.setText(data[6]);
+                teacher_home_msc.setText(data[7]);
+                teacher_home_status.setText(data[8]);
+            }
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -245,6 +264,12 @@ public class TeacherController implements Initializable {
         else {
             teacherShowId.setText(LoginDataSave.staticId);
             setTeacherLoginId(LoginDataSave.staticId);
+        }
+
+        try {
+            showTeacherData();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
