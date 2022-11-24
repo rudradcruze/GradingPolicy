@@ -424,6 +424,22 @@ public class TeacherController implements Initializable {
             setTeacherLoginId(LoginDataSave.staticId);
         }
 
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv";
+        try {
+            Scanner scanner = new Scanner(new File(filePath));
+            while (scanner.hasNextLine()) {
+                String row = scanner.nextLine();
+                String[] data = row.split(",");
+
+                if (data[0].equals(getTeacherLoginId())) {
+                    teacherName_forlogin.setText(data[1]);
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         try {
             showTeacherData();
             setAddTeacherMarksAssignShowListData();
