@@ -265,6 +265,7 @@ public class TeacherController implements Initializable {
             if (checkTeachersStudent(data[0], data[2]) == true)
                 listTeacherViewAssign.add(teacherDashboardData);
         }
+        courseAssignFileReader.close();
         return listTeacherViewAssign;
     }
 
@@ -279,6 +280,7 @@ public class TeacherController implements Initializable {
             if (sendingCourseCode.equals(data[1]) && sendingCourseSemester.equals(data[2]) && data[4].equals(getTeacherLoginId()))
                 return true;
         }
+        scanner.close();
         return false;
     }
 
@@ -344,6 +346,7 @@ public class TeacherController implements Initializable {
                 teacher_home_status.setText(data[8]);
             }
         }
+        teacherFile.close();
     }
 
     Scanner sca = null;
@@ -400,14 +403,19 @@ public class TeacherController implements Initializable {
                 }
                 pw.flush();
                 sca.close();
+                bw.close();
                 pw.close();
 
-                oldFile.delete();
 
-                File rename = new File(filePath);
-                newFile.renameTo(rename);
+                if (oldFile.delete()) {
+                    File rename = new File(filePath);
+                    newFile.renameTo(rename);
 
-                Common.alertInfo("Information Message", "Semester update successfully");
+                    Common.alertInfo("Information Message", "Semester update successfully");
+                } else {
+                    Common.alertWarning("Warning!", "Something went wrong.");
+                }
+
 
             } else return;
             setAddTeacherMarksAssignShowListData();
@@ -436,6 +444,7 @@ public class TeacherController implements Initializable {
                     break;
                 }
             }
+            scanner.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

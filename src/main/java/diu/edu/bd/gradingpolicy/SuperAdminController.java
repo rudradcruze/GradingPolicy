@@ -901,6 +901,7 @@ public class SuperAdminController implements Initializable {
 
             listStudents.add(studentData);
         }
+        studentFileReader.close();
         return listStudents;
     }
 
@@ -1070,7 +1071,7 @@ public class SuperAdminController implements Initializable {
             }
             sca.close();
             oldFile.delete();
-
+            bw.close();
             pw.flush();
             pw.close();
 
@@ -1118,6 +1119,7 @@ public class SuperAdminController implements Initializable {
 
             listSemester.add(semesterData);
         }
+        semesterFileReader.close();
         return listSemester;
     }
 
@@ -1227,7 +1229,7 @@ public class SuperAdminController implements Initializable {
             }
             sca.close();
             oldFile.delete();
-
+            bw.close();
             pw.flush();
             pw.close();
 
@@ -1290,6 +1292,7 @@ public class SuperAdminController implements Initializable {
 
             listTeacher.add(teacherData);
         }
+        teacherFileReader.close();
         return listTeacher;
     }
 
@@ -1429,7 +1432,7 @@ public class SuperAdminController implements Initializable {
             }
             sca.close();
             oldFile.delete();
-
+            bw.close();
             pw.flush();
             pw.close();
 
@@ -1526,7 +1529,7 @@ public class SuperAdminController implements Initializable {
             }
             scan.close();
             oldFile.delete();
-
+            bw.close();
             pw.flush();
             pw.close();
 
@@ -1593,6 +1596,7 @@ public class SuperAdminController implements Initializable {
 
             listCourse.add(courseData);
         }
+        courseFileReader.close();
         return listCourse;
     }
 
@@ -1709,6 +1713,7 @@ public class SuperAdminController implements Initializable {
 
             listCourseAssign.add(courseAssignData);
         }
+        courseAssignFileReader.close();
         return listCourseAssign;
     }
 
@@ -1859,7 +1864,7 @@ public class SuperAdminController implements Initializable {
                 }
                 scanMarks.close();
                 oldFile.delete();
-
+                bw.close();
                 pw.flush();
                 pw.close();
 
@@ -1905,13 +1910,14 @@ public class SuperAdminController implements Initializable {
                     data[0],
                     data[1],
                     data[2],
-                    Integer.parseInt(data[3]),
-                    Integer.parseInt(data[4]),
-                    Integer.parseInt(data[5]),
-                    Integer.parseInt(data[6]));
+                    Double.parseDouble(data[3]),
+                    Double.parseDouble(data[4]),
+                    Double.parseDouble(data[5]),
+                    Double.parseDouble(data[6]));
 
             listMarksAssign.add(adminMarksData);
         }
+        marksAssignFileReader.close();
         return listMarksAssign;
     }
 
@@ -1970,6 +1976,7 @@ public class SuperAdminController implements Initializable {
             else
                 allFemaleStudents++;
         }
+        studentFileScanner.close();
 
         admin_student.setText(String.valueOf(allStudents));
         admin_studentMale.setText(String.valueOf(allMaleStudents));
@@ -1986,6 +1993,7 @@ public class SuperAdminController implements Initializable {
             String row = teacherFileScanner.nextLine();
             String[] data = row.split(",");
         }
+        teacherFileScanner.close();
         admin_teacher.setText(String.valueOf(allTeachers));
     }
 
