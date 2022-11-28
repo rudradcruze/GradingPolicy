@@ -220,3 +220,31 @@ TableView {
 .button-red:hover {
     -fx-background-color: #F44336;
 }
+
+.padding-margin-increase {
+    -fx-padding: 2px 30px;
+    -fx-border-width: .8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: linear-gradient(to bottom right, #d789d7, #9d65c9, #5d54a4, #2a3d66);
+}
+
+.extra-font-size {
+    -fx-font-size: 20px;
+}
+
+.scpga_cursor {
+    -fx-cursor: DEFAULT;
+}
+
+.extra-font-size-ex {
+    -fx-font-size: 35px;
+}
+
+.light-white {
+    -fx-background-color: #edeef0;
+    -fx-background-radius: 8px;
+}
+
+.ex-red {
+    -fx-background-color: #F44336;
+}

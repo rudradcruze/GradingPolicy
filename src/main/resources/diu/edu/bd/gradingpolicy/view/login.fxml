@@ -45,20 +45,7 @@
                         <Image url="@../images/login-top-hed.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="40.0" layoutY="167.0" text="Don’t remember your password?" textAlignment="CENTER">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="requestResetCode" layoutX="140.0" layoutY="245.0" mnemonicParsing="false" onAction="#requestResetCode" prefHeight="37.0" prefWidth="218.0" styleClass="button-white" stylesheets="@../css/loginReset.css" text="Request for reset code" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Label layoutX="133.0" layoutY="315.0" prefHeight="49.0" prefWidth="225.0" text="WELCOME" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="133.0" layoutY="311.0" prefHeight="49.0" prefWidth="225.0" text="WELCOME" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="43.0" />
                      </font>
@@ -102,7 +89,7 @@
                         <Image url="@../images/pass-lock.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="105.0" fitWidth="390.0" layoutX="54.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="105.0" fitWidth="390.0" layoutX="54.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/logo-white.png" />
                      </image>

@@ -104,12 +104,8 @@ public class LoginController implements Initializable {
 
     }
 
-    public void requestResetCode() throws IOException {
-        changeScreen("view/requestCode.fxml");
-    }
-
     public void changeScreen(String view) throws IOException {
-        requestResetCode.getScene().getWindow().hide();
+        loginInButton.getScene().getWindow().hide();
 
         Parent root = FXMLLoader.load(getClass().getResource(view));
 
