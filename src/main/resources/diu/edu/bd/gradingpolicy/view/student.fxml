@@ -127,23 +127,23 @@
                                     <children>
                                         <AnchorPane layoutX="7.0" layoutY="15.0">
                                             <children>
-                                                <TableView fx:id="marksEditViewTable_admin" layoutX="5.0" layoutY="42.0" onMouseClicked="#selectTeacherViewMarksAssignEdit" prefHeight="313.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
+                                                <TableView fx:id="student_report_tableView" layoutX="5.0" layoutY="42.0" onMouseClicked="#selectTeacherViewMarksAssignEdit" prefHeight="313.0" prefWidth="1018.0" stylesheets="@../css/superAdmin.css">
                                                     <columns>
-                                                        <TableColumn fx:id="marks_view_id" prefWidth="69.06664848327637" text="Course Code">
+                                                        <TableColumn fx:id="student_report_table_courseCode" prefWidth="69.06664848327637" text="Course Code">
                                                             <styleClass>
                                                                 <String fx:value="column-header-background" />
                                                                 <String fx:value="colum-header" />
                                                             </styleClass>
                                                         </TableColumn>
-                                          <TableColumn fx:id="marks_view_teacher_id" prefWidth="89.86670684814453" text="Course Title">
+                                          <TableColumn fx:id="student_report_table_courseTitle" prefWidth="89.86670684814453" text="Course Title">
                                              <styleClass>
                                                 <String fx:value="column-header-background" />
                                                 <String fx:value="colum-header" />
                                              </styleClass>
                                           </TableColumn>
-                                                        <TableColumn fx:id="marks_view_name" prefWidth="201.33334350585938" styleClass="column-header-background" text="Credit" />
-                                                        <TableColumn fx:id="marks_view_course_code" prefWidth="83.46661376953125" styleClass="column-header-background" text="Grade" />
-                                                        <TableColumn fx:id="marks_view_semester" prefWidth="87.99996948242188" styleClass="column-header-background" text="Grade Point" />
+                                                        <TableColumn fx:id="student_report_table_credit" prefWidth="201.33334350585938" styleClass="column-header-background" text="Credit" />
+                                                        <TableColumn fx:id="student_report_table_grade" prefWidth="83.46661376953125" styleClass="column-header-background" text="Grade" />
+                                                        <TableColumn fx:id="student_report_table_gradePoint" prefWidth="87.99996948242188" styleClass="column-header-background" text="Grade Point" />
                                                     </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -185,62 +185,62 @@
                                                 <String fx:value="input-title" />
                                                 <String fx:value="extra-font-size" />
                                              </styleClass></Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="217.0" layoutY="21.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="00">
+                                          <Label fx:id="student_view_attendanceMarks" alignment="CENTER" contentDisplay="CENTER" layoutX="217.0" layoutY="21.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="00">
                                              <styleClass>
                                                 <String fx:value="title-text" />
                                                 <String fx:value="padding-margin-increase" />
                                                 <String fx:value="light-white" />
                                              </styleClass>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="92.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
+                                          <Label fx:id="student_view_courseCode" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="92.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
                                              <styleClass>
                                                 <String fx:value="title-text" />
                                                 <String fx:value="padding-margin-increase" />
                                                 <String fx:value="light-white" />
                                              </styleClass>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="219.0" layoutY="163.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
+                                          <Label fx:id="student_view_credit" alignment="CENTER" contentDisplay="CENTER" layoutX="219.0" layoutY="163.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
                                              <styleClass>
                                                 <String fx:value="title-text" />
                                                 <String fx:value="padding-margin-increase" />
                                                 <String fx:value="light-white" />
                                              </styleClass>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="720.0" layoutY="16.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="00">
+                                          <Label fx:id="student_view_quizMarks" alignment="CENTER" contentDisplay="CENTER" layoutX="720.0" layoutY="16.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="00">
                                              <styleClass>
                                                 <String fx:value="title-text" />
                                                 <String fx:value="padding-margin-increase" />
                                                 <String fx:value="light-white" />
                                              </styleClass>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="721.0" layoutY="88.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
+                                          <Label fx:id="student_view_semester" alignment="CENTER" contentDisplay="CENTER" layoutX="721.0" layoutY="88.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
                                              <styleClass>
                                                 <String fx:value="title-text" />
                                                 <String fx:value="padding-margin-increase" />
                                                 <String fx:value="light-white" />
                                              </styleClass>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="722.0" layoutY="159.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
+                                          <Label fx:id="student_view_grade" alignment="CENTER" contentDisplay="CENTER" layoutX="722.0" layoutY="159.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
                                              <styleClass>
                                                 <String fx:value="title-text" />
                                                 <String fx:value="padding-margin-increase" />
                                                 <String fx:value="light-white" />
                                              </styleClass>
                                           </Label>
-                                          <Label layoutX="601.0" layoutY="245.0" stylesheets="@../css/superAdmin.css" text="Greade">
+                                          <Label layoutX="601.0" layoutY="245.0" stylesheets="@../css/superAdmin.css" text="Total Credit">
                                              <styleClass>
                                                 <String fx:value="input-title" />
                                                 <String fx:value="extra-font-size" />
                                              </styleClass>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="725.0" layoutY="230.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
+                                          <Label fx:id="student_view_totalCredit" alignment="CENTER" contentDisplay="CENTER" layoutX="725.0" layoutY="230.0" prefHeight="38.0" prefWidth="228.0" stylesheets="@../css/superAdmin.css" text="...">
                                              <styleClass>
                                                 <String fx:value="title-text" />
                                                 <String fx:value="padding-margin-increase" />
                                                 <String fx:value="light-white" />
                                              </styleClass>
                                           </Label>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="224.0" prefHeight="66.0" prefWidth="383.0" stylesheets="@../css/superAdmin.css" text="0.00">
+                                          <Label fx:id="student_view_cgpa" alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="224.0" prefHeight="66.0" prefWidth="383.0" stylesheets="@../css/superAdmin.css" text="0.00">
                                              <styleClass>
                                                 <String fx:value="button-common" />
                                                 <String fx:value="scpga_cursor" />
@@ -253,14 +253,14 @@
                                           </Label>
                                                     </children>
                                                 </AnchorPane>
-                                    <ComboBox layoutX="6.0" layoutY="-7.0" prefHeight="42.0" prefWidth="406.0" promptText="Choose Semester" styleClass="combo-box" stylesheets="@../css/superAdmin.css" />
-                                    <Button layoutX="427.0" layoutY="-7.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="276.0" stylesheets="@../css/superAdmin.css" text="See Result">
+                                    <ComboBox fx:id="student_report_choose_semester" layoutX="6.0" layoutY="-7.0" prefHeight="42.0" prefWidth="406.0" promptText="Choose Semester" styleClass="combo-box" stylesheets="@../css/superAdmin.css" />
+                                    <Button fx:id="see_result_btn" layoutX="427.0" layoutY="-7.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="276.0" stylesheets="@../css/superAdmin.css" text="See Result">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-green" />
                                        </styleClass>
                                     </Button>
-                                    <Button layoutX="717.0" layoutY="-7.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="307.0" stylesheets="@../css/superAdmin.css" text="Print Report">
+                                    <Button fx:id="print_report" layoutX="717.0" layoutY="-7.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="307.0" stylesheets="@../css/superAdmin.css" text="Print Report">
                                        <styleClass>
                                           <String fx:value="button-common" />
                                           <String fx:value="button-blue" />
