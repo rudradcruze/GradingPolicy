@@ -15,9 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.Optional;
@@ -212,9 +210,32 @@ public class TeacherController implements Initializable {
         stage.setIconified(true);
     }
 
-    @FXML
-    void selectMarksAssignEdit(MouseEvent event) {
+    public void clearTeacherMarksViewData() {
+        marks_insert_attendance.setText("");
+        marks_insert_quiz.setText("");
+        marks_insert_assignment.setText("");
+        marks_insert_final.setText("");
+        marks_insert_course_code.setText("");
+        marks_insert_semester.setPromptText("");
+        marks_insert_student_id.setPromptText("");
+        marks_insert_student_name.setPromptText("");
+    }
 
+    public void selectTeacherViewMarksAssignEdit() {
+        TeacherDashboardData teacherDashboardData = marksEditViewTable_admin.getSelectionModel().getSelectedItem();
+        int num = marksEditViewTable_admin.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        marks_insert_attendance.setText(String.valueOf(teacherDashboardData.getAttendance()));
+        marks_insert_quiz.setText(String.valueOf(teacherDashboardData.getQuiz()));
+        marks_insert_assignment.setText(String.valueOf(teacherDashboardData.getAssignment()));
+        marks_insert_final.setText(String.valueOf(teacherDashboardData.getFinalMarks()));
+        marks_insert_course_code.setText(String.valueOf(teacherDashboardData.getCourseCode()));
+        marks_insert_semester.setPromptText(String.valueOf(teacherDashboardData.getSemester()));
+        marks_insert_student_id.setPromptText(String.valueOf(teacherDashboardData.getStudentId()));
+        marks_insert_student_name.setPromptText(String.valueOf(teacherDashboardData.getStudentName()));
     }
 
     public ObservableList<TeacherDashboardData> addTeacherViewTableList() throws FileNotFoundException {
@@ -275,6 +296,7 @@ public class TeacherController implements Initializable {
         marks_view_assignment.setCellValueFactory(new PropertyValueFactory<>("assignment"));
         marks_view_final.setCellValueFactory(new PropertyValueFactory<>("finalMarks"));
         marks_view_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        marks_view_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
 
         marksEditViewTable_admin.setItems(addTeacherMarksAssignListD);
     }
@@ -324,6 +346,75 @@ public class TeacherController implements Initializable {
         }
     }
 
+    Scanner sca = null;
+    public void updateSemesterData() throws IOException, ParseException {
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/courseAssign.csv";
+        String tempFile = "src/main/resources/diu/edu/bd/gradingpolicy/csv/temp.csv";
+
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+
+        TeacherDashboardData teacherDashboardData = marksEditViewTable_admin.getSelectionModel().getSelectedItem();
+        int num = marksEditViewTable_admin.getSelectionModel().getSelectedIndex();
+
+        if((num -1) < -1)
+            return;
+
+        String oldStudentId = String.valueOf(teacherDashboardData.getStudentId());
+        String oldSemester = String.valueOf(teacherDashboardData.getSemester());
+        String oldCourseCode = String.valueOf(teacherDashboardData.getCourseCode());
+
+        String newAttendance = marks_insert_attendance.getText();
+        String newQuiz = marks_insert_quiz.getText();
+        String newAssignment = marks_insert_assignment.getText();
+        String newFinal = marks_insert_final.getText();
+
+        if(Double.parseDouble(newAttendance) > 10 || Double.parseDouble(newQuiz) > 15 || Double.parseDouble(newAssignment) > 35 || Double.parseDouble(newFinal) > 40)
+            Common.alertError("Marks Update Error", "The Marks Distribution will be:\n" +
+                    "Attendance marks = 10\n" +
+                    "Quiz marks = 15\n" +
+                    "Assignment marks = 35\n" +
+                    "Final marks = 40");
+        else {
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            sca = new Scanner(new File(filePath));
+            sca.useDelimiter("[,\n]");
+
+            Optional<ButtonType> option = (Optional<ButtonType>) Common.alertConfirmationReturn("Confirm Message", "Are you sure you want to Update student marks data!");
+
+            if (option.get().equals(ButtonType.OK)) {
+
+                while (sca.hasNextLine()) {
+
+                    String row = sca.nextLine();
+                    String[] data = row.split(",");
+
+                    if (oldStudentId.equals(data[1]) && oldSemester.equals(data[2]) && oldCourseCode.equals(data[0]))
+                        pw.println(data[0] + "," + data[1] + "," + data[2] + "," + newAttendance + "," + newQuiz + "," + newAssignment + "," + newFinal);
+                    else
+                        pw.println(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + data[4] + "," + data[5] + "," + data[6]);
+                }
+                pw.flush();
+                sca.close();
+                pw.close();
+
+                oldFile.delete();
+
+                File rename = new File(filePath);
+                newFile.renameTo(rename);
+
+                Common.alertInfo("Information Message", "Semester update successfully");
+
+            } else return;
+            setAddTeacherMarksAssignShowListData();
+            clearTeacherMarksViewData();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(LoginDataSave.staticId.equals(""))
@@ -331,6 +422,22 @@ public class TeacherController implements Initializable {
         else {
             teacherShowId.setText(LoginDataSave.staticId);
             setTeacherLoginId(LoginDataSave.staticId);
+        }
+
+        String filePath = "src/main/resources/diu/edu/bd/gradingpolicy/csv/teachers.csv";
+        try {
+            Scanner scanner = new Scanner(new File(filePath));
+            while (scanner.hasNextLine()) {
+                String row = scanner.nextLine();
+                String[] data = row.split(",");
+
+                if (data[0].equals(getTeacherLoginId())) {
+                    teacherName_forlogin.setText(data[1]);
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         try {
