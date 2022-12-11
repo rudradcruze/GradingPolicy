@@ -18,10 +18,6 @@ public class GradingPolicy extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        // FXMLLoader fxmlLoader = new FXMLLoader(GradingPolicy.class.getResource("view/login.fxml"));
-        // Scene scene = new Scene(fxmlLoader.load(), 1270, 753);
-
-
         Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
         Scene scene = new Scene(root);
 
