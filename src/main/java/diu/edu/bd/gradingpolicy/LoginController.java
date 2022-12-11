@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class LoginController implements Initializable {
+public class LoginController extends commonAbstract implements Initializable {
 
     Common common;
     private double x = 0;
@@ -104,6 +104,7 @@ public class LoginController implements Initializable {
 
     }
 
+    @Override
     public void changeScreen(String view) throws IOException {
         loginInButton.getScene().getWindow().hide();
 
